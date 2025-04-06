@@ -41,7 +41,7 @@
     /* Landing Page */
     header {
   height: 100vh;
-  background: #3d3d3d;
+  background: #202020;
   background-size: 300px;
   background-blend-mode: overlay;
   display: flex;
@@ -171,11 +171,22 @@
       font-weight: bold;
       cursor: pointer;
     }
+    .header-logo {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  opacity: 0.40;
+  z-index: 0;
+  pointer-events: none;
+}
   </style>
 </head>
 <body>
 
   <header id="home">
+    <img src="IDK.png" alt="Logo" class="header-logo">
     <h1>IDK KITCHEN</h1>
     <p class="slogan">“The place to go when you or they don’t know”</p>
   </header>
