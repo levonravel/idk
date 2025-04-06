@@ -20,18 +20,21 @@
       font-family: 'Montserrat', sans-serif;
       color: #333;
       background: #fff;
+      padding-bottom: 70px; /* space for fixed nav */
     }
 
-    /* Menu Bar - now at top */
+    /* Bottom Menu Bar */
     nav {
-      position: sticky;
-      top: 0;
-      z-index: 999;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #1f1f1f;
       display: flex;
       justify-content: center;
       gap: 2rem;
-      background: #1f1f1f;
       padding: 1rem 0;
+      z-index: 999;
     }
 
     nav a {
@@ -42,16 +45,16 @@
 
     /* Landing Page */
     header {
-      height: 100vh;
-      background-color: #3d3d3d;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      color: white;
-      position: relative;
-    }
+  height: 100vh;
+  background-color: #3d3d3d;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-top: 30vh;
+  color: white;
+  position: relative;
+}
 
     header::before {
       content: '';
@@ -158,18 +161,19 @@
 </head>
 <body>
 
+  <header id="home">
+    <h1>IDK KITCHEN</h1>
+    <p class="slogan">“The place to go when you don’t know”</p>
+  </header>
+
   <nav>
+    <a href="#home">Home</a>
     <a href="#about">About</a>
     <a href="#menu">Menu</a>
     <a href="#gallery">Gallery</a>
     <a href="#contact">Contact</a>
   </nav>
-
-  <header>
-    <h1>IDK KITCHEN</h1>
-    <p class="slogan">“The place to go when you don’t know”</p>
-  </header>
-
+  
   <section id="about">
     <h2>About IDK Kitchen</h2>
     <p>We’re a small, flavor bomb of a kitchen — one side dishing out asian fusion with deep roots, loud energy, and explosive flavor; the other slinging Mexican street classics with bold spice, fearless character, and unapologetic heat. A diverse kitchen with no rules — just taste.</p>
