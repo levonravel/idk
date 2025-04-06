@@ -11,18 +11,15 @@
       padding: 0;
       box-sizing: border-box;
     }
-
     html {
       scroll-behavior: smooth;
     }
-
     body {
       font-family: 'Montserrat', sans-serif;
       color: #333;
       background: #fff;
       padding-bottom: 70px; /* space for fixed nav */
     }
-
     /* Bottom Menu Bar */
     nav {
       position: fixed;
@@ -36,115 +33,111 @@
       padding: 1rem 0;
       z-index: 999;
     }
-
     nav a {
       color: white;
       text-decoration: none;
       font-weight: bold;
     }
-
     /* Landing Page */
     header {
-  height: 100vh;
-  background-color: #3d3d3d;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding-top: 30vh;
-  color: white;
-  position: relative;
-}
-
+      height: 100vh;
+      background-color: #3d3d3d;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding-top: 30vh;
+      color: white;
+      position: relative;
+    }
     header::before {
       content: '';
       position: absolute;
       inset: 0;
       background: rgba(0, 0, 0, 0.4);
     }
-
     header h1 {
       font-size: 3.5rem;
       z-index: 1;
       text-transform: uppercase;
       letter-spacing: 3px;
     }
-
     header p {
       font-size: 1.5rem;
       margin-top: 1rem;
       z-index: 1;
     }
-
     section {
       padding: 2.2rem 2rem;
       max-width: 1100px;
       margin: auto;
     }
-
     h2 {
       font-size: 3rem;
       margin-bottom: 1.5rem;
       text-align: center;
     }
-
     h3 {
-  font-size: 1.8rem;
-  margin: 4rem 0 1.5rem 0;
-  text-align: center;
-  color: #222;
-}
-
-h4 {
-  margin-bottom: 0.5rem;
-  font-size: 1.2rem;
-}
-
-.menu {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-  margin-bottom: 2rem;
-}
+      font-size: 1.8rem;
+      margin: 1.5rem 0;
+      text-align: center;
+      color: #222;
+    }
+    /* Push down the Asian Fusion label 50px */
+    #asian-fusion {
+      margin-top: 75px;
+    }
+    h4 {
+      margin-bottom: 0.5rem;
+      font-size: 1.2rem;
+    }
+    .menu {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
     .menu-item {
       background: #fdfdfd;
       border-radius: 10px;
       padding: 1.5rem;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: relative;
+      padding-bottom: 20px; /* Space for the price */
     }
-
-    .menu-item h4 {
-      margin-bottom: 0.5rem;
+    /* Add bottom margin to description paragraphs only */
+    .menu-item p:not(.price) {
+      margin-bottom: 20px;
     }
-
+    .price {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      font-weight: bold;
+    }
     .gallery {
       display: flex;
       gap: 1rem;
       overflow-x: auto;
     }
-
     .gallery img {
       border-radius: 10px;
       height: 200px;
     }
-
     footer {
       background: #111;
       color: white;
       padding: 3rem 1rem;
       text-align: center;
     }
-
     .social-icons a {
       color: white;
       margin: 0 1rem;
       text-decoration: none;
     }
-
     .contact-form {
       margin-top: 2rem;
     }
-
     .slogan {
       font-family: 'Georgia', serif;
       font-style: italic;
@@ -154,12 +147,10 @@ h4 {
       margin-top: 1rem;
       padding-left: 1.5rem;
     }
-
     .options-list li {
       margin-bottom: 0.5rem;
       line-height: 1.4;
     }
-
     input, textarea {
       width: 100%;
       padding: 1rem;
@@ -167,7 +158,6 @@ h4 {
       border-radius: 8px;
       border: none;
     }
-
     button {
       margin-top: 1rem;
       padding: 1rem 2rem;
@@ -197,43 +187,13 @@ h4 {
 
   <section id="about">
     <h2>About IDK Kitchen</h2>
-    <p>We’re a small, flavor bomb of a kitchen — one side dishing out asian fusion with deep roots, loud energy, and explosive flavor; the other slinging Mexican street twists with bold spice, fearless character, and unapologetic heat. A diverse kitchen with no rules — just taste.</p>
+    <p>We’re a small, flavor bomb of a kitchen — one side dishing out Asian fusion with deep roots, loud energy, and explosive flavor; the other slinging Mexican street twists with bold spice, fearless character, and unapologetic heat. A diverse kitchen with no rules — just taste.</p>
   </section>
-
-  <style>
-    .menu-item {
-      position: relative;
-      padding-bottom: 20px; /* Ensure space for the price */
-    }
-    .price {
-      position: absolute;
-      bottom: 10px;
-      right: 10px;
-      font-weight: bold;
-    }
-  </style>
-  
-  <style>
-    .menu-item {
-      position: relative;
-      padding-bottom: 20px; /* Space for the price */
-    }
-    /* Add bottom margin to description paragraphs only */
-    .menu-item p:not(.price) {
-      margin-bottom: 20px;
-    }
-    .price {
-      position: absolute;
-      bottom: 10px;
-      right: 10px;
-      font-weight: bold;
-    }
-  </style>
   
   <section id="menu">
     <h2>Menu</h2>
   
-    <h3>Asian Fusion</h3>
+    <h3 id="asian-fusion">Asian Fusion</h3>
     <div class="menu">
       <div class="menu-item">
         <h4>Chicken Chow Mein</h4>
@@ -293,20 +253,18 @@ h4 {
         <p>
           Street-style tortilla loaded with 2oz of premium protein, elevated by your choice of enticing add-ons.
         </p>
-        <p class="price">$1.50</p>
+        <p class="price">$4.99</p>
       </div>
       <div class="menu-item">
         <h4>Bangin Burrito</h4>
         <p>
           A warm flour tortilla loaded with 4oz of your chosen protein, perfectly paired with customizable add-ons to elevate every bite.
         </p>
-        <p class="price">$8.00</p>
+        <p class="price">$7.99</p>
       </div>
     </div>
-  </section> 
-  
+    
     <h3>Options</h3>
-
     <div class="menu">
       <div class="menu-item">
         <h4>Asian Sides</h4>
@@ -315,7 +273,6 @@ h4 {
           <li>Sticky Rice — Delicately chewy and freshly steamed</li>
         </ul>
       </div>
-    
       <div class="menu-item">
         <h4>Mexican Add-ons</h4>
         <ul class="options-list">
@@ -326,7 +283,6 @@ h4 {
           <li>Make it Extra Spicy 🔥</li>
         </ul>
       </div>
-    
       <div class="menu-item">
         <h4>Mexican Proteins</h4>
         <ul class="options-list">
