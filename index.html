@@ -88,12 +88,24 @@
       text-align: center;
     }
 
-    .menu {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-    }
+    h3 {
+  font-size: 1.8rem;
+  margin: 4rem 0 1.5rem 0;
+  text-align: center;
+  color: #222;
+}
 
+h4 {
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.menu {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
     .menu-item {
       background: #fdfdfd;
       border-radius: 10px;
@@ -138,6 +150,15 @@
       font-style: italic;
       font-size: 1.8rem;
     }
+    .options-list {
+      margin-top: 1rem;
+      padding-left: 1.5rem;
+    }
+
+    .options-list li {
+      margin-bottom: 0.5rem;
+      line-height: 1.4;
+    }
 
     input, textarea {
       width: 100%;
@@ -163,7 +184,7 @@
 
   <header id="home">
     <h1>IDK KITCHEN</h1>
-    <p class="slogan">“The place to go when you don’t know”</p>
+    <p class="slogan">“The place to go when you or they don’t know”</p>
   </header>
 
   <nav>
@@ -173,45 +194,92 @@
     <a href="#gallery">Gallery</a>
     <a href="#contact">Contact</a>
   </nav>
-  
+
   <section id="about">
     <h2>About IDK Kitchen</h2>
-    <p>We’re a small, flavor bomb of a kitchen — one side dishing out asian fusion with deep roots, loud energy, and explosive flavor; the other slinging Mexican street classics with bold spice, fearless character, and unapologetic heat. A diverse kitchen with no rules — just taste.</p>
+    <p>We’re a small, flavor bomb of a kitchen — one side dishing out asian fusion with deep roots, loud energy, and explosive flavor; the other slinging Mexican street twists with bold spice, fearless character, and unapologetic heat. A diverse kitchen with no rules — just taste.</p>
   </section>
 
   <section id="menu">
     <h2>Menu</h2>
+  
+    <h3>Asian Fusion</h3>
     <div class="menu">
       <div class="menu-item">
-        <h4>Chicken chow mein</h4>
-        <p>Noodles tossed with tender chicken and mixed vegetables, melding robust flavors, mild saltiness, and a faint, sugary undertone.</p>
+        <h4>Chicken Chow Mein</h4>
+        <p>Noodles with chicken and vegetables, sweet and savory balance</p>
       </div>
       <div class="menu-item">
-        <h4>House fried rice</h4>
-        <p>Rice tossed with vegetables, aromatic garlic, and Chinese sausage, combining deep flavors, refined saltiness, and a light, caramel finish.</p>
+        <h4>House Fried Rice</h4>
+        <p>Fried rice with vegetables, garlic, and Chinese sausage</p>
       </div>
       <div class="menu-item">
-        <h4>Glazed pork ribs</h4>
-        <p>Tender pork ribs enveloped in a smoky, robust asian glaze that marries savory depth with a mild, sugar-infused allure.</p>
+        <h4>Glazed Pork Ribs</h4>
+        <p>Pork ribs glazed in savory-sweet Asian sauce</p>
       </div>
       <div class="menu-item">
         <h4>Grilled Chicken</h4>
-        <p>Brined and grilled to perfection, this chicken bursts with umami notes, bright salt accents, and a gentle, sugar-kissed finish.</p>
+        <p>Grilled chicken with umami notes and mild sweetness</p>
       </div>
       <div class="menu-item">
         <h4>Golden Eggrolls</h4>
-        <p>Crispy eggrolls bursting with tender pork, vibrant carrots, and crunchy cabbage, intertwined with delicate glass noodles for a satisfying, well-rounded bite.</p>
+        <p>Eggrolls with pork, carrots, cabbage, glass noodles</p>
       </div>
       <div class="menu-item">
-        <h4>Buttery beef skewers</h4>
-        <p>Beef skewers infused with a bright, zesty marinade of lemongrass, kaffir lime, and warming spices, finished with a buttery, smoky char.</p>
+        <h4>Buttery Beef Skewers</h4>
+        <p>Beef skewers with lemongrass, lime, smoky char</p>
       </div>
       <div class="menu-item">
         <h4>Phở</h4>
-        <p>A bowl of soul-warming pho with a richly simmered broth that melds tender beef ribs and ox tail with aromatic spices, achieving a harmonious blend of savory depth and a subtle, sugar-kissed lift. Customize with shrimp, beef, or meatballs, and finish with crisp mint, cilantro, and bean sprouts alongside classic condiments.</p>
+        <p>Rich broth with oxtail and spices. Choice of shrimp, beef, or meatballs, plus herbs and condiments</p>
+      </div>
+    </div>
+  
+    <h3>Mexican</h3>
+    <div class="menu">
+      <div class="menu-item">
+        <h4>Street taco</h4>
+        <p> Street-style tortilla loaded with 2oz of premium protein, elevated by your choice of enticing add-ons</p>
+      </div>
+      <div class="menu-item">
+        <h4>Burrito</h4>
+        <p>A warm flour tortilla loaded with 4oz of your chosen protein, perfectly paired with customizable add-ons to elevate every bite</p>
+      </div>
+    </div>
+  
+    <h3>Options</h3>
+
+    <div class="menu">
+      <div class="menu-item">
+        <h4>Asian Sides</h4>
+        <ul class="options-list">
+          <li>White Rice — Steamed and served warm</li>
+          <li>Sticky Rice — Delicately chewy and freshly steamed</li>
+        </ul>
+      </div>
+    
+      <div class="menu-item">
+        <h4>Mexican Add-ons</h4>
+        <ul class="options-list">
+          <li>Mexican rice, Pinto beans</li>
+          <li>Cabbage, Radish</li>
+          <li>Grilled onion, Grilled jalapeños</li>
+          <li>Salsas: Green, Picante, Habanero</li>
+          <li>Make it Extra Spicy 🔥</li>
+        </ul>
+      </div>
+    
+      <div class="menu-item">
+        <h4>Mexican Proteins</h4>
+        <ul class="options-list">
+          <li><strong>Asada</strong> — Zesty beef marinated to perfection, grilled with a smoky char</li>
+          <li><strong>Grilled Chicken</strong> — Perfectly brined chicken, grilled to achieve a smoky char and juicy tenderness</li>
+          <li><strong>Al Pastor</strong> — Succulent pork shoulder steeped in a vibrant blend of Mexican spices, then grilled to perfection</li>
+        </ul>
       </div>
     </div>
   </section>
+  
 
   <section id="gallery">
     <h2>Gallery</h2>
