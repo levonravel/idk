@@ -23,7 +23,7 @@
       font-family: 'Montserrat', sans-serif;
       color: #333;
       background: #fff;
-      padding-bottom: 70px;
+      padding-bottom: 80px;
     }
 
     nav {
@@ -33,10 +33,12 @@
       width: 100%;
       background: #1f1f1f;
       display: flex;
+      flex-wrap: wrap;
       justify-content: center;
-      gap: 2rem;
-      padding: 1rem 0;
+      gap: 1.2rem;
+      padding: 1rem 0.5rem;
       z-index: 999;
+      font-size: 0.85rem;
     }
 
     nav a {
@@ -44,6 +46,15 @@
       text-decoration: none;
       font-weight: bold;
       font-family: 'Montserrat', sans-serif;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 400px) {
+      nav a {
+        flex: 1 1 45%;
+        text-align: center;
+        padding: 0.5rem 0;
+      }
     }
 
     header {
@@ -72,7 +83,9 @@
       top: 35%;
       left: 50%;
       transform: translate(-50%, -50%);
+      max-width: 90vw;
       width: 500px;
+      height: auto;
       opacity: 0.4;
       z-index: 0;
       pointer-events: none;
@@ -235,92 +248,94 @@
     <h2>About IDK Kitchen</h2>
     <p>We’re a small, flavor bomb of a kitchen — one side dishing out Asian fusion with deep roots, loud energy, and explosive flavor; the other slinging Mexican street twists with bold spice, fearless character, and unapologetic heat. A diverse kitchen with no rules — just taste.</p>
   </section>
-  
-  <section id="menu">
-    <h2>Menu</h2>
 
-    <h3 id="asian-fusion">Asian Fusion</h3>
-    <div class="menu">
-      <div class="menu-item">
-        <h4>Chicken Chow Mein</h4>
-        <p>Noodles tossed with tender chicken and vegetables, melding robust flavors, mild saltiness, and a faint, sugary undertone.</p>
-        <p class="price">$6.50</p>
-      </div>
-      <div class="menu-item">
-        <h4>House Fried Rice</h4>
-        <p>Rice tossed with mixed vegetables, aromatic garlic, and Chinese sausage, combining deep flavors, refined saltiness, and a light, caramel finish.</p>
-        <p class="price">$6.50</p>
-      </div>
-      <div class="menu-item">
-        <h4>Glazed Pork Ribs</h4>
-        <p>Tender pork ribs enveloped in a smoky, robust glaze that marries savory depth with a mild, asian-infused allure.</p>
-        <p class="price">$7.00</p>
-      </div>
-      <div class="menu-item">
-        <h4>Grilled Chicken</h4>
-        <p>Brined and grilled to perfection, this chicken bursts with layered savory notes, bright salt accents, and a gentle, sugar-kissed finish.</p>
-        <p class="price">$7.00</p>
-      </div>
-      <div class="menu-item">
-        <h4>Golden Eggrolls</h4>
-        <p>Four crispy eggrolls bursting with tender pork, vibrant carrots, and crunchy cabbage, intertwined with delicate glass noodles for a satisfying, well-rounded bite.</p>
-        <p class="price">$6.00</p>
-      </div>
-      <div class="menu-item">
-        <h4>Buttery Beef Skewer</h4>
-        <p>Beef skewer infused with a bright, zesty marinade of lemongrass, kaffir lime, and warming spices, finished with a buttery, smoky char.</p>
-        <p class="price">$2.50</p>
-      </div>
-      <div class="menu-item">
-        <h4>Phở</h4>
-        <p>A bowl of soul-warming rice noodles with a richly simmered broth that melds tender pork ribs and ox tail with aromatic spices, achieving a harmonious blend of savory depth and a subtle, sugar-kissed lift. Customize with shrimp, beef, or meatballs, and finish with crisp mint, cilantro, and bean sprouts alongside classic condiments.</p>
-        <p class="price">Med $7.00 Lrg $9.00</p>
-      </div>
-    </div>
+</section>
 
-    <h3>Mexican</h3>
-    <div class="menu">
-      <div class="menu-item">
-        <h4>Twisted Street Taco</h4>
-        <p>Street-style corn tortilla loaded with 2oz of premium protein, elevated by your choice of enticing add-ons.</p>
-        <p class="price">$2.00 Tues $1.50</p>
-      </div>
-      <div class="menu-item">
-        <h4>Bangin Burrito</h4>
-        <p>A warm flour tortilla loaded with 4oz of your chosen protein, perfectly paired with customizable add-ons to elevate every bite.</p>
-        <p class="price">$8.00</p>
-      </div>
-    </div>
+<section id="menu">
+  <h2>Menu</h2>
 
-    <h3>Options</h3>
-    <div class="menu">
-      <div class="menu-item">
-        <h4>Asian Sides</h4>
-        <ul class="options-list">
-          <li>White Rice — Steamed and served warm</li>
-          <li>Sticky Rice — Delicately chewy and freshly steamed</li>
-        </ul>
-      </div>
-      <div class="menu-item">
-        <h4>Mexican Add-ons</h4>
-        <ul class="options-list">
-          <li>Mexican rice, Pinto beans</li>
-          <li>Cabbage, Radish, Cilantro</li>
-          <li>Grilled onion, Grilled jalapeños</li>
-          <li>Salsas: Green, Picante, Habanero</li>
-          <li>Make it Extra Spicy 🔥</li>
-        </ul>
-      </div>
-      <div class="menu-item">
-        <h4>Mexican Proteins</h4>
-        <ul class="options-list">
-          <li><strong>Asada</strong> — Zesty beef marinated to perfection, grilled with a smoky char</li>
-          <li><strong>Grilled Chicken</strong> — Perfectly brined chicken, grilled to achieve a smoky char and juicy tenderness</li>
-          <li><strong>Al Pastor</strong> — Succulent pork shoulder steeped in a vibrant blend of Mexican spices, then grilled to perfection</li>
-        </ul>
-      </div>
+  <h3 id="asian-fusion">Asian Fusion</h3>
+  <div class="menu">
+    <div class="menu-item">
+      <h4>Chicken Chow Mein</h4>
+      <p>Noodles tossed with tender chicken and vegetables, melding robust flavors, mild saltiness, and a faint, sugary undertone.</p>
+      <p class="price">$6.50</p>
     </div>
-  </section>
+    <div class="menu-item">
+      <h4>House Fried Rice</h4>
+      <p>Rice tossed with mixed vegetables, aromatic garlic, and Chinese sausage, combining deep flavors, refined saltiness, and a light, caramel finish.</p>
+      <p class="price">$6.50</p>
+    </div>
+    <div class="menu-item">
+      <h4>Glazed Pork Ribs</h4>
+      <p>Tender pork ribs enveloped in a smoky, robust glaze that marries savory depth with a mild, asian-infused allure.</p>
+      <p class="price">$7.00</p>
+    </div>
+    <div class="menu-item">
+      <h4>Grilled Chicken</h4>
+      <p>Brined and grilled to perfection, this chicken bursts with layered savory notes, bright salt accents, and a gentle, sugar-kissed finish.</p>
+      <p class="price">$7.00</p>
+    </div>
+    <div class="menu-item">
+      <h4>Golden Eggrolls</h4>
+      <p>Four crispy eggrolls bursting with tender pork, vibrant carrots, and crunchy cabbage, intertwined with delicate glass noodles for a satisfying, well-rounded bite.</p>
+      <p class="price">$6.00</p>
+    </div>
+    <div class="menu-item">
+      <h4>Buttery Beef Skewer</h4>
+      <p>Beef skewer infused with a bright, zesty marinade of lemongrass, kaffir lime, and warming spices, finished with a buttery, smoky char.</p>
+      <p class="price">$2.50</p>
+    </div>
+    <div class="menu-item">
+      <h4>Phở</h4>
+      <p>A bowl of soul-warming rice noodles with a richly simmered broth that melds tender pork ribs and ox tail with aromatic spices, achieving a harmonious blend of savory depth and a subtle, sugar-kissed lift. Customize with shrimp, beef, or meatballs, and finish with crisp mint, cilantro, and bean sprouts alongside classic condiments.</p>
+      <p class="price">Med $7.00 Lrg $9.00</p>
+    </div>
+  </div>
+
+  <h3>Mexican</h3>
+  <div class="menu">
+    <div class="menu-item">
+      <h4>Twisted Street Taco</h4>
+      <p>Street-style corn tortilla loaded with 2oz of premium protein, elevated by your choice of enticing add-ons.</p>
+      <p class="price">$2.00 Tues $1.50</p>
+    </div>
+    <div class="menu-item">
+      <h4>Bangin Burrito</h4>
+      <p>A warm flour tortilla loaded with 4oz of your chosen protein, perfectly paired with customizable add-ons to elevate every bite.</p>
+      <p class="price">$8.00</p>
+    </div>
+  </div>
+
+  <h3>Options</h3>
+  <div class="menu">
+    <div class="menu-item">
+      <h4>Asian Sides</h4>
+      <ul class="options-list">
+        <li>White Rice — Steamed and served warm</li>
+        <li>Sticky Rice — Delicately chewy and freshly steamed</li>
+      </ul>
+    </div>
+    <div class="menu-item">
+      <h4>Mexican Add-ons</h4>
+      <ul class="options-list">
+        <li>Mexican rice, Pinto beans</li>
+        <li>Cabbage, Radish, Cilantro</li>
+        <li>Grilled onion, Grilled jalapeños</li>
+        <li>Salsas: Green, Picante, Habanero</li>
+        <li>Make it Extra Spicy 🔥</li>
+      </ul>
+    </div>
+    <div class="menu-item">
+      <h4>Mexican Proteins</h4>
+      <ul class="options-list">
+        <li><strong>Asada</strong> — Zesty beef marinated to perfection, grilled with a smoky char</li>
+        <li><strong>Grilled Chicken</strong> — Perfectly brined chicken, grilled to achieve a smoky char and juicy tenderness</li>
+        <li><strong>Al Pastor</strong> — Succulent pork shoulder steeped in a vibrant blend of Mexican spices, then grilled to perfection</li>
+      </ul>
+    </div>
+  </div>
+</section>
 
   <footer>
     <p style="margin-top: 1rem;">&copy; 2025 IDK Kitchen. All rights reserved.</p>
