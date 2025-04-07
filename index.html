@@ -9,24 +9,28 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
 
   <style>
-    * {
+    * 
+    {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
-    html {
+    html 
+    {
       scroll-behavior: smooth;
     }
 
-    body {
+    body 
+    {
       font-family: 'Montserrat', sans-serif;
       color: #333;
       background: #fff;
       padding-bottom: 0;
     }
 
-    nav {
+    nav 
+    {
       position: fixed;
       bottom: 0;
       left: 0;
@@ -41,7 +45,8 @@
       font-size: 0.85rem;
     }
 
-    nav a {
+    nav a 
+    {
       color: white;
       text-decoration: none;
       font-weight: bold;
@@ -49,7 +54,8 @@
       flex-shrink: 0;
     }
 
-    @media (max-width: 400px) {
+    @media (max-width: 400px) 
+    {
       nav a {
         flex: 1 1 45%;
         text-align: center;
@@ -57,7 +63,8 @@
       }
     }
 
-    header {
+    header 
+    {
       height: 100vh;
       background: #202020;
       background-size: 300px;
@@ -71,14 +78,16 @@
       position: relative;
     }
 
-    header::before {
+    header::before 
+    {
       content: '';
       position: absolute;
       inset: 0;
       background: rgba(0, 0, 0, 0.4);
     }
 
-    .header-logo {
+    .header-logo 
+    {
       position: absolute;
       top: 45%;
       left: 50%;
@@ -92,7 +101,8 @@
       mix-blend-mode: screen;
     }
 
-    header h1 {
+    header h1 
+    {
       font-size: 3.5rem;
       z-index: 1;
       text-transform: uppercase;
@@ -100,28 +110,32 @@
       font-family: 'Montserrat', sans-serif;
     }
 
-    .slogan {
+    .slogan 
+    {
       font-family: 'Lora', serif;
       font-style: italic;
       font-size: 1.8rem;
       z-index: 1;
     }
 
-    section {
+    section 
+    {
       padding: 2.2rem 2rem;
       max-width: 1100px;
       margin: auto;
       font-family: 'Lora', serif;
     }
 
-    h2 {
+    h2 
+    {
       font-size: 3rem;
       margin-bottom: 1.5rem;
       text-align: center;
       font-family: 'Montserrat', sans-serif;
     }
 
-    h3 {
+    h3 
+    {
       font-size: 1.8rem;
       margin: 1.5rem 0;
       text-align: center;
@@ -129,24 +143,28 @@
       font-family: 'Montserrat', sans-serif;
     }
 
-    #asian-fusion {
+    #asian-fusion 
+    {
       margin-top: 75px;
     }
 
-    h4 {
+    h4 
+    {
       margin-bottom: 0.5rem;
       font-size: 1.2rem;
       font-family: 'Montserrat', sans-serif;
     }
 
-    .menu {
+    .menu 
+    {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 2rem;
       margin-bottom: 2rem;
     }
 
-    .menu-item {
+    .menu-item 
+    {
       background: #fdfdfd;
       border-radius: 10px;
       padding: 1.5rem;
@@ -155,11 +173,13 @@
       padding-bottom: 20px;
     }
 
-    .menu-item p:not(.price) {
+    .menu-item p:not(.price) 
+    {
       margin-bottom: 20px;
     }
 
-    .price {
+    .price 
+    {
       position: absolute;
       bottom: 10px;
       right: 10px;
@@ -168,32 +188,61 @@
       font-family: 'Montserrat', sans-serif;
     }
 
-    .gallery {
+    .gallery 
+    {
       display: flex;
       gap: 1rem;
       overflow-x: auto;
     }
 
-    .gallery img {
+    .gallery img 
+    {
       border-radius: 10px;
       height: 200px;
     }
 
-    .options-list {
+    .option 
+    {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+
+    .options-heading 
+    {
+      margin-top: 5rem; /* or go higher if you want more space */
+    }
+
+    .option-price 
+    {
+      font-weight: bold;
+      font-size: 0.9rem;
+      font-family: 'Montserrat', sans-serif;
+      margin-top: 0.3rem;
+      margin-left: auto;
+    }
+
+    .options-list 
+    {
       margin-top: 1rem;
       padding-left: 1.5rem;
     }
 
-    .options-list li {
+    .options-list li 
+    {
       margin-bottom: 0.5rem;
       line-height: 1.4;
     }
 
-    .contact-form {
+    .contact-form 
+    {
       margin-top: 2rem;
     }
 
-    input, textarea {
+    input, textarea 
+    {
       width: 100%;
       padding: 1rem;
       margin-top: 1rem;
@@ -202,7 +251,8 @@
       font-family: 'Lora', serif;
     }
 
-    button {
+    button 
+    {
       margin-top: 1rem;
       padding: 1rem 2rem;
       background: #ff5722;
@@ -214,7 +264,8 @@
       font-family: 'Montserrat', sans-serif;
     }
 
-    footer {
+    footer 
+    {
       background: #111;
       color: white;
       padding: 1rem;
@@ -223,7 +274,8 @@
       margin-bottom: 48px; /* makes room for nav bar */
     }
 
-    .social-icons a {
+    .social-icons a 
+    {
       color: white;
       margin: 0 1rem;
       text-decoration: none;
@@ -248,47 +300,47 @@
 
   <section id="about">
     <h2>About IDK Kitchen</h2>
-    <p>We’re a small, flavor bomb of a kitchen — one side dishing out Asian fusion with deep roots, loud energy, and explosive flavor; the other slinging Mexican street twists with bold spice, fearless character, and unapologetic heat. A diverse kitchen with no rules — just taste.</p>
+    <p>We’re a small, flavor bomb of a kitchen — one side dishing out Asian fusion with deep roots, loud energy, and explosive flavor; the other slinging Mexican street twists with bold spice, fearless character, and unapologetic heat. A diverse kitchen with no rules — just taste</p>
   </section>
 
   <section id="menu">
     <h2>Menu</h2>
   
-    <h3 id="asian-fusion">Asian Fusion</h3>
+    <h3 id="asian-fusion">Asian</h3>
     <div class="menu">
       <div class="menu-item">
         <h4>Chicken Chow Mein</h4>
-        <p>Noodles tossed with tender chicken and vegetables, melding robust flavors, mild saltiness, and a faint, sugary undertone.</p>
+        <p>Noodles tossed with tender chicken and vegetables, melding robust flavors, mild saltiness, and a faint, sugary undertone</p>
         <p class="price">$6.50</p>
       </div>
       <div class="menu-item">
         <h4>House Fried Rice</h4>
-        <p>Rice tossed with mixed vegetables, aromatic garlic, and Chinese sausage, combining deep flavors, refined saltiness, and a light, caramel finish.</p>
+        <p>Rice tossed with mixed vegetables, aromatic garlic, and Chinese sausage, combining deep flavors, refined saltiness, and a light, caramel finish</p>
         <p class="price">$6.50</p>
       </div>
       <div class="menu-item">
         <h4>Glazed Pork Ribs</h4>
-        <p>Tender pork ribs enveloped in a smoky, robust glaze that marries savory depth with a mild, asian-infused allure.</p>
+        <p>Tender pork ribs enveloped in a smoky, robust glaze that marries savory depth with a mild, asian-infused allure</p>
         <p class="price">$7.00</p>
       </div>
       <div class="menu-item">
         <h4>Grilled Chicken</h4>
-        <p>Brined and grilled to perfection, this chicken bursts with layered savory notes, bright salt accents, and a gentle, sugar-kissed finish.</p>
+        <p>Brined and grilled to perfection, this chicken bursts with layered savory notes, bright salt accents, and a gentle, sugar-kissed finish</p>
         <p class="price">$7.00</p>
       </div>
       <div class="menu-item">
         <h4>Golden Eggrolls</h4>
-        <p>Four crispy eggrolls bursting with tender pork, vibrant carrots, and crunchy cabbage, intertwined with delicate glass noodles for a satisfying, well-rounded bite.</p>
+        <p>Four crispy eggrolls bursting with tender pork, vibrant carrots, and crunchy cabbage, intertwined with delicate glass noodles for a satisfying, well-rounded bite</p>
         <p class="price">$6.00</p>
       </div>
       <div class="menu-item">
         <h4>Buttery Beef Skewer</h4>
-        <p>Beef skewer infused with a bright, zesty marinade of lemongrass, kaffir lime, and warming spices, finished with a buttery, smoky char.</p>
+        <p>Beef skewer infused with a bright, zesty marinade of lemongrass, kaffir lime, and warming spices, finished with a buttery, smoky char</p>
         <p class="price">$2.50</p>
       </div>
       <div class="menu-item">
         <h4>Phở</h4>
-        <p>A bowl of soul-warming rice noodles with a richly simmered broth that melds tender pork ribs and ox tail with aromatic spices, achieving a harmonious blend of savory depth and a subtle, sugar-kissed lift. Customize with shrimp, beef, or meatballs, and finish with crisp mint, cilantro, and bean sprouts alongside classic condiments.</p>
+        <p>A bowl of soul-warming rice noodles with a richly simmered broth that melds tender pork ribs and ox tail with aromatic spices, achieving a harmonious blend of savory depth and a subtle, sugar-kissed lift. Customize with Asian proteins and Asian add-ons</p>
         <p class="price">Med $7.00 Lrg $9.00</p>
       </div>
     </div>
@@ -297,33 +349,52 @@
     <div class="menu">
       <div class="menu-item">
         <h4>Twisted Street Taco</h4>
-        <p>Street-style corn tortilla loaded with 2oz of premium protein, elevated by your choice of enticing add-ons.</p>
-        <p class="price">$2.00 Tues $1.50</p>
+        <p>Street-style corn tortilla loaded with your chosen premium protein, elevated by your choice of enticing add-ons</p>
+        <p class="price">$2.50 Tues $1.75</p>
       </div>
       <div class="menu-item">
         <h4>Bangin Burrito</h4>
-        <p>A warm flour tortilla loaded with 4oz of your chosen protein, perfectly paired with customizable add-ons to elevate every bite.</p>
+        <p>A warm flour tortilla loaded with your chosen premium protein, perfectly paired with customizable add-ons to elevate every bite</p>
         <p class="price">$8.00</p>
       </div>
     </div>
   
-    <h3>Options</h3>
+    <h3 class="options-heading">Options</h3>
     <div class="menu">
       <div class="menu-item">
         <h4>Asian Sides</h4>
         <ul class="options-list">
-          <li>White Rice — Steamed and served warm</li>
-          <li>Sticky Rice — Delicately chewy and freshly steamed</li>
+          <li><strong>White Rice</strong> — Steamed and served warm</li>
+          <li><strong>Sticky Rice</strong> — Delicately chewy and freshly steamed</li>
         </ul>
       </div>
       <div class="menu-item">
-        <h4>Mexican Add-ons</h4>
+        <h4>Asian Proteins</h4>
         <ul class="options-list">
-          <li>Mexican rice, Pinto beans</li>
-          <li>Cabbage, Radish, Cilantro</li>
-          <li>Grilled onion, Grilled jalapeños</li>
-          <li>Salsas: Green, Picante, Habanero</li>
-          <li>Make it Extra Spicy 🔥</li>
+          <li><strong>Pearl meatball</strong> — Tender, juicy texture and an invigorating finish. Each bite offers a harmonious blend of deep umami with a subtle hint of spice, rounded out by a refreshing aftertaste</li>
+          <li><strong>Brisket</strong> — finely sliced brisket simmered to tender perfection</li>
+          <li><strong>Shrimp</strong> — Gently boiled to lock in their natural sweetness, these shrimp offer a delicate, tender bite and a crisp, refreshing finish</li>
+        </ul>
+      </div>
+      <div class="menu-item">
+        <h4>Asian Add-ons</h4>
+        <ul class="options-list">
+          <li>Mint, Bean sprouts, Cilantro, Lime</li>
+          <li>Hoisin sauce</li>
+          <li>Sriracha</li>
+          <li>Garlic chili oil</li>
+          <li>Sugar</li>
+        </ul>
+      </div>
+      <div class="menu-item">
+        <h4>Mexican Sides</h4>
+        <ul class="options-list">
+          <li>
+            <div class="option">
+              <div><strong>Not elote</strong> — Fire-grilled corn on the cob dressed in a zesty blend of creamy mayo and a dusting of parmesan chili—delivering a harmonious balance of smoky, tangy, and spicy flavors</div>
+              <div class="option-price">$1.50</div>
+            </div>
+          </li>
         </ul>
       </div>
       <div class="menu-item">
@@ -332,6 +403,16 @@
           <li><strong>Asada</strong> — Zesty beef marinated to perfection, grilled with a smoky char</li>
           <li><strong>Grilled Chicken</strong> — Perfectly brined chicken, grilled to achieve a smoky char and juicy tenderness</li>
           <li><strong>Al Pastor</strong> — Succulent pork shoulder steeped in a vibrant blend of Mexican spices, then grilled to perfection</li>
+        </ul>
+      </div>
+      <div class="menu-item">
+        <h4>Mexican Add-ons</h4>
+        <ul class="options-list">
+          <li>Mexican rice, Pinto beans</li>
+          <li>Cabbage, Radish, Cilantro, Diced onion</li>
+          <li>Grilled onion, Grilled jalapeños</li>
+          <li>Salsas: Green, Picante, Habanero</li>
+          <li>Make it Extra Spicy 🔥</li>
         </ul>
       </div>
     </div>
