@@ -23,7 +23,7 @@
       font-family: 'Montserrat', sans-serif;
       color: #333;
       background: #fff;
-      padding-bottom: 80px;
+      padding-bottom: 0;
     }
 
     nav {
@@ -79,18 +79,18 @@
     }
 
     .header-logo {
-  position: absolute;
-  top: 45%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 450px;
-  max-width: 90vw;
-  height: auto;
-  z-index: 0;
-  pointer-events: none;
-  opacity: 0.5;
-  mix-blend-mode: screen;
-}
+      position: absolute;
+      top: 45%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 450px;
+      max-width: 90vw;
+      height: auto;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.5;
+      mix-blend-mode: screen;
+    }
 
     header h1 {
       font-size: 3.5rem;
@@ -217,9 +217,10 @@
     footer {
       background: #111;
       color: white;
-      padding: 3rem 1rem;
+      padding: 1rem;
       text-align: center;
       font-family: 'Montserrat', sans-serif;
+      margin-bottom: 48px; /* makes room for nav bar */
     }
 
     .social-icons a {
