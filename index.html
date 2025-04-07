@@ -79,17 +79,19 @@
     }
 
     .header-logo {
-      position: absolute;
-      top: 35%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      max-width: 90vw;
-      width: 500px;
-      height: auto;
-      opacity: 0.4;
-      z-index: 0;
-      pointer-events: none;
-    }
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 90vw;
+  width: 500px;
+  height: auto;
+  opacity: 0.6; /* Increase for more glow, lower for subtlety */
+  z-index: 0;
+  pointer-events: none;
+  filter: drop-shadow(0 0 40px rgba(255, 0, 0, 0.6)) 
+          drop-shadow(0 0 40px rgba(0, 255, 0, 0.4));
+}
 
     header h1 {
       font-size: 3.5rem;
