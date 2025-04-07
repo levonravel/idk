@@ -83,14 +83,17 @@
   top: 35%;
   left: 50%;
   transform: translate(-50%, -50%);
+  width: 450px;
   max-width: 90vw;
-  width: 500px;
   height: auto;
-  opacity: 0.6; /* Increase for more glow, lower for subtlety */
   z-index: 0;
   pointer-events: none;
-  filter: drop-shadow(0 0 40px rgba(255, 0, 0, 0.6)) 
-          drop-shadow(0 0 40px rgba(0, 255, 0, 0.4));
+  opacity: 0.9;
+
+  /* This is where the magic happens */
+  filter: drop-shadow(0 0 25px #ff0000)
+          drop-shadow(0 0 15px #00ff00)
+          drop-shadow(0 0 5px #ffffff);
 }
 
     header h1 {
