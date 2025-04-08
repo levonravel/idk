@@ -1,0 +1,41 @@
+# ============================================
+# Robots.txt for IDK Kitchen (Best Practice)
+# ============================================
+
+# Allow all compliant bots full access
+User-agent: *
+Disallow:
+
+# Crawl-delay to reduce server load
+Crawl-delay: 5
+
+# Block common bad bots
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: dotbot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+User-agent: Yandex
+Disallow: /
+
+User-agent: Baiduspider
+Disallow: /
+
+# Disallow sensitive or non-existent paths (optional)
+Disallow: /cgi-bin/
+Disallow: /tmp/
+Disallow: /private/
+Disallow: /hidden/
+
+# Optional: Sitemap for SEO (update this)
+Sitemap: https://yourdomain.com/sitemap.xml
