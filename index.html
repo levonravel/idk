@@ -512,9 +512,157 @@
       transition: all 0.3s ease;
     }
 
-    .logout-btn:hover 
+    /* Address Modal Styles */
+    .address-modal 
+    {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1001;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .address-modal.show 
+    {
+      display: flex;
+      opacity: 1;
+    }
+
+    .address-panel 
+    {
+      background: white;
+      border-radius: 20px;
+      padding: 2rem;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      transform: translateY(20px);
+      transition: transform 0.3s ease;
+    }
+
+    .address-modal.show .address-panel 
+    {
+      transform: translateY(0);
+    }
+
+    .address-header 
+    {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .address-header h3 
+    {
+      font-size: 1.5rem;
+      color: #333;
+      margin-bottom: 0.5rem;
+    }
+
+    .address-form 
+    {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .address-form input,
+    .address-form textarea 
+    {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: 'Lora', serif;
+    }
+
+    .address-form input:focus,
+    .address-form textarea:focus 
+    {
+      outline: none;
+      border-color: #ff5722;
+    }
+
+    .address-buttons 
+    {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .confirm-order-btn 
+    {
+      flex: 1;
+      background: #ff5722;
+      color: white;
+      border: none;
+      padding: 1rem;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .confirm-order-btn:hover 
+    {
+      background: #ff7043;
+      transform: translateY(-2px);
+    }
+
+    .cancel-btn 
+    {
+      flex: 1;
+      background: #666;
+      color: white;
+      border: none;
+      padding: 1rem;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .cancel-btn:hover 
     {
       background: #555;
+    }
+
+    .order-summary 
+    {
+      background: #f5f5f5;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+
+    .order-summary h4 
+    {
+      margin-bottom: 0.5rem;
+      color: #333;
+    }
+
+    .order-summary-item 
+    {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.25rem 0;
+      font-size: 0.9rem;
+    }
+
+    .order-total 
+    {
+      border-top: 1px solid #ddd;
+      margin-top: 0.5rem;
+      padding-top: 0.5rem;
+      font-weight: bold;
     }
   </style>
 </head>
@@ -568,6 +716,40 @@
         <button type="submit" class="login-btn" id="loginButton">Continue</button>
         
         <div id="loginMessage"></div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Address Modal -->
+  <div class="address-modal" id="addressModal">
+    <div class="address-panel">
+      <div class="address-header">
+        <h3>Delivery Information</h3>
+        <p>Where should we deliver your order?</p>
+      </div>
+      
+      <div class="order-summary">
+        <h4>Order Summary</h4>
+        <div id="orderSummaryItems"></div>
+        <div class="order-summary-item order-total">
+          <span>Total:</span>
+          <span>$<span id="summaryTotal">0.00</span></span>
+        </div>
+      </div>
+      
+      <form class="address-form" onsubmit="confirmOrder(event)">
+        <input type="text" id="deliveryStreet" placeholder="Street address" required>
+        <input type="text" id="deliveryCity" placeholder="City" required>
+        <div style="display: flex; gap: 1rem;">
+          <input type="text" id="deliveryState" placeholder="State" required style="flex: 1;">
+          <input type="text" id="deliveryZip" placeholder="ZIP code" required style="flex: 1;">
+        </div>
+        <textarea id="deliveryInstructions" placeholder="Delivery instructions (optional)" rows="3"></textarea>
+        
+        <div class="address-buttons">
+          <button type="submit" class="confirm-order-btn">Place Order</button>
+          <button type="button" class="cancel-btn" onclick="closeAddressModal()">Cancel</button>
+        </div>
       </form>
     </div>
   </div>
@@ -990,8 +1172,55 @@
         return;
       }
       
+      // Show order summary in modal
+      const summaryContainer = document.getElementById('orderSummaryItems');
+      summaryContainer.innerHTML = items.map(item => `
+        <div class="order-summary-item">
+          <span>${item.quantity}x ${item.name}</span>
+          <span>${(item.quantity * item.price).toFixed(2)}</span>
+        </div>
+      `).join('');
+      document.getElementById('summaryTotal').textContent = total.toFixed(2);
+      
+      // Store order details for later
+      window.pendingOrder = { items, total };
+      
+      // Show address modal
+      openAddressModal();
+    }
+    
+    function openAddressModal() {
+      const modal = document.getElementById('addressModal');
+      modal.classList.add('show');
+      document.body.style.overflow = 'hidden';
+    }
+    
+    function closeAddressModal() {
+      const modal = document.getElementById('addressModal');
+      modal.classList.remove('show');
+      document.body.style.overflow = 'auto';
+      
+      // Clear form
+      document.getElementById('deliveryStreet').value = '';
+      document.getElementById('deliveryCity').value = '';
+      document.getElementById('deliveryState').value = '';
+      document.getElementById('deliveryZip').value = '';
+      document.getElementById('deliveryInstructions').value = '';
+    }
+    
+    async function confirmOrder(event) {
+      event.preventDefault();
+      
+      const deliveryAddress = {
+        street: document.getElementById('deliveryStreet').value,
+        city: document.getElementById('deliveryCity').value,
+        state: document.getElementById('deliveryState').value,
+        zip: document.getElementById('deliveryZip').value,
+        instructions: document.getElementById('deliveryInstructions').value
+      };
+      
       try {
-        // Send order to server
+        // Send order to server with address
         const response = await fetch(`${SERVER_URL}/api/order`, {
           method: 'POST',
           headers: {
@@ -999,15 +1228,16 @@
           },
           body: JSON.stringify({
             email: currentUser.email,
-            items: items,
-            total: total
+            items: window.pendingOrder.items,
+            total: window.pendingOrder.total,
+            deliveryAddress: deliveryAddress
           })
         });
         
         const data = await response.json();
         
         if (response.ok) {
-          alert(`Order placed successfully!\n\nOrder #${data.orderId}\nTotal: $${total.toFixed(2)}\n\nYou'll receive a confirmation shortly.`);
+          alert(`Order placed successfully!\n\nOrder #${data.orderId}\nTotal: ${window.pendingOrder.total.toFixed(2)}\n\nDelivery to:\n${deliveryAddress.street}\n${deliveryAddress.city}, ${deliveryAddress.state} ${deliveryAddress.zip}`);
           
           // Clear cart
           cart = {};
@@ -1015,8 +1245,11 @@
             document.getElementById(`qty-${item.id}`).textContent = '0';
           });
           updateCartTotal();
+          
+          // Close modal
+          closeAddressModal();
         } else {
-          alert('Error placing order. Please try again.');
+          alert('Error placing order: ' + (data.error || 'Please try again.'));
         }
       } catch (error) {
         alert('Cannot connect to server. Make sure the server is running!');
@@ -1062,7 +1295,15 @@
     // Close modal with Escape key
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') {
-        closeLogin();
+        const loginOverlay = document.getElementById('loginOverlay');
+        const addressModal = document.getElementById('addressModal');
+        
+        if (loginOverlay.classList.contains('show')) {
+          closeLogin();
+        }
+        if (addressModal.classList.contains('show')) {
+          closeAddressModal();
+        }
       }
     });
   </script>
