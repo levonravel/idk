@@ -8,11 +8,6 @@
   <!-- Web Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
 
-  <!-- Firebase SDK -->
-  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
-
   <style>
     * 
     {
@@ -200,6 +195,19 @@
       font-family: 'Montserrat', sans-serif;
     }
 
+    .gallery 
+    {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+    }
+
+    .gallery img 
+    {
+      border-radius: 10px;
+      height: 200px;
+    }
+
     .option 
     {
       display: flex;
@@ -243,6 +251,13 @@
       text-align: center;
       font-family: 'Montserrat', sans-serif;
       margin-bottom: 48px;
+    }
+
+    .social-icons a 
+    {
+      color: white;
+      margin: 0 1rem;
+      text-decoration: none;
     }
 
     /* Login Modal Styles */
@@ -396,130 +411,90 @@
       transform: translateY(-2px);
     }
 
-    .error-message 
+    .login-extras 
     {
-      color: #ff5722;
-      background: rgba(255, 87, 34, 0.1);
-      padding: 0.75rem;
-      border-radius: 8px;
-      text-align: center;
-      margin-top: 1rem;
-      font-size: 0.9rem;
-    }
-
-    .success-message 
-    {
-      color: #4caf50;
-      background: rgba(76, 175, 80, 0.1);
-      padding: 0.75rem;
-      border-radius: 8px;
-      text-align: center;
-      margin-top: 1rem;
-      font-size: 0.9rem;
-    }
-
-    /* Order Menu Styles */
-    #order-menu 
-    {
-      display: none;
-      padding: 2rem;
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    .order-header 
-    {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-
-    .user-info 
-    {
-      text-align: center;
-      margin-bottom: 2rem;
-      color: #666;
-    }
-
-    .order-item 
-    {
-      background: #fdfdfd;
-      border-radius: 10px;
-      padding: 1.5rem;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      margin-bottom: 1rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      margin-top: 1rem;
     }
 
-    .order-controls 
+    .remember-me 
     {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 0.5rem;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 0.9rem;
     }
 
-    .quantity-btn 
+    .remember-me input[type="checkbox"] 
     {
-      background: #ff5722;
-      color: white;
-      border: none;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-weight: bold;
-      transition: all 0.3s ease;
+      width: auto;
+      margin: 0;
+      accent-color: #ff5722;
     }
 
-    .quantity-btn:hover 
+    .forgot-password 
     {
-      background: #ff7043;
-      transform: scale(1.1);
+      color: #ff5722;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.3s ease;
     }
 
-    .quantity 
+    .forgot-password:hover 
     {
-      font-weight: bold;
-      min-width: 30px;
+      color: #ff7043;
+    }
+
+    .divider 
+    {
       text-align: center;
+      margin: 2rem 0 1rem;
+      color: rgba(255, 255, 255, 0.6);
+      position: relative;
     }
 
-    .cart-summary 
+    .divider::before,
+    .divider::after 
     {
-      position: fixed;
-      bottom: 80px;
-      right: 20px;
-      background: #ff5722;
-      color: white;
-      padding: 1rem 2rem;
-      border-radius: 50px;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-      cursor: pointer;
-      transition: all 0.3s ease;
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 40%;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.2);
     }
 
-    .cart-summary:hover 
+    .divider::before 
     {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+      left: 0;
     }
 
-    .logout-btn 
+    .divider::after 
     {
-      background: #666;
-      color: white;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 5px;
-      cursor: pointer;
-      font-family: 'Montserrat', sans-serif;
-      transition: all 0.3s ease;
+      right: 0;
     }
 
-    .logout-btn:hover 
+    .signup-link 
     {
-      background: #555;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.8);
+      margin-top: 1rem;
+    }
+
+    .signup-link a 
+    {
+      color: #ff5722;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    .signup-link a:hover 
+    {
+      color: #ff7043;
     }
   </style>
 </head>
@@ -531,13 +506,12 @@
     <p class="slogan">"The place to go when you or they don't know"</p>
   </header>
 
-  <nav id="mainNav">
+  <nav>
     <a href="#home">Home</a>
     <a href="#about">About</a>
     <a href="#menu">Menu</a>
     <a href="#gallery">Gallery</a>
-    <a onclick="openLogin()" id="loginNavBtn">Login</a>
-    <a onclick="logout()" id="logoutNavBtn" style="display: none;">Logout</a>
+    <a onclick="openLogin()">Login</a>
   </nav>
 
   <!-- Login Modal -->
@@ -547,26 +521,37 @@
       
       <div class="login-header">
         <h2>Welcome Back</h2>
-        <p>Sign in with your email and access code</p>
+        <p>Sign in to your IDK Kitchen account</p>
       </div>
       
       <form class="login-form" onsubmit="handleLogin(event)">
         <div class="input-group">
-          <input type="email" id="loginEmail" placeholder="Email address" required>
+          <input type="email" placeholder="Email address" required>
         </div>
         
         <div class="input-group">
-          <input type="password" id="loginCode" placeholder="Access code" required>
+          <input type="password" placeholder="Password" required>
+        </div>
+        
+        <div class="login-extras">
+          <label class="remember-me">
+            <input type="checkbox">
+            <span>Remember me</span>
+          </label>
+          <a href="#" class="forgot-password">Forgot password?</a>
         </div>
         
         <button type="submit" class="login-btn">Sign In</button>
-        
-        <div id="loginMessage"></div>
       </form>
+      
+      <div class="divider">or</div>
+      
+      <div class="signup-link">
+        Don't have an account? <a href="#">Sign up</a>
+      </div>
     </div>
   </div>
 
-  <!-- Regular Menu Section -->
   <section id="about">
     <h2>About IDK Kitchen</h2>
     <p>We're a small, flavor bomb of a kitchen — one side dishing out Asian fusion with deep roots, loud energy, and explosive flavor; the other slinging Mexican street twists with bold spice, fearless character, and unapologetic heat. A diverse kitchen with no rules — just taste</p>
@@ -686,71 +671,11 @@
     </div>
   </section>
 
-  <!-- Order Menu (Hidden by default) -->
-  <section id="order-menu">
-    <div class="order-header">
-      <h2>Order Menu</h2>
-      <div class="user-info">
-        <p>Welcome, <span id="userEmail"></span>!</p>
-        <button class="logout-btn" onclick="logout()">Logout</button>
-      </div>
-    </div>
-    
-    <h3>Quick Order</h3>
-    <div id="orderItems">
-      <!-- Order items will be populated here -->
-    </div>
-    
-    <div class="cart-summary" onclick="checkout()">
-      <span>Cart: $<span id="cartTotal">0.00</span></span>
-    </div>
-  </section>
-
   <footer>
     <p style="margin-top: 1rem;">&copy; 2025 IDK Kitchen™. All rights reserved.</p>
   </footer>
 
   <script>
-    // Firebase configuration - REPLACE WITH YOUR OWN CONFIG
-    const firebaseConfig = {
-      apiKey: "YOUR_API_KEY",
-      authDomain: "YOUR_AUTH_DOMAIN",
-      projectId: "YOUR_PROJECT_ID",
-      storageBucket: "YOUR_STORAGE_BUCKET",
-      messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-      appId: "YOUR_APP_ID"
-    };
-
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-    const db = firebase.firestore();
-
-    // Valid access codes (in production, store these in Firestore)
-    const validCodes = {
-      'WELCOME2025': true,
-      'IDKSPECIAL': true,
-      'TASTEBOMB': true,
-      'FUSION123': true
-    };
-
-    // Menu items for ordering
-    const menuItems = [
-      { id: 1, name: 'Chicken Chow Mein', price: 6.50, category: 'asian' },
-      { id: 2, name: 'House Fried Rice', price: 6.50, category: 'asian' },
-      { id: 3, name: 'Glazed Pork Ribs', price: 7.00, category: 'asian' },
-      { id: 4, name: 'Grilled Chicken', price: 7.00, category: 'asian' },
-      { id: 5, name: 'Golden Eggrolls', price: 6.00, category: 'asian' },
-      { id: 6, name: 'Buttery Beef Skewer', price: 3.00, category: 'asian' },
-      { id: 7, name: 'Phở (Medium)', price: 7.00, category: 'asian' },
-      { id: 8, name: 'Phở (Large)', price: 9.00, category: 'asian' },
-      { id: 9, name: 'Twisted Street Taco', price: 2.50, category: 'mexican' },
-      { id: 10, name: 'Bangin Burrito', price: 8.00, category: 'mexican' }
-    ];
-
-    let cart = {};
-    let currentUser = null;
-
     function openLogin() {
       const overlay = document.getElementById('loginOverlay');
       overlay.classList.add('show');
@@ -761,145 +686,13 @@
       const overlay = document.getElementById('loginOverlay');
       overlay.classList.remove('show');
       document.body.style.overflow = 'auto';
-      document.getElementById('loginMessage').innerHTML = '';
     }
     
-    async function handleLogin(event) {
+    function handleLogin(event) {
       event.preventDefault();
-      
-      const email = document.getElementById('loginEmail').value;
-      const code = document.getElementById('loginCode').value;
-      const messageDiv = document.getElementById('loginMessage');
-      
-      // Check if code is valid
-      if (!validCodes[code.toUpperCase()]) {
-        messageDiv.innerHTML = '<div class="error-message">Invalid access code. Please try again.</div>';
-        return;
-      }
-      
-      try {
-        // For demo purposes, we'll create a simple auth session
-        // In production, you'd want to use Firebase Auth properly
-        currentUser = { email: email, code: code };
-        
-        // Store in session
-        sessionStorage.setItem('idkUser', JSON.stringify(currentUser));
-        
-        messageDiv.innerHTML = '<div class="success-message">Login successful! Redirecting...</div>';
-        
-        setTimeout(() => {
-          showOrderMenu();
-          closeLogin();
-        }, 1500);
-        
-      } catch (error) {
-        messageDiv.innerHTML = '<div class="error-message">Login failed. Please try again.</div>';
-      }
-    }
-    
-    function showOrderMenu() {
-      // Hide regular sections
-      document.getElementById('about').style.display = 'none';
-      document.getElementById('menu').style.display = 'none';
-      
-      // Show order menu
-      document.getElementById('order-menu').style.display = 'block';
-      document.getElementById('userEmail').textContent = currentUser.email;
-      
-      // Update nav
-      document.getElementById('loginNavBtn').style.display = 'none';
-      document.getElementById('logoutNavBtn').style.display = 'block';
-      
-      // Populate order items
-      populateOrderMenu();
-    }
-    
-    function populateOrderMenu() {
-      const container = document.getElementById('orderItems');
-      container.innerHTML = '';
-      
-      menuItems.forEach(item => {
-        const orderItem = document.createElement('div');
-        orderItem.className = 'order-item';
-        orderItem.innerHTML = `
-          <div>
-            <h4>${item.name}</h4>
-            <p>$${item.price.toFixed(2)}</p>
-          </div>
-          <div class="order-controls">
-            <button class="quantity-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
-            <span class="quantity" id="qty-${item.id}">0</span>
-            <button class="quantity-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
-          </div>
-        `;
-        container.appendChild(orderItem);
-      });
-    }
-    
-    function updateQuantity(itemId, change) {
-      if (!cart[itemId]) cart[itemId] = 0;
-      cart[itemId] = Math.max(0, cart[itemId] + change);
-      
-      document.getElementById(`qty-${itemId}`).textContent = cart[itemId];
-      updateCartTotal();
-    }
-    
-    function updateCartTotal() {
-      let total = 0;
-      for (let itemId in cart) {
-        const item = menuItems.find(i => i.id == itemId);
-        total += item.price * cart[itemId];
-      }
-      document.getElementById('cartTotal').textContent = total.toFixed(2);
-    }
-    
-    function checkout() {
-      const items = [];
-      let total = 0;
-      
-      for (let itemId in cart) {
-        if (cart[itemId] > 0) {
-          const item = menuItems.find(i => i.id == itemId);
-          items.push(`${cart[itemId]}x ${item.name}`);
-          total += item.price * cart[itemId];
-        }
-      }
-      
-      if (items.length === 0) {
-        alert('Your cart is empty!');
-        return;
-      }
-      
-      alert(`Order Summary:\n\n${items.join('\n')}\n\nTotal: $${total.toFixed(2)}\n\nThis is a demo - no actual order placed.`);
-    }
-    
-    function logout() {
-      currentUser = null;
-      sessionStorage.removeItem('idkUser');
-      cart = {};
-      
-      // Show regular sections
-      document.getElementById('about').style.display = 'block';
-      document.getElementById('menu').style.display = 'block';
-      
-      // Hide order menu
-      document.getElementById('order-menu').style.display = 'none';
-      
-      // Update nav
-      document.getElementById('loginNavBtn').style.display = 'block';
-      document.getElementById('logoutNavBtn').style.display = 'none';
-      
-      // Scroll to top
-      window.scrollTo(0, 0);
-    }
-    
-    // Check if user is already logged in
-    window.onload = function() {
-      const savedUser = sessionStorage.getItem('idkUser');
-      if (savedUser) {
-        currentUser = JSON.parse(savedUser);
-        showOrderMenu();
-      }
+      // Handle login logic here
+      alert('Login functionality would be implemented here!');
+      closeLogin();
     }
     
     // Close modal when clicking outside
