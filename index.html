@@ -195,19 +195,6 @@
       font-family: 'Montserrat', sans-serif;
     }
 
-    .gallery 
-    {
-      display: flex;
-      gap: 1rem;
-      overflow-x: auto;
-    }
-
-    .gallery img 
-    {
-      border-radius: 10px;
-      height: 200px;
-    }
-
     .option 
     {
       display: flex;
@@ -251,13 +238,6 @@
       text-align: center;
       font-family: 'Montserrat', sans-serif;
       margin-bottom: 48px;
-    }
-
-    .social-icons a 
-    {
-      color: white;
-      margin: 0 1rem;
-      text-decoration: none;
     }
 
     /* Login Modal Styles */
@@ -411,90 +391,130 @@
       transform: translateY(-2px);
     }
 
-    .login-extras 
+    .error-message 
     {
+      color: #ff5722;
+      background: rgba(255, 87, 34, 0.1);
+      padding: 0.75rem;
+      border-radius: 8px;
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .success-message 
+    {
+      color: #4caf50;
+      background: rgba(76, 175, 80, 0.1);
+      padding: 0.75rem;
+      border-radius: 8px;
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+
+    /* Order Menu Styles */
+    #order-menu 
+    {
+      display: none;
+      padding: 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .order-header 
+    {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .user-info 
+    {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #666;
+    }
+
+    .order-item 
+    {
+      background: #fdfdfd;
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 1rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-top: 1rem;
     }
 
-    .remember-me 
+    .order-controls 
     {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      color: rgba(255, 255, 255, 0.8);
-      font-size: 0.9rem;
+      gap: 1rem;
     }
 
-    .remember-me input[type="checkbox"] 
+    .quantity-btn 
     {
-      width: auto;
-      margin: 0;
-      accent-color: #ff5722;
-    }
-
-    .forgot-password 
-    {
-      color: #ff5722;
-      text-decoration: none;
-      font-size: 0.9rem;
-      transition: color 0.3s ease;
-    }
-
-    .forgot-password:hover 
-    {
-      color: #ff7043;
-    }
-
-    .divider 
-    {
-      text-align: center;
-      margin: 2rem 0 1rem;
-      color: rgba(255, 255, 255, 0.6);
-      position: relative;
-    }
-
-    .divider::before,
-    .divider::after 
-    {
-      content: '';
-      position: absolute;
-      top: 50%;
-      width: 40%;
-      height: 1px;
-      background: rgba(255, 255, 255, 0.2);
-    }
-
-    .divider::before 
-    {
-      left: 0;
-    }
-
-    .divider::after 
-    {
-      right: 0;
-    }
-
-    .signup-link 
-    {
-      text-align: center;
-      color: rgba(255, 255, 255, 0.8);
-      margin-top: 1rem;
-    }
-
-    .signup-link a 
-    {
-      color: #ff5722;
-      text-decoration: none;
+      background: #ff5722;
+      color: white;
+      border: none;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
       font-weight: bold;
-      transition: color 0.3s ease;
+      transition: all 0.3s ease;
     }
 
-    .signup-link a:hover 
+    .quantity-btn:hover 
     {
-      color: #ff7043;
+      background: #ff7043;
+      transform: scale(1.1);
+    }
+
+    .quantity 
+    {
+      font-weight: bold;
+      min-width: 30px;
+      text-align: center;
+    }
+
+    .cart-summary 
+    {
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      background: #ff5722;
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .cart-summary:hover 
+    {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .logout-btn 
+    {
+      background: #666;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      font-family: 'Montserrat', sans-serif;
+      transition: all 0.3s ease;
+    }
+
+    .logout-btn:hover 
+    {
+      background: #555;
     }
   </style>
 </head>
@@ -511,7 +531,8 @@
     <a href="#about">About</a>
     <a href="#menu">Menu</a>
     <a href="#gallery">Gallery</a>
-    <a onclick="openLogin()">Login</a>
+    <a onclick="openLogin()" id="loginNavBtn">Login</a>
+    <a onclick="logout()" id="logoutNavBtn" style="display: none;">Logout</a>
   </nav>
 
   <!-- Login Modal -->
@@ -520,35 +541,34 @@
       <button class="close-btn" onclick="closeLogin()">×</button>
       
       <div class="login-header">
-        <h2>Welcome Back</h2>
-        <p>Sign in to your IDK Kitchen account</p>
+        <h2 id="loginTitle">Welcome to IDK Kitchen</h2>
+        <p id="loginSubtitle">Enter your email to get started</p>
       </div>
       
       <form class="login-form" onsubmit="handleLogin(event)">
         <div class="input-group">
-          <input type="email" placeholder="Email address" required>
+          <input type="email" id="loginEmail" placeholder="Email address" required>
         </div>
         
-        <div class="input-group">
-          <input type="password" placeholder="Password" required>
+        <div class="input-group" id="passwordGroup" style="display: none;">
+          <input type="password" id="loginPassword" placeholder="Password">
         </div>
         
-        <div class="login-extras">
-          <label class="remember-me">
-            <input type="checkbox">
-            <span>Remember me</span>
-          </label>
-          <a href="#" class="forgot-password">Forgot password?</a>
+        <div class="input-group" id="codeGroup" style="display: none;">
+          <input type="text" id="loginCode" placeholder="Access code">
         </div>
         
-        <button type="submit" class="login-btn">Sign In</button>
+        <div class="input-group" id="newPasswordGroup" style="display: none;">
+          <input type="password" id="newPassword" placeholder="Create password" minlength="6">
+          <p style="color: rgba(255,255,255,0.7); font-size: 0.85rem; margin-top: 5px;">
+            Choose a password (minimum 6 characters)
+          </p>
+        </div>
+        
+        <button type="submit" class="login-btn" id="loginButton">Continue</button>
+        
+        <div id="loginMessage"></div>
       </form>
-      
-      <div class="divider">or</div>
-      
-      <div class="signup-link">
-        Don't have an account? <a href="#">Sign up</a>
-      </div>
     </div>
   </div>
 
@@ -671,23 +691,83 @@
     </div>
   </section>
 
+  <!-- Order Menu (Hidden by default) -->
+  <section id="order-menu">
+    <div class="order-header">
+      <h2>Order Menu</h2>
+      <div class="user-info">
+        <p>Welcome, <span id="userEmail"></span>!</p>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+      </div>
+    </div>
+    
+    <h3>Quick Order</h3>
+    <div id="orderItems">
+      <!-- Order items will be populated here -->
+    </div>
+    
+    <div class="cart-summary" onclick="checkout()">
+      <span>Cart: $<span id="cartTotal">0.00</span></span>
+    </div>
+  </section>
+
   <footer>
     <p style="margin-top: 1rem;">&copy; 2025 IDK Kitchen™. All rights reserved.</p>
   </footer>
 
   <script>
-    const SERVER_URL = 'https://api.idk.kitchen.com';
+    // Server URL - FIXED (removed extra .com)
+    const SERVER_URL = 'https://api.idk.kitchen';
+    
+    // Variables
+    let cart = {};
+    let currentUser = null;
+    let loginStep = 'email';
+    let tempEmail = '';
+    let tempCode = '';
+
+    // Menu items for ordering
+    const menuItems = [
+      { id: 1, name: 'Chicken Chow Mein', price: 6.50, category: 'asian' },
+      { id: 2, name: 'House Fried Rice', price: 6.50, category: 'asian' },
+      { id: 3, name: 'Glazed Pork Ribs', price: 7.00, category: 'asian' },
+      { id: 4, name: 'Grilled Chicken', price: 7.00, category: 'asian' },
+      { id: 5, name: 'Golden Eggrolls', price: 6.00, category: 'asian' },
+      { id: 6, name: 'Buttery Beef Skewer', price: 3.00, category: 'asian' },
+      { id: 7, name: 'Phở (Medium)', price: 7.00, category: 'asian' },
+      { id: 8, name: 'Phở (Large)', price: 9.00, category: 'asian' },
+      { id: 9, name: 'Twisted Street Taco', price: 2.50, category: 'mexican' },
+      { id: 10, name: 'Bangin Burrito', price: 8.00, category: 'mexican' }
+    ];
     
     function openLogin() {
       const overlay = document.getElementById('loginOverlay');
       overlay.classList.add('show');
       document.body.style.overflow = 'hidden';
+      resetLoginForm();
     }
     
     function closeLogin() {
       const overlay = document.getElementById('loginOverlay');
       overlay.classList.remove('show');
       document.body.style.overflow = 'auto';
+      document.getElementById('loginMessage').innerHTML = '';
+      resetLoginForm();
+    }
+    
+    function resetLoginForm() {
+      loginStep = 'email';
+      document.getElementById('loginTitle').textContent = 'Welcome to IDK Kitchen';
+      document.getElementById('loginSubtitle').textContent = 'Enter your email to get started';
+      document.getElementById('loginButton').textContent = 'Continue';
+      document.getElementById('passwordGroup').style.display = 'none';
+      document.getElementById('codeGroup').style.display = 'none';
+      document.getElementById('newPasswordGroup').style.display = 'none';
+      document.getElementById('loginEmail').value = '';
+      document.getElementById('loginPassword').value = '';
+      document.getElementById('loginCode').value = '';
+      document.getElementById('newPassword').value = '';
+      document.getElementById('loginMessage').innerHTML = '';
     }
     
     async function handleLogin(event) {
@@ -859,7 +939,7 @@
         orderItem.innerHTML = `
           <div>
             <h4>${item.name}</h4>
-            <p>${item.price.toFixed(2)}</p>
+            <p>$${item.price.toFixed(2)}</p>
           </div>
           <div class="order-controls">
             <button class="quantity-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
@@ -927,7 +1007,7 @@
         const data = await response.json();
         
         if (response.ok) {
-          alert(`Order placed successfully!\n\nOrder #${data.orderId}\nTotal: ${total.toFixed(2)}\n\nYou'll receive a confirmation shortly.`);
+          alert(`Order placed successfully!\n\nOrder #${data.orderId}\nTotal: $${total.toFixed(2)}\n\nYou'll receive a confirmation shortly.`);
           
           // Clear cart
           cart = {};
@@ -970,21 +1050,6 @@
         currentUser = JSON.parse(savedUser);
         showOrderMenu();
       }
-    }
-    
-    function resetLoginForm() {
-      loginStep = 'email';
-      document.getElementById('loginTitle').textContent = 'Welcome to IDK Kitchen';
-      document.getElementById('loginSubtitle').textContent = 'Enter your email to get started';
-      document.getElementById('loginButton').textContent = 'Continue';
-      document.getElementById('passwordGroup').style.display = 'none';
-      document.getElementById('codeGroup').style.display = 'none';
-      document.getElementById('newPasswordGroup').style.display = 'none';
-      document.getElementById('loginEmail').value = '';
-      document.getElementById('loginPassword').value = '';
-      document.getElementById('loginCode').value = '';
-      document.getElementById('newPassword').value = '';
-      document.getElementById('loginMessage').innerHTML = '';
     }
     
     // Close modal when clicking outside
