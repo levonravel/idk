@@ -688,11 +688,301 @@
       document.body.style.overflow = 'auto';
     }
     
-    function handleLogin(event) {
+    async function handleLogin(event) {
       event.preventDefault();
-      // Handle login logic here
-      alert('Login functionality would be implemented here!');
-      closeLogin();
+      
+      const messageDiv = document.getElementById('loginMessage');
+      
+      if (loginStep === 'email') {
+        // First step: check if user exists
+        const email = document.getElementById('loginEmail').value;
+        tempEmail = email;
+        
+        try {
+          const response = await fetch(`${SERVER_URL}/api/check-user`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email })
+          });
+          
+          const data = await response.json();
+          
+          if (data.exists) {
+            // Existing user - show password field
+            loginStep = 'password';
+            document.getElementById('loginTitle').textContent = 'Welcome back!';
+            document.getElementById('loginSubtitle').textContent = 'Enter your password to continue';
+            document.getElementById('loginButton').textContent = 'Sign In';
+            document.getElementById('passwordGroup').style.display = 'block';
+            document.getElementById('loginPassword').required = true;
+            document.getElementById('loginPassword').focus();
+          } else {
+            // New user - show code field
+            loginStep = 'code';
+            document.getElementById('loginTitle').textContent = 'First time? Great!';
+            document.getElementById('loginSubtitle').textContent = 'Enter your access code';
+            document.getElementById('loginButton').textContent = 'Continue';
+            document.getElementById('codeGroup').style.display = 'block';
+            document.getElementById('loginCode').required = true;
+            document.getElementById('loginCode').focus();
+          }
+        } catch (error) {
+          messageDiv.innerHTML = '<div class="error-message">Cannot connect to server. Make sure the server is running!</div>';
+        }
+        
+      } else if (loginStep === 'password') {
+        // Existing user login
+        const password = document.getElementById('loginPassword').value;
+        
+        try {
+          const response = await fetch(`${SERVER_URL}/api/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: tempEmail, password })
+          });
+          
+          const data = await response.json();
+          
+          if (response.ok && data.success) {
+            currentUser = data.user;
+            sessionStorage.setItem('idkUser', JSON.stringify(currentUser));
+            messageDiv.innerHTML = '<div class="success-message">Login successful! Redirecting...</div>';
+            
+            setTimeout(() => {
+              showOrderMenu();
+              closeLogin();
+            }, 1500);
+          } else {
+            messageDiv.innerHTML = '<div class="error-message">Invalid password. Please try again.</div>';
+          }
+        } catch (error) {
+          messageDiv.innerHTML = '<div class="error-message">Cannot connect to server. Make sure the server is running!</div>';
+        }
+        
+      } else if (loginStep === 'code') {
+        // Validate access code
+        const code = document.getElementById('loginCode').value;
+        tempCode = code;
+        
+        try {
+          const response = await fetch(`${SERVER_URL}/api/first-login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: tempEmail, code })
+          });
+          
+          const data = await response.json();
+          
+          if (response.ok && data.success) {
+            // Code valid - show password setup
+            loginStep = 'setPassword';
+            document.getElementById('loginTitle').textContent = 'Almost done!';
+            document.getElementById('loginSubtitle').textContent = 'Create a password for future logins';
+            document.getElementById('loginButton').textContent = 'Create Account';
+            document.getElementById('codeGroup').style.display = 'none';
+            document.getElementById('newPasswordGroup').style.display = 'block';
+            document.getElementById('newPassword').required = true;
+            document.getElementById('newPassword').focus();
+          } else {
+            messageDiv.innerHTML = '<div class="error-message">' + (data.error || 'Invalid access code') + '</div>';
+          }
+        } catch (error) {
+          messageDiv.innerHTML = '<div class="error-message">Cannot connect to server. Make sure the server is running!</div>';
+        }
+        
+      } else if (loginStep === 'setPassword') {
+        // Set password for new user
+        const password = document.getElementById('newPassword').value;
+        
+        if (password.length < 6) {
+          messageDiv.innerHTML = '<div class="error-message">Password must be at least 6 characters.</div>';
+          return;
+        }
+        
+        try {
+          const response = await fetch(`${SERVER_URL}/api/set-password`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+              email: tempEmail, 
+              code: tempCode,
+              password: password 
+            })
+          });
+          
+          const data = await response.json();
+          
+          if (response.ok && data.success) {
+            currentUser = data.user;
+            sessionStorage.setItem('idkUser', JSON.stringify(currentUser));
+            messageDiv.innerHTML = '<div class="success-message">Account created! Redirecting...</div>';
+            
+            setTimeout(() => {
+              showOrderMenu();
+              closeLogin();
+            }, 1500);
+          } else {
+            messageDiv.innerHTML = '<div class="error-message">Error creating account. Please try again.</div>';
+          }
+        } catch (error) {
+          messageDiv.innerHTML = '<div class="error-message">Cannot connect to server. Make sure the server is running!</div>';
+        }
+      }
+    }
+    
+    function showOrderMenu() {
+      // Hide regular sections
+      document.getElementById('about').style.display = 'none';
+      document.getElementById('menu').style.display = 'none';
+      
+      // Show order menu
+      document.getElementById('order-menu').style.display = 'block';
+      document.getElementById('userEmail').textContent = currentUser.email;
+      
+      // Update nav
+      document.getElementById('loginNavBtn').style.display = 'none';
+      document.getElementById('logoutNavBtn').style.display = 'block';
+      
+      // Populate order items
+      populateOrderMenu();
+    }
+    
+    function populateOrderMenu() {
+      const container = document.getElementById('orderItems');
+      container.innerHTML = '';
+      
+      menuItems.forEach(item => {
+        const orderItem = document.createElement('div');
+        orderItem.className = 'order-item';
+        orderItem.innerHTML = `
+          <div>
+            <h4>${item.name}</h4>
+            <p>${item.price.toFixed(2)}</p>
+          </div>
+          <div class="order-controls">
+            <button class="quantity-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
+            <span class="quantity" id="qty-${item.id}">0</span>
+            <button class="quantity-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
+          </div>
+        `;
+        container.appendChild(orderItem);
+      });
+    }
+    
+    function updateQuantity(itemId, change) {
+      if (!cart[itemId]) cart[itemId] = 0;
+      cart[itemId] = Math.max(0, cart[itemId] + change);
+      
+      document.getElementById(`qty-${itemId}`).textContent = cart[itemId];
+      updateCartTotal();
+    }
+    
+    function updateCartTotal() {
+      let total = 0;
+      for (let itemId in cart) {
+        const item = menuItems.find(i => i.id == itemId);
+        total += item.price * cart[itemId];
+      }
+      document.getElementById('cartTotal').textContent = total.toFixed(2);
+    }
+    
+    async function checkout() {
+      const items = [];
+      let total = 0;
+      
+      for (let itemId in cart) {
+        if (cart[itemId] > 0) {
+          const item = menuItems.find(i => i.id == itemId);
+          items.push({
+            id: item.id,
+            name: item.name,
+            quantity: cart[itemId],
+            price: item.price
+          });
+          total += item.price * cart[itemId];
+        }
+      }
+      
+      if (items.length === 0) {
+        alert('Your cart is empty!');
+        return;
+      }
+      
+      try {
+        // Send order to server
+        const response = await fetch(`${SERVER_URL}/api/order`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            email: currentUser.email,
+            items: items,
+            total: total
+          })
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+          alert(`Order placed successfully!\n\nOrder #${data.orderId}\nTotal: ${total.toFixed(2)}\n\nYou'll receive a confirmation shortly.`);
+          
+          // Clear cart
+          cart = {};
+          menuItems.forEach(item => {
+            document.getElementById(`qty-${item.id}`).textContent = '0';
+          });
+          updateCartTotal();
+        } else {
+          alert('Error placing order. Please try again.');
+        }
+      } catch (error) {
+        alert('Cannot connect to server. Make sure the server is running!');
+      }
+    }
+    
+    function logout() {
+      currentUser = null;
+      sessionStorage.removeItem('idkUser');
+      cart = {};
+      
+      // Show regular sections
+      document.getElementById('about').style.display = 'block';
+      document.getElementById('menu').style.display = 'block';
+      
+      // Hide order menu
+      document.getElementById('order-menu').style.display = 'none';
+      
+      // Update nav
+      document.getElementById('loginNavBtn').style.display = 'block';
+      document.getElementById('logoutNavBtn').style.display = 'none';
+      
+      // Scroll to top
+      window.scrollTo(0, 0);
+    }
+    
+    // Check if user is already logged in
+    window.onload = function() {
+      const savedUser = sessionStorage.getItem('idkUser');
+      if (savedUser) {
+        currentUser = JSON.parse(savedUser);
+        showOrderMenu();
+      }
+    }
+    
+    function resetLoginForm() {
+      loginStep = 'email';
+      document.getElementById('loginTitle').textContent = 'Welcome to IDK Kitchen';
+      document.getElementById('loginSubtitle').textContent = 'Enter your email to get started';
+      document.getElementById('loginButton').textContent = 'Continue';
+      document.getElementById('passwordGroup').style.display = 'none';
+      document.getElementById('codeGroup').style.display = 'none';
+      document.getElementById('newPasswordGroup').style.display = 'none';
+      document.getElementById('loginEmail').value = '';
+      document.getElementById('loginPassword').value = '';
+      document.getElementById('loginCode').value = '';
+      document.getElementById('newPassword').value = '';
+      document.getElementById('loginMessage').innerHTML = '';
     }
     
     // Close modal when clicking outside
