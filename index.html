@@ -664,6 +664,152 @@
       padding-top: 0.5rem;
       font-weight: bold;
     }
+
+    /* Customize Modal Styles */
+    .customize-modal 
+    {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1001;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .customize-modal.show 
+    {
+      display: flex;
+      opacity: 1;
+    }
+
+    .customize-panel 
+    {
+      background: white;
+      border-radius: 20px;
+      padding: 2rem;
+      width: 90%;
+      max-width: 600px;
+      max-height: 80vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      transform: translateY(20px);
+      transition: transform 0.3s ease;
+    }
+
+    .customize-modal.show .customize-panel 
+    {
+      transform: translateY(0);
+    }
+
+    .customize-header 
+    {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .customize-header h3 
+    {
+      font-size: 1.5rem;
+      color: #333;
+      margin-bottom: 0.5rem;
+    }
+
+    .customize-section 
+    {
+      margin-bottom: 1.5rem;
+    }
+
+    .customize-section h4 
+    {
+      margin-bottom: 0.75rem;
+      color: #ff5722;
+    }
+
+    .customize-option 
+    {
+      padding: 0.5rem;
+      margin-bottom: 0.5rem;
+      background: #f5f5f5;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .customize-option:hover 
+    {
+      background: #eeeeee;
+    }
+
+    .customize-option input[type="checkbox"] 
+    {
+      cursor: pointer;
+    }
+
+    .customize-buttons 
+    {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .add-to-cart-btn 
+    {
+      flex: 1;
+      background: #ff5722;
+      color: white;
+      border: none;
+      padding: 1rem;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .add-to-cart-btn:hover 
+    {
+      background: #ff7043;
+      transform: translateY(-2px);
+    }
+
+    .customize-btn 
+    {
+      background: #2196F3;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+
+    .customize-btn:hover 
+    {
+      background: #1976D2;
+      transform: scale(1.05);
+    }
+
+    .cart-item-details 
+    {
+      font-size: 0.85rem;
+      color: #666;
+      margin-top: 0.25rem;
+    }
+
+    .item-info 
+    {
+      flex: 1;
+    }
   </style>
 </head>
 <body>
@@ -717,6 +863,25 @@
         
         <div id="loginMessage"></div>
       </form>
+    </div>
+  </div>
+
+  <!-- Customize Modal -->
+  <div class="customize-modal" id="customizeModal">
+    <div class="customize-panel">
+      <div class="customize-header">
+        <h3 id="customizeTitle">Customize Your Item</h3>
+        <p id="customizeSubtitle">Select your proteins and add-ons</p>
+      </div>
+      
+      <div id="customizeContent">
+        <!-- Dynamic content will be inserted here -->
+      </div>
+      
+      <div class="customize-buttons">
+        <button class="add-to-cart-btn" onclick="addCustomizedItem()">Add to Cart</button>
+        <button class="cancel-btn" onclick="closeCustomizeModal()">Cancel</button>
+      </div>
     </div>
   </div>
 
@@ -898,7 +1063,7 @@
   </footer>
 
   <script>
-    // Server URL - FIXED (removed extra .com)
+    // Server URL
     const SERVER_URL = 'https://api.idk.kitchen';
     
     // Variables
@@ -907,19 +1072,58 @@
     let loginStep = 'email';
     let tempEmail = '';
     let tempCode = '';
+    let currentCustomizeItem = null;
 
     // Menu items for ordering
     const menuItems = [
-      { id: 1, name: 'Chicken Chow Mein', price: 6.50, category: 'asian' },
-      { id: 2, name: 'House Fried Rice', price: 6.50, category: 'asian' },
-      { id: 3, name: 'Glazed Pork Ribs', price: 7.00, category: 'asian' },
-      { id: 4, name: 'Grilled Chicken', price: 7.00, category: 'asian' },
-      { id: 5, name: 'Golden Eggrolls', price: 6.00, category: 'asian' },
-      { id: 6, name: 'Buttery Beef Skewer', price: 3.00, category: 'asian' },
-      { id: 7, name: 'Phở (Medium)', price: 7.00, category: 'asian' },
-      { id: 8, name: 'Phở (Large)', price: 9.00, category: 'asian' },
-      { id: 9, name: 'Twisted Street Taco', price: 2.50, category: 'mexican' },
-      { id: 10, name: 'Bangin Burrito', price: 8.00, category: 'mexican' }
+      { id: 1, name: 'Chicken Chow Mein', price: 6.50, category: 'asian', customizable: false },
+      { id: 2, name: 'House Fried Rice', price: 6.50, category: 'asian', customizable: false },
+      { id: 3, name: 'Glazed Pork Ribs', price: 7.00, category: 'asian', customizable: false },
+      { id: 4, name: 'Grilled Chicken', price: 7.00, category: 'asian', customizable: false },
+      { id: 5, name: 'Golden Eggrolls', price: 6.00, category: 'asian', customizable: false },
+      { id: 6, name: 'Buttery Beef Skewer', price: 3.00, category: 'asian', customizable: false },
+      { id: 7, name: 'Phở (Medium)', price: 7.00, category: 'asian', customizable: true },
+      { id: 8, name: 'Phở (Large)', price: 9.00, category: 'asian', customizable: true },
+      { id: 9, name: 'Twisted Street Taco', price: 2.50, category: 'mexican', customizable: true },
+      { id: 10, name: 'Bangin Burrito', price: 8.00, category: 'mexican', customizable: true }
+    ];
+
+    // Available proteins and addons
+    const asianProteins = [
+      { name: 'Pearl meatball', price: 0 },
+      { name: 'Brisket', price: 0 },
+      { name: 'Shrimp', price: 0 }
+    ];
+
+    const asianAddons = [
+      { name: 'Mint', price: 0 },
+      { name: 'Bean sprouts', price: 0 },
+      { name: 'Cilantro', price: 0 },
+      { name: 'Lime', price: 0 },
+      { name: 'Hoisin sauce', price: 0 },
+      { name: 'Sriracha', price: 0 },
+      { name: 'Garlic chili oil', price: 0 }
+    ];
+
+    const mexicanProteins = [
+      { name: 'Asada', price: 0 },
+      { name: 'Grilled Chicken', price: 0 },
+      { name: 'Al Pastor', price: 0 }
+    ];
+
+    const mexicanAddons = [
+      { name: 'Mexican rice', price: 0 },
+      { name: 'Pinto beans', price: 0 },
+      { name: 'Cabbage', price: 0 },
+      { name: 'Radish', price: 0 },
+      { name: 'Cilantro', price: 0 },
+      { name: 'Diced onion', price: 0 },
+      { name: 'Grilled onion', price: 0 },
+      { name: 'Grilled jalapeños', price: 0 },
+      { name: 'Green salsa', price: 0 },
+      { name: 'Picante salsa', price: 0 },
+      { name: 'Habanero salsa', price: 0 },
+      { name: 'Extra Spicy 🔥', price: 0 }
     ];
     
     function openLogin() {
@@ -1118,19 +1322,60 @@
       menuItems.forEach(item => {
         const orderItem = document.createElement('div');
         orderItem.className = 'order-item';
-        orderItem.innerHTML = `
-          <div>
-            <h4>${item.name}</h4>
-            <p>$${item.price.toFixed(2)}</p>
-          </div>
-          <div class="order-controls">
-            <button class="quantity-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
-            <span class="quantity" id="qty-${item.id}">0</span>
-            <button class="quantity-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
-          </div>
+        
+        const itemInfo = document.createElement('div');
+        itemInfo.className = 'item-info';
+        itemInfo.innerHTML = `
+          <h4>${item.name}</h4>
+          <p>$${item.price.toFixed(2)}</p>
+          ${getCartItemDetails(item.id)}
         `;
+        
+        const controls = document.createElement('div');
+        controls.className = 'order-controls';
+        
+        if (item.customizable) {
+          controls.innerHTML = `
+            <button class="customize-btn" onclick="openCustomizeModal(${item.id})">Customize & Add</button>
+          `;
+        } else {
+          controls.innerHTML = `
+            <button class="quantity-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
+            <span class="quantity" id="qty-${item.id}">${getItemQuantity(item.id)}</span>
+            <button class="quantity-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
+          `;
+        }
+        
+        orderItem.appendChild(itemInfo);
+        orderItem.appendChild(controls);
         container.appendChild(orderItem);
       });
+    }
+
+    function getCartItemDetails(itemId) {
+      if (!cart[itemId] || cart[itemId].length === 0) return '';
+      
+      let details = '<div class="cart-item-details">';
+      cart[itemId].forEach((variant, index) => {
+        details += `<div>• ${variant.quantity}x`;
+        if (variant.proteins && variant.proteins.length > 0) {
+          details += ` with ${variant.proteins.join(', ')}`;
+        }
+        if (variant.addons && variant.addons.length > 0) {
+          details += ` + ${variant.addons.join(', ')}`;
+        }
+        details += '</div>';
+      });
+      details += '</div>';
+      return details;
+    }
+
+    function getItemQuantity(itemId) {
+      if (!cart[itemId]) return 0;
+      if (Array.isArray(cart[itemId])) {
+        return cart[itemId].reduce((sum, variant) => sum + variant.quantity, 0);
+      }
+      return cart[itemId];
     }
     
     function updateQuantity(itemId, change) {
@@ -1140,13 +1385,149 @@
       document.getElementById(`qty-${itemId}`).textContent = cart[itemId];
       updateCartTotal();
     }
+
+    function openCustomizeModal(itemId) {
+      const item = menuItems.find(i => i.id === itemId);
+      currentCustomizeItem = {
+        id: itemId,
+        name: item.name,
+        price: item.price,
+        category: item.category,
+        proteins: [],
+        addons: []
+      };
+      
+      // Set modal title
+      document.getElementById('customizeTitle').textContent = `Customize ${item.name}`;
+      
+      // Build customize content
+      let content = '<div id="customizeContent">';
+      
+      if (item.category === 'asian') {
+        // Asian proteins
+        content += `
+          <div class="customize-section">
+            <h4>Select Proteins</h4>
+            ${asianProteins.map(protein => `
+              <div class="customize-option">
+                <input type="checkbox" id="protein-${protein.name}" value="${protein.name}" onchange="toggleProtein('${protein.name}')">
+                <label for="protein-${protein.name}">${protein.name}</label>
+              </div>
+            `).join('')}
+          </div>
+          
+          <div class="customize-section">
+            <h4>Select Add-ons</h4>
+            ${asianAddons.map(addon => `
+              <div class="customize-option">
+                <input type="checkbox" id="addon-${addon.name}" value="${addon.name}" onchange="toggleAddon('${addon.name}')">
+                <label for="addon-${addon.name}">${addon.name}</label>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      } else if (item.category === 'mexican') {
+        // Mexican proteins
+        content += `
+          <div class="customize-section">
+            <h4>Select Protein (Choose One)</h4>
+            ${mexicanProteins.map(protein => `
+              <div class="customize-option">
+                <input type="radio" name="mexican-protein" id="protein-${protein.name}" value="${protein.name}" onchange="selectMexicanProtein('${protein.name}')">
+                <label for="protein-${protein.name}">${protein.name}</label>
+              </div>
+            `).join('')}
+          </div>
+          
+          <div class="customize-section">
+            <h4>Select Add-ons</h4>
+            ${mexicanAddons.map(addon => `
+              <div class="customize-option">
+                <input type="checkbox" id="addon-${addon.name}" value="${addon.name}" onchange="toggleAddon('${addon.name}')">
+                <label for="addon-${addon.name}">${addon.name}</label>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      }
+      
+      content += '</div>';
+      document.getElementById('customizeContent').innerHTML = content;
+      
+      // Show modal
+      const modal = document.getElementById('customizeModal');
+      modal.classList.add('show');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeCustomizeModal() {
+      const modal = document.getElementById('customizeModal');
+      modal.classList.remove('show');
+      document.body.style.overflow = 'auto';
+      currentCustomizeItem = null;
+    }
+
+    function toggleProtein(proteinName) {
+      const index = currentCustomizeItem.proteins.indexOf(proteinName);
+      if (index > -1) {
+        currentCustomizeItem.proteins.splice(index, 1);
+      } else {
+        currentCustomizeItem.proteins.push(proteinName);
+      }
+    }
+
+    function selectMexicanProtein(proteinName) {
+      currentCustomizeItem.proteins = [proteinName];
+    }
+
+    function toggleAddon(addonName) {
+      const index = currentCustomizeItem.addons.indexOf(addonName);
+      if (index > -1) {
+        currentCustomizeItem.addons.splice(index, 1);
+      } else {
+        currentCustomizeItem.addons.push(addonName);
+      }
+    }
+
+    function addCustomizedItem() {
+      if (currentCustomizeItem.category === 'mexican' && currentCustomizeItem.proteins.length === 0) {
+        alert('Please select a protein for your item.');
+        return;
+      }
+      
+      // Initialize cart array for this item if needed
+      if (!cart[currentCustomizeItem.id]) {
+        cart[currentCustomizeItem.id] = [];
+      }
+      
+      // Add customized variant to cart
+      cart[currentCustomizeItem.id].push({
+        quantity: 1,
+        proteins: [...currentCustomizeItem.proteins],
+        addons: [...currentCustomizeItem.addons]
+      });
+      
+      closeCustomizeModal();
+      populateOrderMenu();
+      updateCartTotal();
+    }
     
     function updateCartTotal() {
       let total = 0;
+      
       for (let itemId in cart) {
         const item = menuItems.find(i => i.id == itemId);
-        total += item.price * cart[itemId];
+        if (Array.isArray(cart[itemId])) {
+          // Customizable items
+          cart[itemId].forEach(variant => {
+            total += item.price * variant.quantity;
+          });
+        } else {
+          // Regular items
+          total += item.price * cart[itemId];
+        }
       }
+      
       document.getElementById('cartTotal').textContent = total.toFixed(2);
     }
     
@@ -1155,8 +1536,25 @@
       let total = 0;
       
       for (let itemId in cart) {
-        if (cart[itemId] > 0) {
-          const item = menuItems.find(i => i.id == itemId);
+        const item = menuItems.find(i => i.id == itemId);
+        
+        if (Array.isArray(cart[itemId])) {
+          // Customizable items
+          cart[itemId].forEach(variant => {
+            if (variant.quantity > 0) {
+              items.push({
+                id: item.id,
+                name: item.name,
+                quantity: variant.quantity,
+                price: item.price,
+                proteins: variant.proteins,
+                addons: variant.addons
+              });
+              total += item.price * variant.quantity;
+            }
+          });
+        } else if (cart[itemId] > 0) {
+          // Regular items
           items.push({
             id: item.id,
             name: item.name,
@@ -1174,12 +1572,21 @@
       
       // Show order summary in modal
       const summaryContainer = document.getElementById('orderSummaryItems');
-      summaryContainer.innerHTML = items.map(item => `
-        <div class="order-summary-item">
-          <span>${item.quantity}x ${item.name}</span>
-          <span>${(item.quantity * item.price).toFixed(2)}</span>
-        </div>
-      `).join('');
+      summaryContainer.innerHTML = items.map(item => {
+        let itemText = `${item.quantity}x ${item.name}`;
+        if (item.proteins && item.proteins.length > 0) {
+          itemText += ` (${item.proteins.join(', ')})`;
+        }
+        if (item.addons && item.addons.length > 0) {
+          itemText += ` + ${item.addons.join(', ')}`;
+        }
+        return `
+          <div class="order-summary-item">
+            <span>${itemText}</span>
+            <span>$${(item.quantity * item.price).toFixed(2)}</span>
+          </div>
+        `;
+      }).join('');
       document.getElementById('summaryTotal').textContent = total.toFixed(2);
       
       // Store order details for later
@@ -1237,13 +1644,11 @@
         const data = await response.json();
         
         if (response.ok) {
-          alert(`Order placed successfully!\n\nOrder #${data.orderId}\nTotal: ${window.pendingOrder.total.toFixed(2)}\n\nDelivery to:\n${deliveryAddress.street}\n${deliveryAddress.city}, ${deliveryAddress.state} ${deliveryAddress.zip}`);
+          alert(`Order placed successfully!\n\nOrder #${data.orderId}\nTotal: $${window.pendingOrder.total.toFixed(2)}\n\nDelivery to:\n${deliveryAddress.street}\n${deliveryAddress.city}, ${deliveryAddress.state} ${deliveryAddress.zip}`);
           
           // Clear cart
           cart = {};
-          menuItems.forEach(item => {
-            document.getElementById(`qty-${item.id}`).textContent = '0';
-          });
+          populateOrderMenu();
           updateCartTotal();
           
           // Close modal
@@ -1291,18 +1696,28 @@
         closeLogin();
       }
     });
+
+    document.getElementById('customizeModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeCustomizeModal();
+      }
+    });
     
     // Close modal with Escape key
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') {
         const loginOverlay = document.getElementById('loginOverlay');
         const addressModal = document.getElementById('addressModal');
+        const customizeModal = document.getElementById('customizeModal');
         
         if (loginOverlay.classList.contains('show')) {
           closeLogin();
         }
         if (addressModal.classList.contains('show')) {
           closeAddressModal();
+        }
+        if (customizeModal.classList.contains('show')) {
+          closeCustomizeModal();
         }
       }
     });
