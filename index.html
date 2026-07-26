@@ -18,7 +18,7 @@
 
     html 
     {
-      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
     }
 
     body 
@@ -27,6 +27,8 @@
       color: #333;
       background: #fff;
       padding-bottom: 0;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-y: none;
     }
 
     nav 
@@ -37,10 +39,11 @@
       width: 100%;
       background: #1f1f1f;
       display: flex;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
       justify-content: center;
-      gap: 1.2rem;
-      padding: 1rem 0.5rem;
+      align-items: center;
+      gap: 1.4rem;
+      padding: 0.55rem 0.5rem;
       z-index: 999;
       font-size: 0.85rem;
     }
@@ -54,6 +57,7 @@
       flex-shrink: 0;
       cursor: pointer;
       transition: color 0.3s ease;
+      white-space: nowrap;
     }
 
     nav a:hover 
@@ -61,12 +65,12 @@
       color: #ff5722;
     }
 
-    @media (max-width: 400px) 
+    @media (max-width: 480px) 
     {
-      nav a {
-        flex: 1 1 45%;
-        text-align: center;
-        padding: 0.5rem 0;
+      nav {
+        gap: 0.9rem;
+        font-size: 0.8rem;
+        padding: 0.5rem 0.4rem;
       }
     }
 
@@ -207,6 +211,25 @@
     .options-heading 
     {
       margin-top: 5rem;
+    }
+
+    .group-header
+    {
+      font-size: 1.3rem;
+      text-align: center;
+      color: #ff5722;
+      margin: 1rem 0 0.5rem;
+      font-family: 'Montserrat', sans-serif;
+      line-height: 1.3;
+    }
+
+    .group-note
+    {
+      display: block;
+      color: #666;
+      font-weight: 400;
+      font-size: 0.9rem;
+      margin-top: 0.15rem;
     }
 
     .option-price 
@@ -817,7 +840,7 @@
   <header id="home">
     <img src="logo.png" alt="Logo" class="header-logo">
     <h1>IDK KITCHEN</h1>
-    <p class="slogan">"The place to go when you or they don't know"</p>
+    <p class="slogan">"The place you can go if you or they do not know"</p>
   </header>
 
   <nav>
@@ -921,118 +944,198 @@
 
   <section id="about">
     <h2>About IDK Kitchen</h2>
-    <p>We're a small, flavor bomb of a kitchen — one side dishing out Asian fusion with deep roots, loud energy, and explosive flavor; the other slinging Mexican street twists with bold spice, fearless character, and unapologetic heat. A diverse kitchen with no rules — just taste</p>
+    <p>We're a small, flavor bomb of a kitchen — Asian fusion with deep roots, loud energy, and explosive flavor; Mexican street twists with bold spice, fearless character, and unapologetic heat; and American classics done our way, charred and stacked. A diverse kitchen with no rules — just taste</p>
   </section>
 
   <section id="menu">
     <h2>Menu</h2>
-  
-    <h3 id="asian-fusion">Asian</h3>
-    <div class="menu">
-      <div class="menu-item">
-        <h4>Chicken Chow Mein</h4>
-        <p>Noodles tossed with tender chicken and vegetables, mixing robust flavors, mild saltiness, and a faint, sugary undertone</p>
-       <!-- <p class="price">$6.50</p> -->
-      </div>
-      <div class="menu-item">
-        <h4>House Fried Rice</h4>
-        <p>Rice tossed with mixed vegetables, aromatic garlic, and Chinese sausage, combining deep flavors, refined saltiness, and a light, caramel finish</p>
-        <!--<p class="price">$6.50</p> -->
-      </div>
-      <div class="menu-item">
-        <h4>Glazed Pork Ribs</h4>
-        <p>Tender pork ribs enveloped in a smoky robust glaze that marries a enriched depth with a mild asian-infused allure</p>
-        <!--<p class="price">$7.00</p> -->
-      </div>
-      <div class="menu-item">
-        <h4>Grilled Chicken</h4>
-        <p>Brined and grilled to perfection, this chicken bursts with layered flavorful notes, bright salt accents, and a gentle, sugar-kissed finish</p>
-        <!-- <p class="price">$7.00</p> -->
-      </div>
-      <div class="menu-item">
-        <h4>Golden Eggrolls</h4>
-        <p>Four crispy eggrolls bursting with tender pork, vibrant carrots, and crunchy cabbage, intertwined with delicate glass noodles for a satisfying, well-rounded bite</p>
-        <!-- <p class="price">$6.00</p> -->
-      </div>
-      <div class="menu-item">
-        <h4>Buttery Beef Skewer</h4>
-        <p>Beef skewer infused with a bright, zesty marinade of lemongrass, kaffir lime, and warming spices, finished with a buttery, smoky char</p>
-        <!-- <p class="price">$3.00</p> -->
-      </div>
-      <div class="menu-item">
-        <h4>Phở</h4>
-        <p>A bowl of soul-warming rice noodles with a richly simmered broth that infuses beef bones with aromatic spices, achieving a harmonious blend of savory depth. Customize with Asian proteins and add-ons</p>
-        <!-- <p class="price">Med $7.00 Lrg $9.00</p> -->
-      </div>
-    </div>
-  
-    <h3 class="options-heading">Mexican</h3>
+
+    <h3 id="asian-fusion">Mexican</h3>
+    <h3 class="group-header">Pick Your Protein</h3>
     <div class="menu">
       <div class="menu-item">
         <h4>Twisted Street Taco</h4>
-        <p>Street-style corn tortilla elevated by your choice of enticing add-ons</p>
-        <!-- <p class="price">$2.50 Tues $1.75</p> -->
+        <p>Street-size single corn tortilla topped with cilantro, onion and radish. Small, bright and loud in a few perfect bites</p>
+        <p class="price">$3.49</p>
       </div>
       <div class="menu-item">
         <h4>Bangin Burrito</h4>
-        <p>A warm flour tortilla with pinto beans and mexican rice, paired with customizable add-ons to elevate every bite</p>
-        <!-- <p class="price">$8.00</p> -->
+        <p>A fat, two-hand flour tortilla packed with Mexican rice, pinto beans, cabbage, onion and radish. Hearty and built to fill you up</p>
+        <p class="price">$8.79</p>
+      </div>
+      <div class="menu-item">
+        <h4>California Burrito</h4>
+        <p>A loaded two-hand flour tortilla with hot crispy fries, refried beans, melted cheese and cool guac-lime crema. Rich and messy</p>
+        <p class="price">$8.79</p>
       </div>
     </div>
-  
-    <h3 class="options-heading">Options</h3>
+
+    <h3 class="options-heading">American</h3>
+    <h3 class="group-header">Dogs — $5.49<span class="group-note">meal +$3.00 (fries + drink)</span></h3>
     <div class="menu">
       <div class="menu-item">
-        <h4>Asian Sides</h4>
-        <ul class="options-list">
-          <li><strong>White Rice</strong> — Steamed and served warm</li>
-          <li><strong>Sticky Rice</strong> — Delicately chewy and freshly steamed</li>
-        </ul>
+        <h4>Plain Dog</h4>
+        <p>Charred link, real snap, toasted bun</p>
+        <p style="font-size:0.85rem; color:#666; margin-top:0.4rem;">Ketchup, mustard, onion</p>
       </div>
       <div class="menu-item">
-        <h4>Asian Proteins</h4>
-        <ul class="options-list">
-          <!-- <li><strong>Pearl meatball</strong> — Tender, juicy texture with an invigorating finish. Each bite offers a combination blend of deep umami with a subtle hint of spice, rounded out by a refreshing aftertaste</li> -->
-          <li><strong>Brisket</strong> — finely sliced brisket simmered to tender perfection</li>
-          <li><strong>Shrimp</strong> — Gently boiled to lock in their natural subtle salty flavor, these shrimp offer a delicate tender bite and a crisp refreshing finish</li>
-        </ul>
+        <h4>Chigo Dog</h4>
+        <p>Charred link, cucumber relish and pickled Thai chilies, covered with chopped tomato and onion, topped with cilantro-lime crema</p>
       </div>
       <div class="menu-item">
-        <h4>Asian Add-ons</h4>
-        <ul class="options-list">
-          <li>Mint, Bean sprouts, Cilantro, Lime</li>
-          <li>Hoisin sauce</li>
-          <li>Sriracha</li>
-          <li>Garlic chili oil</li>
-        </ul>
+        <h4>Kraut Dog</h4>
+        <p>Tangy kraut and sharp mustard over a charred link</p>
       </div>
       <div class="menu-item">
-        <h4>Mexican Sides</h4>
+        <h4>Chili Dog</h4>
+        <p>Charred link smothered in our smooth beef-and-pork chili</p>
+      </div>
+      <div class="menu-item">
+        <h4>Wild Dog</h4>
+        <p>Charred link topped with hot chopped fries tossed in our creamy tangy-sweet house sauce</p>
+      </div>
+    </div>
+    <div class="menu">
+      <div class="menu-item">
+        <h4>Spaghetti</h4>
+        <p>Noodles covered in a robust marinara, cooked low and slow</p>
+        <p class="price">$6.79</p>
+      </div>
+    </div>
+
+    <h3 class="options-heading">Asian</h3>
+    <div class="menu">
+      <div class="menu-item">
+        <h4>Phở</h4>
+        <p>Rice noodles in beef-bone broth simmered for hours, topped with sliced beef, fresh herbs, lime and heat. Add shrimp, pearl meatballs, pork or extra beef below</p>
+        <p class="price">$10.99</p>
+      </div>
+      <div class="menu-item">
+        <h4>Golden Eggrolls</h4>
+        <p>Three rolls fried to order — pork, carrot, cabbage, glass noodles, crisp shell</p>
+        <p class="price">$5.50</p>
+      </div>
+      <div class="menu-item">
+        <h4>Bánh Mì</h4>
+        <p>Baguette, marinated pork shoulder, honey ham, savory spread, pickled carrot and radish, cucumber and cilantro</p>
+        <p class="price">$6.99</p>
+      </div>
+      <div class="menu-item">
+        <h4>Kroeung Beef Skewer</h4>
+        <p>Beef in lemongrass, kaffir lime and warm spice, charred smoky on the lava rock</p>
+        <p class="price">$6.99</p>
+      </div>
+    </div>
+
+    <h3 class="group-header">Rice Plates — $6.99<span class="group-note">served with jasmine or sticky rice</span></h3>
+    <div class="menu">
+      <div class="menu-item">
+        <h4>Kroeung Chicken</h4>
+        <p>Thigh in house lemongrass kroeung, charred hard. Smoky and herby</p>
+      </div>
+      <div class="menu-item">
+        <h4>Chinese BBQ Chicken</h4>
+        <p>Sweet, sticky char-siu chicken grilled till the edges caramelize</p>
+      </div>
+      <div class="menu-item">
+        <h4>Grilled Chicken</h4>
+        <p>Brined juicy and grilled over the fire with a good char</p>
+      </div>
+      <div class="menu-item">
+        <h4>Chicken Chow Mein</h4>
+        <p>Noodles tossed in the wok with chicken and veg — hot, savory, a touch sweet</p>
+      </div>
+      <div class="menu-item">
+        <h4>House Fried Rice</h4>
+        <p>Rice fired in the wok with garlic, veg and Chinese sausage. Smoky-sweet</p>
+      </div>
+      <div class="menu-item">
+        <h4>Teriyaki Chicken</h4>
+        <p>Chopped chicken over rice with carrot and a sweet teriyaki glaze</p>
+      </div>
+    </div>
+
+    <h3 class="options-heading">Drinks</h3>
+    <div class="menu">
+      <div class="menu-item">
+        <h4>Boba</h4>
+        <p>Cold milk tea over chewy tapioca pearls</p>
+        <p class="price">$5.99</p>
+      </div>
+      <div class="menu-item">
+        <h4>Fountain &amp; Canned Soda / Water</h4>
+        <p>Ice-cold cans and bottled water</p>
+        <p class="price">Soda $2.00 · Water $1.50</p>
+      </div>
+    </div>
+
+    <h3 class="options-heading">Build &amp; Add-ons</h3>
+    <div class="menu">
+      <div class="menu-item">
+        <h4>Choose Your Protein</h4>
+        <ul class="options-list">
+          <li><strong>Asada</strong> — Chopped steak, smoked and charred on the lava rock</li>
+          <li><strong>Grilled Chicken</strong> — Brined chicken, grilled juicy with a hard char</li>
+          <li><strong>Hawaiian</strong> — Sweet-savory pineapple beef with a little island heat</li>
+        </ul>
+        <h4 style="margin-top:1rem;">Finish Your Meat</h4>
+        <ul class="options-list">
+          <li>Charred plain</li>
+          <li>Citrus pan-sauce</li>
+          <li>Jerk-style</li>
+          <li>Camarones sauce</li>
+        </ul>
         <ul class="options-list">
           <li>
             <div class="option">
-              <div><strong>Kerneled elote (Seasonal)</strong> — fire-grilled corn on the cob kerneled then dressed in a zesty blend of creamy mayo and a dusting of cotija cheese and chili—delivering a harmonious balance of smoky, tangy, and spicy flavors</div>
-              <!-- <div class="option-price">$2.00</div> -->
+              <div>Extra protein</div>
+              <div class="option-price">+$2.00</div>
             </div>
           </li>
         </ul>
       </div>
       <div class="menu-item">
-        <h4>Mexican Proteins</h4>
+        <h4>Load It Up</h4>
         <ul class="options-list">
-          <li><strong>Brisket</strong> — Zesty beef marinated in lime, orange juice, cilantro and our house spice, grilled with a smoky char</li>
-          <li><strong>Grilled Chicken</strong> — Perfectly brined chicken, grilled to achieve a smoky char and juicy tenderness</li>
-          <!-- <li><strong>Al Pastor</strong> — Succulent pork shoulder steeped in a vibrant blend of Mexican spices, then grilled to perfection</li> -->
+          <li>
+            <div class="option"><div>Add cheese</div><div class="option-price">+$0.75</div></div>
+          </li>
+          <li>
+            <div class="option"><div>Add guac-lime</div><div class="option-price">+$1.49</div></div>
+          </li>
+          <li>
+            <div class="option"><div>Crema (Mexican sour cream)</div><div class="option-price">+$0.75</div></div>
+          </li>
+          <li>
+            <div class="option"><div>Extra rice or beans</div><div class="option-price">+$1.00</div></div>
+          </li>
+          <li>
+            <div class="option"><div>Side of fries</div><div class="option-price">+$2.49</div></div>
+          </li>
+          <li>
+            <div class="option"><div>Wild fries — fries topped with our creamy tangy-sweet house sauce</div><div class="option-price">$3.99</div></div>
+          </li>
         </ul>
       </div>
       <div class="menu-item">
-        <h4>Mexican Add-ons</h4>
+        <h4>Phở Toppings</h4>
         <ul class="options-list">
-          <li>Mexican rice, Pinto beans</li>
-          <li>Cabbage, Radish, Cilantro, Diced onion</li>
-          <li>Grilled onion, Grilled jalapeños</li>
-          <li>Salsas: Green, Picante, Habanero</li>
-          <li>Make it Extra Spicy 🔥</li>
+          <li>Mint, Bean sprouts, Cilantro, Lime</li>
+          <li>Hoisin, Sriracha, Garlic chili oil</li>
+          <li>
+            <div class="option"><div>Add shrimp, meatballs, pork or extra beef</div><div class="option-price">+$3.00</div></div>
+          </li>
+        </ul>
+      </div>
+      <div class="menu-item">
+        <h4>Esquites</h4>
+        <ul class="options-list">
+          <li>
+            <div class="option">
+              <div>Fire-grilled corn tossed in creamy mayo, parmesan and a tangy chili-lime dusting</div>
+              <div class="option-price">$2.99</div>
+            </div>
+          </li>
         </ul>
       </div>
     </div>
@@ -1063,6 +1166,19 @@
   </footer>
 
   <script>
+    // Smooth scroll for nav anchor links only (keeps page momentum scrolling native on mobile)
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('nav a[href^="#"]').forEach(function(link) {
+        link.addEventListener('click', function(e) {
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      });
+    });
+
     // Server URL
     const SERVER_URL = 'https://api.idk.kitchen';
     
@@ -1076,23 +1192,42 @@
 
     // Menu items for ordering
     const menuItems = [
-      { id: 1, name: 'Chicken Chow Mein', price: 6.50, category: 'asian', customizable: false },
-      { id: 2, name: 'House Fried Rice', price: 6.50, category: 'asian', customizable: false },
-      { id: 3, name: 'Glazed Pork Ribs', price: 7.00, category: 'asian', customizable: false },
-      { id: 4, name: 'Grilled Chicken', price: 7.00, category: 'asian', customizable: false },
-      { id: 5, name: 'Golden Eggrolls', price: 6.00, category: 'asian', customizable: false },
-      { id: 6, name: 'Buttery Beef Skewer', price: 3.00, category: 'asian', customizable: false },
-      { id: 7, name: 'Phở (Medium)', price: 7.00, category: 'asian', customizable: true },
-      { id: 8, name: 'Phở (Large)', price: 9.00, category: 'asian', customizable: true },
-      { id: 9, name: 'Twisted Street Taco', price: 2.50, category: 'mexican', customizable: true },
-      { id: 10, name: 'Bangin Burrito', price: 8.00, category: 'mexican', customizable: true }
+      // Mexican
+      { id: 1, name: 'Twisted Street Taco', price: 3.49, category: 'mexican', customizable: true },
+      { id: 2, name: 'Bangin Burrito', price: 8.79, category: 'mexican', customizable: true },
+      { id: 3, name: 'California Burrito', price: 8.79, category: 'mexican', customizable: true },
+      // American
+      { id: 4, name: 'Plain Dog', price: 5.49, category: 'american', customizable: false },
+      { id: 5, name: 'Chigo Dog', price: 5.49, category: 'american', customizable: false },
+      { id: 21, name: 'Kraut Dog', price: 5.49, category: 'american', customizable: false },
+      { id: 22, name: 'Chili Dog', price: 5.49, category: 'american', customizable: false },
+      { id: 23, name: 'Wild Dog', price: 5.49, category: 'american', customizable: false },
+      { id: 24, name: 'Dog Meal (add fries + drink)', price: 3.00, category: 'american', customizable: false },
+      { id: 6, name: 'Spaghetti', price: 6.79, category: 'american', customizable: false },
+      { id: 25, name: 'Wild Fries', price: 3.99, category: 'american', customizable: false },
+      // Asian
+      { id: 7, name: 'Phở', price: 10.99, category: 'asian', customizable: true },
+      { id: 8, name: 'Golden Eggrolls', price: 5.50, category: 'asian', customizable: false },
+      { id: 9, name: 'Kroeung Beef Skewer', price: 6.99, category: 'asian', customizable: false },
+      { id: 10, name: 'Kroeung Chicken', price: 6.99, category: 'asian', customizable: false },
+      { id: 11, name: 'Chinese BBQ Chicken', price: 6.99, category: 'asian', customizable: false },
+      { id: 12, name: 'Grilled Chicken', price: 6.99, category: 'asian', customizable: false },
+      { id: 13, name: 'Chicken Chow Mein', price: 6.99, category: 'asian', customizable: false },
+      { id: 14, name: 'House Fried Rice', price: 6.99, category: 'asian', customizable: false },
+      { id: 26, name: 'Teriyaki Chicken', price: 6.99, category: 'asian', customizable: false },
+      { id: 20, name: 'Bánh Mì', price: 6.99, category: 'asian', customizable: false },
+      // Drinks
+      { id: 15, name: 'Boba', price: 5.99, category: 'drink', customizable: false },
+      { id: 18, name: 'Canned Soda', price: 2.00, category: 'drink', customizable: false },
+      { id: 19, name: 'Bottled Water', price: 1.50, category: 'drink', customizable: false }
     ];
 
     // Available proteins and addons
     const asianProteins = [
-      { name: 'Pearl meatball', price: 0 },
-      { name: 'Brisket', price: 0 },
-      { name: 'Shrimp', price: 0 }
+      { name: 'Extra sliced beef', price: 3.00 },
+      { name: 'Shrimp', price: 3.00 },
+      { name: 'Pearl meatballs', price: 3.00 },
+      { name: 'Pork', price: 3.00 }
     ];
 
     const asianAddons = [
@@ -1108,12 +1243,16 @@
     const mexicanProteins = [
       { name: 'Asada', price: 0 },
       { name: 'Grilled Chicken', price: 0 },
-      { name: 'Al Pastor', price: 0 }
+      { name: 'Hawaiian', price: 0 }
     ];
 
     const mexicanAddons = [
-      { name: 'Mexican rice', price: 0 },
-      { name: 'Pinto beans', price: 0 },
+      { name: 'Extra protein', price: 2.00 },
+      { name: 'Add cheese', price: 0.75 },
+      { name: 'Add guac-lime', price: 1.49 },
+      { name: 'Crema (Mexican sour cream)', price: 0.75 },
+      { name: 'Extra rice or beans', price: 1.00 },
+      { name: 'Side of fries', price: 2.49 },
       { name: 'Cabbage', price: 0 },
       { name: 'Radish', price: 0 },
       { name: 'Cilantro', price: 0 },
@@ -1444,7 +1583,7 @@
             ${mexicanAddons.map(addon => `
               <div class="customize-option">
                 <input type="checkbox" id="addon-${addon.name}" value="${addon.name}" onchange="toggleAddon('${addon.name}')">
-                <label for="addon-${addon.name}">${addon.name}</label>
+                <label for="addon-${addon.name}">${addon.name}${addon.price > 0 ? ' (+$' + addon.price.toFixed(2) + ')' : ''}</label>
               </div>
             `).join('')}
           </div>
@@ -1520,7 +1659,14 @@
         if (Array.isArray(cart[itemId])) {
           // Customizable items
           cart[itemId].forEach(variant => {
-            total += item.price * variant.quantity;
+            let variantPrice = item.price;
+            if (variant.addons) {
+              variant.addons.forEach(addonName => {
+                const addon = [...mexicanAddons, ...asianAddons].find(a => a.name === addonName);
+                if (addon) variantPrice += addon.price;
+              });
+            }
+            total += variantPrice * variant.quantity;
           });
         } else {
           // Regular items
@@ -1542,15 +1688,22 @@
           // Customizable items
           cart[itemId].forEach(variant => {
             if (variant.quantity > 0) {
+              let variantPrice = item.price;
+              if (variant.addons) {
+                variant.addons.forEach(addonName => {
+                  const addon = [...mexicanAddons, ...asianAddons].find(a => a.name === addonName);
+                  if (addon) variantPrice += addon.price;
+                });
+              }
               items.push({
                 id: item.id,
                 name: item.name,
                 quantity: variant.quantity,
-                price: item.price,
+                price: variantPrice,
                 proteins: variant.proteins,
                 addons: variant.addons
               });
-              total += item.price * variant.quantity;
+              total += variantPrice * variant.quantity;
             }
           });
         } else if (cart[itemId] > 0) {
