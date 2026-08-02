@@ -334,6 +334,92 @@
     .heat.mild { color: var(--status-warning); border-color: var(--status-warning); }
     .heat.hot  { color: var(--status-danger);  border-color: var(--status-danger); }
 
+
+    /* ─── Photos ──────────────────────────────────────────── */
+    .item { position: relative; }
+
+    .item-body { display: flex; gap: 14px; align-items: flex-start; }
+    .item-text { flex: 1; min-width: 0; }
+
+    .thumb {
+      flex: 0 0 auto;
+      width: 74px; height: 74px;
+      border-radius: 6px;
+      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid var(--border-tertiary);
+      cursor: zoom-in;
+      position: relative;
+      margin-top: 2px;
+    }
+
+    .thumb img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      /* tame the glare — food shots are much brighter than this page */
+      filter: brightness(.82) saturate(.94);
+      transition: filter .2s, transform .3s;
+    }
+
+    .thumb:hover img { filter: brightness(.95) saturate(1); transform: scale(1.04); }
+
+    /* visible from the start. a missing file removes the element via onerror. */
+
+    /* ─── Lightbox ────────────────────────────────────────── */
+    .lightbox {
+      position: fixed; inset: 0;
+      background: rgba(10,10,14,.92);
+      backdrop-filter: blur(8px);
+      display: none; align-items: center; justify-content: center;
+      z-index: 1100; padding: 28px;
+      cursor: zoom-out;
+    }
+    .lightbox.show { display: flex; }
+
+    .lightbox figure {
+      max-width: 620px; width: 100%;
+      cursor: default;
+    }
+
+    .lightbox img {
+      width: 100%; height: auto;
+      max-height: 68vh;
+      object-fit: contain;
+      border-radius: var(--radius);
+      border: 1px solid var(--border-tertiary);
+      filter: brightness(.9);
+      display: block;
+    }
+
+    .lightbox figcaption { margin-top: 16px; }
+    .lightbox .lb-name {
+      font-size: var(--font-large);
+      font-weight: 600;
+      color: var(--text-primary);
+      display: flex; justify-content: space-between; gap: 16px;
+    }
+    .lightbox .lb-price { font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .lightbox .lb-desc {
+      font-size: var(--font-body);
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-top: 7px;
+    }
+    .lightbox .lb-close {
+      position: absolute; top: 20px; right: 22px;
+      background: none; border: 0; cursor: pointer;
+      color: var(--text-tertiary); font-size: 26px; line-height: 1;
+      width: 38px; height: 38px;
+    }
+    .lightbox .lb-close:hover { color: var(--text-primary); }
+
+    @media (max-width: 880px) {
+      .thumb { width: 64px; height: 64px; }
+      .lightbox { padding: 18px; }
+      .lightbox img { max-height: 56vh; }
+    }
+
     /* ─── Option rows ─────────────────────────────────────── */
     .opt {
       display: flex;
@@ -667,7 +753,7 @@
         </div>
 
         <div class="grid">
-          <div class="item">
+          <div class="item" data-photo="street-taco">
             <div class="item-top"><h4>Twisted Street Taco</h4><span class="price">$1.99</span></div>
             <p>Street-size corn tortilla topped with cilantro, onion and radish. Small, bright and loud in a few perfect bites.</p>
             <div class="note">Choice of protein — grilled chicken, Hawaiian or asada</div>
@@ -676,11 +762,11 @@
 
         <div class="group"><span>Burritos</span><span class="px-note">(choose your protein)</span><span class="px">Half $5.99 · Full $9.99</span></div>
         <div class="grid">
-          <div class="item">
+          <div class="item" data-photo="burrito-bangin">
             <div class="item-top"><h4>Bangin</h4></div>
             <p>A loaded flour tortilla packed with Mexican rice, pinto beans, cabbage, onion and radish. Hearty and built to fill you up.</p>
           </div>
-          <div class="item">
+          <div class="item" data-photo="burrito-california">
             <div class="item-top"><h4>California</h4></div>
             <p>A loaded flour tortilla with hot crispy fries, refried beans, melted cheese and cool guac-lime crema. Rich and messy.</p>
           </div>
@@ -688,15 +774,15 @@
 
         <div class="group"><span>Sides</span></div>
         <div class="grid">
-          <div class="item">
+          <div class="item" data-photo="side-rice">
             <div class="item-top"><h4>Rice</h4><span class="price">$2.49</span></div>
             <p>Mexican or white rice</p>
           </div>
-          <div class="item">
+          <div class="item" data-photo="side-beans">
             <div class="item-top"><h4>Beans</h4><span class="price">$2.49</span></div>
             <p>Pinto or refried</p>
           </div>
-          <div class="item">
+          <div class="item" data-photo="esquites">
             <div class="item-top"><h4>Esquites <span class="heat mild">Mild</span></h4><span class="price">$3.49</span></div>
             <p>Fire-grilled corn tossed in creamy mayo, parmesan and dusted with tangy lime seasoning.</p>
           </div>
@@ -711,7 +797,7 @@
         </div>
 
         <div class="grid">
-          <div class="item">
+          <div class="item" data-photo="spaghetti">
             <div class="item-top"><h4>Spaghetti</h4><span class="price">$6.49</span></div>
             <p>A hearty bowl of spiral noodles loaded in our slow-cooked meat sauce — rich, meaty, home-style comfort food.</p>
           </div>
@@ -719,24 +805,24 @@
 
         <div class="group"><span>Dogs</span><span class="px-note">(choose your style)</span><span class="px">Classic $2.49 · Signature $5.49</span></div>
         <div class="grid">
-          <div class="item">
+          <div class="item" data-photo="dog-plain">
             <div class="item-top"><h4>Plain</h4></div>
             <p>Real snap, dressed simple.</p>
             <div class="note">Ketchup, mustard, onion</div>
           </div>
-          <div class="item">
+          <div class="item" data-photo="dog-chigo">
             <div class="item-top"><h4>Chigo <span class="heat hot">Hot</span></h4></div>
             <p>Cucumber relish and pickled Thai chilies, covered with chopped tomato and onion, topped with cilantro-lime crema.</p>
           </div>
-          <div class="item">
+          <div class="item" data-photo="dog-kraut">
             <div class="item-top"><h4>Kraut</h4></div>
             <p>Tangy kraut and sharp mustard.</p>
           </div>
-          <div class="item">
+          <div class="item" data-photo="dog-hawaiian">
             <div class="item-top"><h4>Hawaiian</h4></div>
             <p>Sweet-savory pineapple beef spooned on hot — a different style sauce dog.</p>
           </div>
-          <div class="item">
+          <div class="item" data-photo="dog-crazy">
             <div class="item-top"><h4>Crazy</h4></div>
             <p>Topped with hot chopped fries tossed in our creamy tangy-sweet house sauce.</p>
           </div>
@@ -744,11 +830,11 @@
 
         <div class="group"><span>Sides</span></div>
         <div class="grid">
-          <div class="item">
+          <div class="item" data-photo="fries">
             <div class="item-top"><h4>Fries</h4><span class="price">$2.49</span></div>
             <p>Hot crispy fries.</p>
           </div>
-          <div class="item">
+          <div class="item" data-photo="crazy-fries">
             <div class="item-top"><h4>Crazy Fries</h4><span class="price">$3.79</span></div>
             <p>Fries topped with our creamy tangy-sweet house sauce.</p>
           </div>
@@ -763,16 +849,16 @@
         </div>
 
         <div class="grid">
-          <div class="item">
+          <div class="item" data-photo="pho">
             <div class="item-top"><h4>Phở</h4><span class="price">$11.99</span></div>
             <p>Rice noodles in beef-bone broth simmered for hours, topped with sliced beef, fresh herbs, lime and heat.</p>
             <div class="note">Add shrimp, pearl meatballs, pork or extra beef — see Build &amp; Add-ons</div>
           </div>
-          <div class="item">
+          <div class="item" data-photo="eggrolls">
             <div class="item-top"><h4>Golden Eggrolls</h4><span class="price">$5.49</span></div>
             <p>Three rolls fried to order — pork, carrot, cabbage, glass noodles, crisp shell.</p>
           </div>
-          <div class="item">
+          <div class="item" data-photo="banh-mi">
             <div class="item-top"><h4>Bánh Mì</h4><span class="price">$8.99</span></div>
             <p>Baguette, marinated pork shoulder, honey ham, savory spread, pickled carrot and radish, cucumber and cilantro.</p>
           </div>
@@ -780,31 +866,31 @@
 
         <div class="group"><span>Rice Plates</span><span class="px">$8.49</span><span class="px-note">served with white or sticky rice</span></div>
         <div class="grid">
-          <div class="item">
+          <div class="item" data-photo="plate-beef-skewer">
             <div class="item-top"><h4>Kroeung Beef Skewer</h4><span class="price">$9.49</span></div>
             <p>Beef in lemongrass, kaffir lime and warm spice, charred and smoky, served over rice.</p>
           </div>
-          <div class="item">
+          <div class="item" data-photo="plate-kroeung-chicken">
             <div class="item-top"><h4>Kroeung Chicken</h4></div>
             <p>Thigh in house lemongrass kroeung, charred hard. Smoky and herby.</p>
           </div>
-          <div class="item">
+          <div class="item" data-photo="plate-bbq-chicken">
             <div class="item-top"><h4>Chinese BBQ Chicken</h4></div>
             <p>Sweet, sticky char-siu chicken grilled till the edges caramelize.</p>
           </div>
-          <div class="item">
+          <div class="item" data-photo="plate-grilled-chicken">
             <div class="item-top"><h4>Grilled Chicken</h4></div>
             <p>Brined juicy and grilled over the fire with a good char.</p>
           </div>
-          <div class="item">
+          <div class="item" data-photo="plate-chow-mein">
             <div class="item-top"><h4>Chicken Chow Mein</h4></div>
             <p>Noodles tossed in the wok with chicken and veg — hot, savory, a touch sweet.</p>
           </div>
-          <div class="item">
+          <div class="item" data-photo="plate-fried-rice">
             <div class="item-top"><h4>House Fried Rice</h4></div>
             <p>Rice fired in the wok with garlic, veg and Chinese sausage. Smoky-sweet.</p>
           </div>
-          <div class="item">
+          <div class="item" data-photo="plate-teriyaki">
             <div class="item-top"><h4>Teriyaki Chicken</h4></div>
             <p>Chopped chicken over rice with carrot and a sweet teriyaki glaze.</p>
           </div>
@@ -812,15 +898,15 @@
 
         <div class="group"><span>Sides</span><span class="px">$2.49</span></div>
         <div class="grid">
-          <div class="item">
+          <div class="item" data-photo="spicy-pickles">
             <div class="item-top"><h4>Spicy Pickles <span class="heat hot">Hot</span></h4></div>
             <p>Crunchy spears shaken to order in toasted rice powder, chili, sugar and salt — sweet, smoky and seriously hot.</p>
           </div>
-          <div class="item">
+          <div class="item" data-photo="white-rice">
             <div class="item-top"><h4>White Rice</h4></div>
             <p>Fragrant steamed jasmine rice.</p>
           </div>
-          <div class="item">
+          <div class="item" data-photo="sticky-rice">
             <div class="item-top"><h4>Sticky Rice</h4></div>
             <p>Warm, chewy sticky rice — perfect for scooping and dipping.</p>
           </div>
@@ -834,15 +920,15 @@
           <div class="sub">Cold and cheap</div>
         </div>
         <div class="grid">
-          <div class="item">
+          <div class="item" data-photo="boba">
             <div class="item-top"><h4>Boba</h4><span class="price">$4.99</span></div>
             <p>Cold milk tea over chewy tapioca pearls.</p>
           </div>
-          <div class="item">
+          <div class="item" data-photo="soda">
             <div class="item-top"><h4>Soda</h4><span class="price">$1.79</span></div>
             <p>Coke, Pepsi, Sprite, Mountain Dew, Dr Pepper — zero-sugar available.</p>
           </div>
-          <div class="item">
+          <div class="item" data-photo="water">
             <div class="item-top"><h4>Water</h4><span class="price">$1.00</span></div>
             <p>Ice-cold bottled water.</p>
           </div>
@@ -929,6 +1015,18 @@
   </div>
 
   <div class="cart-bar" id="cartBar" onclick="checkout()" style="display:none">$<span id="cartTotal">0.00</span></div>
+
+  <!-- ─── Photo lightbox ─── -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="lb-close" onclick="closeLightbox()">&times;</button>
+    <figure onclick="event.stopPropagation()">
+      <img id="lbImg" alt="">
+      <figcaption>
+        <div class="lb-name"><span id="lbName"></span><span class="lb-price" id="lbPrice"></span></div>
+        <div class="lb-desc" id="lbDesc"></div>
+      </figcaption>
+    </figure>
+  </div>
 
   <!-- ─── Sign in ─── -->
   <div class="overlay" id="loginOverlay">
@@ -1074,6 +1172,56 @@
       { name: 'Green salsa', price: 0 }, { name: 'Picante salsa', price: 0 },
       { name: 'Habanero salsa', price: 0 }, { name: 'Extra Spicy', price: 0 }
     ];
+
+
+    /* ─── Photos: add data-photo="name" to a card, drop img/name.jpg ─── */
+    function initPhotos() {
+      document.querySelectorAll('.item[data-photo]').forEach(function (card) {
+        var file = card.getAttribute('data-photo');
+        if (!file) return;
+
+        var text = document.createElement('div');
+        text.className = 'item-text';
+        while (card.firstChild) text.appendChild(card.firstChild);
+
+        var thumb = document.createElement('div');
+        thumb.className = 'thumb';
+
+        var img = document.createElement('img');
+        var h4 = text.querySelector('h4');
+        img.alt = h4 ? h4.textContent.trim() : '';
+        img.onerror = function () { thumb.remove(); };
+        img.src = (typeof DEMO_IMAGES !== 'undefined' && DEMO_IMAGES[file])
+                  ? DEMO_IMAGES[file] : 'img/' + file + '.jpg';
+
+        thumb.appendChild(img);
+        thumb.addEventListener('click', function () { openLightbox(card, img.src); });
+
+        var body = document.createElement('div');
+        body.className = 'item-body';
+        body.appendChild(text);
+        body.appendChild(thumb);
+        card.appendChild(body);
+      });
+    }
+
+    function openLightbox(card, src) {
+      var lb = document.getElementById('lightbox');
+      var name = card.querySelector('h4');
+      var price = card.querySelector('.price');
+      var desc = card.querySelector('p');
+      document.getElementById('lbImg').src = src;
+      document.getElementById('lbName').textContent = name ? name.textContent.trim() : '';
+      document.getElementById('lbPrice').textContent = price ? price.textContent.trim() : '';
+      document.getElementById('lbDesc').textContent = desc ? desc.textContent.trim() : '';
+      lb.classList.add('show');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('show');
+      document.body.style.overflow = 'auto';
+    }
 
     /* ─── Login ─── */
     function openLogin() {
@@ -1433,9 +1581,13 @@
       window.scrollTo(0, 0);
     }
 
+    document.addEventListener('DOMContentLoaded', initPhotos);
+
     window.addEventListener('load', function () {
-      const saved = sessionStorage.getItem('idkUser');
-      if (saved) { currentUser = JSON.parse(saved); showOrderMenu(); }
+      try {
+        const saved = sessionStorage.getItem('idkUser');
+        if (saved) { currentUser = JSON.parse(saved); showOrderMenu(); }
+      } catch (e) { /* storage blocked on file:// — ignore */ }
     });
 
     ['loginOverlay','customizeModal','addressModal'].forEach(function (id) {
@@ -1449,6 +1601,7 @@
 
     document.addEventListener('keydown', function (e) {
       if (e.key !== 'Escape') return;
+      if (document.getElementById('lightbox').classList.contains('show')) closeLightbox();
       if (document.getElementById('loginOverlay').classList.contains('show')) closeLogin();
       if (document.getElementById('addressModal').classList.contains('show')) closeAddressModal();
       if (document.getElementById('customizeModal').classList.contains('show')) closeCustomizeModal();
