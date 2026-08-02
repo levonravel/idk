@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="theme-color" content="#18181C"/>
+  <meta name="theme-color" content="#1C1C22"/>
   <title>IDK Kitchen</title>
 
   <style>
@@ -12,34 +12,35 @@
        ═══════════════════════════════════════════════════════════ */
     :root {
       /* Surfaces */
-      --bg:                #18181C;
-      --surface:           #202025;
-      --surface-secondary: #26262C;
-      --surface-hover:     #2C2C32;
-      --sidebar-bg:        #141418;
-      --surface-light:     #2A2A30;
-      --elevated:          #2E2E34;
+      --bg:                #1C1C22;
+      --surface:           #25252C;
+      --surface-secondary: #2A2A32;
+      --surface-hover:     #2F2F38;
+      --sidebar-bg:        #17171C;
+      --surface-light:     #2E2E36;
+      --elevated:          #33333C;
 
       /* Borders — ultra-thin, low opacity feel */
-      --border-tertiary:   #303038;
-      --border-secondary:  #44444C;
+      --border-tertiary:   #33333B;
+      --border-secondary:  #464650;
 
       /* Text */
-      --text-primary:      #E8E8EC;
+      --text-primary:      #ABABB6;   /* dimmed from app #E8E8EC — 7.4:1, no halation */
       --text-hover:        #5C74AC;
-      --text-secondary:    #94949E;
-      --text-tertiary:     #646470;
+      --fill-strong:       #35353F;   /* button fill — lit, not white */
+      --text-secondary:    #8A8A95;
+      --text-tertiary:     #7A7A86;   /* rebalanced against the lifted background */
 
       /* Status only — no decorative colour */
-      --status-warning:    #C8A840;
-      --status-success:    #4CA868;
-      --status-danger:     #C45852;
-      --info:              #7894BA;
+      --status-warning:    #B09339;
+      --status-success:    #439460;
+      --status-danger:     #AE4E49;
+      --info:              #6A83A4;
 
       /* Type scale — WinForms pt converted at 96dpi */
-      --font-small:    11px;
-      --font-caption:  12px;
-      --font-body:     13px;
+      --font-small:    12px;
+      --font-caption:  13px;
+      --font-body:     14px;
       --font-regular:  14px;
       --font-large:    17px;
       --font-title:    23px;
@@ -168,7 +169,7 @@
       width: 340px;
       max-width: 78%;
       height: auto;
-      opacity: .22;
+      opacity: .15;
       mix-blend-mode: screen;
       pointer-events: none;
       user-select: none;
@@ -186,6 +187,9 @@
       line-height: 1.15;
     }
 
+    /* bold + large = more lit pixels; ease the weight to cut bloom */
+    .hero h1, .page-header h2, .panel h3 { font-weight: 600; }
+
     .hero .rule {
       position: relative;
       z-index: 1;
@@ -198,7 +202,7 @@
       position: relative;
       z-index: 1;
       font-size: var(--font-large);
-      color: var(--text-secondary);
+      color: var(--text-primary);
       line-height: 1.55;
       max-width: 34ch;
       margin: 0 auto;
@@ -216,7 +220,7 @@
 
     .page-header .sub {
       font-size: var(--font-body);
-      color: var(--text-tertiary);
+      color: var(--text-secondary);
       margin-top: 7px;
     }
 
@@ -253,7 +257,7 @@
     }
 
     .group .px-note {
-      color: var(--text-tertiary);
+      color: var(--text-secondary);
       font-weight: 400;
       letter-spacing: .3px;
       text-transform: none;
@@ -304,7 +308,7 @@
     .item p {
       font-size: var(--font-body);
       color: var(--text-secondary);
-      line-height: 1.55;
+      line-height: 1.6;
       margin-top: 7px;
     }
 
@@ -335,10 +339,11 @@
       display: flex;
       justify-content: space-between;
       gap: 12px;
-      padding: 7px 0;
+      padding: 8px 0;
       border-bottom: 1px solid var(--border-tertiary);
       font-size: var(--font-body);
       color: var(--text-secondary);
+      line-height: 1.5;
     }
     .opt:last-child { border-bottom: 0; }
     .opt .p { color: var(--text-primary); font-variant-numeric: tabular-nums; white-space: nowrap; }
@@ -361,7 +366,7 @@
       margin-bottom: 12px;
     }
     .callout.warn h3 { color: var(--status-danger); }
-    .callout p { font-size: var(--font-body); color: var(--text-secondary); line-height: 1.65; }
+    .callout p { font-size: var(--font-regular); color: var(--text-secondary); line-height: 1.65; }
     .callout .fine { font-size: var(--font-small); color: var(--text-tertiary); margin-top: 12px; line-height: 1.6; }
 
     /* ─── Buttons (DarkButton styles) ─────────────────────── */
@@ -378,10 +383,14 @@
       color: var(--text-secondary);
     }
     .btn:hover { color: var(--text-primary); background: var(--surface-hover); }
-    .btn.primary { background: var(--text-primary); color: var(--bg); border-color: var(--text-primary); }
-    .btn.primary:hover { background: #fff; color: var(--bg); }
+    .btn.primary {
+      background: var(--fill-strong);
+      color: var(--text-primary);
+      border-color: var(--border-secondary);
+    }
+    .btn.primary:hover { background: var(--elevated); border-color: var(--text-tertiary); }
     .btn.danger { color: var(--status-danger); border-color: var(--status-danger); background: transparent; }
-    .btn.danger:hover { background: rgba(196,88,82,.12); }
+    .btn.danger:hover { background: rgba(174,78,73,.14); }
     .btn:disabled { opacity: .5; cursor: default; }
 
     /* ─── Footer ──────────────────────────────────────────── */
@@ -397,7 +406,7 @@
     /* ─── Modals ──────────────────────────────────────────── */
     .overlay {
       position: fixed; inset: 0;
-      background: rgba(10,10,12,.72);
+      background: rgba(14,14,18,.72);
       backdrop-filter: blur(6px);
       display: none; align-items: center; justify-content: center;
       z-index: 1000; padding: 20px;
@@ -423,7 +432,7 @@
       color: var(--text-primary);
       margin-bottom: 6px;
     }
-    .panel .lede { font-size: var(--font-body); color: var(--text-tertiary); margin-bottom: 24px; }
+    .panel .lede { font-size: var(--font-body); color: var(--text-secondary); margin-bottom: 24px; }
 
     .close {
       position: absolute; top: 18px; right: 18px;
@@ -484,7 +493,7 @@
     }
     .order-row:hover { border-color: var(--border-secondary); }
     .order-row .nm { font-size: var(--font-regular); color: var(--text-primary); font-weight: 700; }
-    .order-row .pr { font-size: var(--font-body); color: var(--text-tertiary); font-variant-numeric: tabular-nums; margin-top: 3px; }
+    .order-row .pr { font-size: var(--font-body); color: var(--text-secondary); font-variant-numeric: tabular-nums; margin-top: 3px; }
     .order-row .detail { font-size: var(--font-small); color: var(--text-tertiary); margin-top: 5px; line-height: 1.5; }
 
     .qty-ctl { display: flex; align-items: center; gap: 10px; }
@@ -499,13 +508,13 @@
 
     .cart-bar {
       position: fixed; bottom: 24px; right: 24px;
-      background: var(--text-primary); color: var(--bg);
+      background: var(--fill-strong); color: var(--text-primary);
       padding: 12px 22px; border-radius: 24px;
       font-weight: 700; cursor: pointer; z-index: 800;
       font-variant-numeric: tabular-nums;
-      border: 1px solid var(--text-primary);
+      border: 1px solid var(--border-secondary);
     }
-    .cart-bar:hover { background: #fff; }
+    .cart-bar:hover { background: var(--elevated); border-color: var(--text-tertiary); }
 
     .summary-row { display: flex; justify-content: space-between; gap: 14px; font-size: var(--font-body); color: var(--text-secondary); padding: 4px 0; }
     .summary-row.total { border-top: 1px solid var(--border-tertiary); margin-top: 9px; padding-top: 10px; color: var(--text-primary); font-weight: 700; }
@@ -724,8 +733,8 @@
             <p>Tangy kraut and sharp mustard.</p>
           </div>
           <div class="item">
-            <div class="item-top"><h4>Chili</h4></div>
-            <p>Smothered in our thick, smooth beef chili sauce.</p>
+            <div class="item-top"><h4>Hawaiian</h4></div>
+            <p>Sweet-savory pineapple beef spooned on hot — a different style sauce dog.</p>
           </div>
           <div class="item">
             <div class="item-top"><h4>Crazy</h4></div>
@@ -755,7 +764,7 @@
 
         <div class="grid">
           <div class="item">
-            <div class="item-top"><h4>Phở</h4><span class="price">$12.99</span></div>
+            <div class="item-top"><h4>Phở</h4><span class="price">$11.99</span></div>
             <p>Rice noodles in beef-bone broth simmered for hours, topped with sliced beef, fresh herbs, lime and heat.</p>
             <div class="note">Add shrimp, pearl meatballs, pork or extra beef — see Build &amp; Add-ons</div>
           </div>
@@ -1002,18 +1011,18 @@
       { id: 29, name: 'Plain Dog (Classic)',        price: 2.49,  category: 'american', customizable: false },
       { id: 30, name: 'Chigo Dog (Classic)',        price: 2.49,  category: 'american', customizable: false },
       { id: 31, name: 'Kraut Dog (Classic)',        price: 2.49,  category: 'american', customizable: false },
-      { id: 32, name: 'Chili Dog (Classic)',        price: 2.49,  category: 'american', customizable: false },
+      { id: 32, name: 'Hawaiian Dog (Classic)',      price: 2.49,  category: 'american', customizable: false },
       { id: 33, name: 'Crazy Dog (Classic)',        price: 2.49,  category: 'american', customizable: false },
       { id: 4,  name: 'Plain Dog (Signature)',      price: 5.49,  category: 'american', customizable: false },
       { id: 5,  name: 'Chigo Dog (Signature)',      price: 5.49,  category: 'american', customizable: false },
       { id: 21, name: 'Kraut Dog (Signature)',      price: 5.49,  category: 'american', customizable: false },
-      { id: 22, name: 'Chili Dog (Signature)',      price: 5.49,  category: 'american', customizable: false },
+      { id: 22, name: 'Hawaiian Dog (Signature)',    price: 5.49,  category: 'american', customizable: false },
       { id: 23, name: 'Crazy Dog (Signature)',      price: 5.49,  category: 'american', customizable: false },
       { id: 6,  name: 'Spaghetti',                  price: 6.49,  category: 'american', customizable: false },
       { id: 40, name: 'Fries',                      price: 2.49,  category: 'american', customizable: false },
       { id: 25, name: 'Crazy Fries',                price: 3.79,  category: 'american', customizable: false },
       // Asian
-      { id: 7,  name: 'Phở',                        price: 12.99, category: 'asian',    customizable: true },
+      { id: 7,  name: 'Phở',                        price: 11.99, category: 'asian',    customizable: true },
       { id: 8,  name: 'Golden Eggrolls (3)',        price: 5.49,  category: 'asian',    customizable: false },
       { id: 20, name: 'Bánh Mì',                    price: 8.99,  category: 'asian',    customizable: false },
       { id: 9,  name: 'Kroeung Beef Skewer',        price: 9.49, category: 'asian',    customizable: false },
@@ -1256,7 +1265,7 @@
           '<div style="font-size:var(--font-small);color:var(--text-tertiary);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:9px">' + title + '</div>';
         list.forEach(function (o) {
           const nameAttr = inputType === 'radio' ? ' name="mex-protein"' : '';
-          const extra = o.price > 0 ? ' &nbsp;<span style="color:var(--text-tertiary)">+$' + o.price.toFixed(2) + '</span>' : '';
+          const extra = o.price > 0 ? ' &nbsp;<span style="color:var(--text-secondary)">+$' + o.price.toFixed(2) + '</span>' : '';
           h += '<label class="check"><input type="' + inputType + '"' + nameAttr +
                ' onchange="' + handler + '(this.value)" value="' + o.name + '">' +
                '<span>' + o.name + extra + '</span></label>';
