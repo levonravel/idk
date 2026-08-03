@@ -813,7 +813,7 @@
           </div>
           <div class="item" data-photo="dog-chigo">
             <div class="item-top"><h4>Chigo <span class="heat hot">Hot</span></h4></div>
-            <p>Cucumber relish and pickled Thai chilies, covered with chopped tomato and onion, topped with cilantro-lime crema.</p>
+            <p>Cucumber relish and whole pickled Thai chilies, covered with chopped tomato and onion, topped with cilantro-lime crema.</p>
           </div>
           <div class="item" data-photo="dog-kraut">
             <div class="item-top"><h4>Kraut</h4></div>
@@ -821,7 +821,7 @@
           </div>
           <div class="item" data-photo="dog-hawaiian">
             <div class="item-top"><h4>Hawaiian</h4></div>
-            <p>Sweet-savory pineapple beef spooned on hot — a different style sauce dog.</p>
+            <p>Sweet-savory pineapple beef spooned on hot, finished with green onion and toasted sesame — a different style sauce dog.</p>
           </div>
           <div class="item" data-photo="dog-crazy">
             <div class="item-top"><h4>Crazy</h4></div>
@@ -829,7 +829,11 @@
           </div>
           <div class="item" data-photo="dog-teriyaki">
             <div class="item-top"><h4>Teriyaki</h4></div>
-            <p>Sweet teriyaki glaze, toasted sesame, green onion and a stripe of Japanese mayo.</p>
+            <p>Sweet teriyaki glaze, toasted sesame, green onion and a stripe of mayo.</p>
+          </div>
+          <div class="item" data-photo="dog-khmer">
+            <div class="item-top"><h4>Cambodian <span class="heat mild">Mild</span></h4></div>
+            <p>Piled with our house pickle — cucumber, carrot and cabbage in a garlic-fish sauce brine. Sharp, tangy and bright, not hot.</p>
           </div>
         </div>
 
@@ -880,12 +884,12 @@
         <div class="group"><span>Rice Plates</span><span class="px">$8.49</span><span class="px-note">served with white or sticky rice</span></div>
         <div class="grid">
           <div class="item" data-photo="plate-beef-skewer">
-            <div class="item-top"><h4>Kroeung Beef Skewer</h4><span class="price">$9.49</span></div>
+            <div class="item-top"><h4>Lemongrass Beef Skewer</h4><span class="price">$9.49</span></div>
             <p>Beef in lemongrass, kaffir lime and warm spice, charred and smoky, served over rice.</p>
           </div>
           <div class="item" data-photo="plate-kroeung-chicken">
-            <div class="item-top"><h4>Kroeung Chicken</h4></div>
-            <p>Thigh in house lemongrass kroeung, charred hard. Smoky and herby.</p>
+            <div class="item-top"><h4>Lemongrass Chicken</h4></div>
+            <p>Thigh in our house lemongrass and kaffir lime marinade, charred hard. Smoky and herby.</p>
           </div>
           <div class="item" data-photo="plate-bbq-chicken">
             <div class="item-top"><h4>Chinese BBQ Chicken</h4></div>
@@ -905,7 +909,7 @@
           </div>
           <div class="item" data-photo="plate-teriyaki">
             <div class="item-top"><h4>Teriyaki Chicken</h4></div>
-            <p>Chopped chicken over rice with carrot and a sweet teriyaki glaze.</p>
+            <p>Glazed drumstick over rice with carrot, green onion and toasted sesame.</p>
           </div>
         </div>
 
@@ -926,6 +930,10 @@
           <div class="item" data-photo="plate-chow-mein">
             <div class="item-top"><h4>Chicken Chow Mein</h4><span class="price">$3.49</span></div>
             <p>Noodles tossed in the wok with chicken and veg — hot, savory, a touch sweet.</p>
+          </div>
+          <div class="item" data-photo="chrouk">
+            <div class="item-top"><h4>Pickled Vegetables <span class="heat hot">Hot</span></h4><span class="price">$1.49</span></div>
+            <p>Cambodian-style pickle — cucumber, carrot, cabbage and whole Thai chilies in a garlic-fish sauce brine. Cuts through anything rich.</p>
           </div>
         </div>
 
@@ -1011,7 +1019,7 @@
           <div class="item">
             <div class="item-top"><h4>Phở Toppings</h4></div>
             <div class="note" style="margin-bottom:10px">Included</div>
-            <div class="opt"><span>Mint · Bean sprouts · Cilantro · Lime</span></div>
+            <div class="opt"><span>Mint · Bean sprouts · Cilantro · Green onion · Lime</span></div>
             <div class="opt"><span>Hoisin · Sriracha · Garlic chili oil</span></div>
             <div class="opt"><span>Shrimp, meatballs, pork or extra beef</span><span class="p">+$3.00</span></div>
           </div>
@@ -1028,6 +1036,8 @@
         <div class="callout">
           <div class="opt"><span><strong>Esquites</strong> — tangy chili-lime dusting, barely a whisper of heat</span><span class="p"><span class="heat mild">Mild</span></span></div>
           <div class="opt"><span><strong>Chigo</strong> — pickled Thai chilies, a real but friendly kick</span><span class="p"><span class="heat hot">Hot</span></span></div>
+          <div class="opt"><span><strong>Cambodian Dog</strong> — pickled veg, tangy and bright, no heat</span><span class="p"><span class="heat mild">Mild</span></span></div>
+          <div class="opt"><span><strong>Pickled Vegetables</strong> — whole Thai chilies left in, sharp and building</span><span class="p"><span class="heat hot">Hot</span></span></div>
           <div class="opt"><span><strong>Spicy Pickles</strong> — toasted rice powder and árbol chili shake, smoky and sharp</span><span class="p"><span class="heat hot">Hot</span></span></div>
           <div class="opt"><span><strong>Camarones</strong> — wild chiltepín peppers and a Carolina Reaper, full send</span><span class="p"><span class="heat hot">Reaper</span></span></div>
         </div>
@@ -1154,12 +1164,14 @@
       { id: 31, name: 'Kraut Dog (Classic)',        price: 2.49,  category: 'american', customizable: false },
       { id: 32, name: 'Hawaiian Dog (Classic)',      price: 2.49,  category: 'american', customizable: false },
       { id: 43, name: 'Teriyaki Dog (Classic)',      price: 2.49,  category: 'american', customizable: false },
+      { id: 50, name: 'Cambodian Dog (Classic)',     price: 2.49,  category: 'american', customizable: false },
       { id: 33, name: 'Crazy Dog (Classic)',        price: 2.49,  category: 'american', customizable: false },
       { id: 4,  name: 'Plain Dog (Signature)',      price: 5.49,  category: 'american', customizable: false },
       { id: 5,  name: 'Chigo Dog (Signature)',      price: 5.49,  category: 'american', customizable: false },
       { id: 21, name: 'Kraut Dog (Signature)',      price: 5.49,  category: 'american', customizable: false },
       { id: 22, name: 'Hawaiian Dog (Signature)',    price: 5.49,  category: 'american', customizable: false },
       { id: 44, name: 'Teriyaki Dog (Signature)',    price: 5.49,  category: 'american', customizable: false },
+      { id: 51, name: 'Cambodian Dog (Signature)',   price: 5.49,  category: 'american', customizable: false },
       { id: 23, name: 'Crazy Dog (Signature)',      price: 5.49,  category: 'american', customizable: false },
       { id: 6,  name: 'Spaghetti',                  price: 6.49,  category: 'american', customizable: false },
       { id: 40, name: 'Fries',                      price: 2.49,  category: 'american', customizable: false },
@@ -1171,10 +1183,11 @@
       { id: 37, name: 'Sticky Rice',                price: 2.49,  category: 'asian',    customizable: false },
       { id: 41, name: 'Side House Fried Rice',       price: 3.49,  category: 'asian',    customizable: false },
       { id: 42, name: 'Side Chicken Chow Mein',      price: 3.49,  category: 'asian',    customizable: false },
+      { id: 52, name: 'Pickled Vegetables',          price: 1.49,  category: 'asian',    customizable: false },
       { id: 38, name: 'Spicy Pickles (snack)',       price: 2.99,  category: 'asian',    customizable: false },
       { id: 20, name: 'Bánh Mì',                    price: 8.99,  category: 'asian',    customizable: false },
-      { id: 9,  name: 'Kroeung Beef Skewer',        price: 9.49, category: 'asian',    customizable: false },
-      { id: 10, name: 'Kroeung Chicken',            price: 8.49,  category: 'asian',    customizable: false },
+      { id: 9,  name: 'Lemongrass Beef Skewer',      price: 9.49, category: 'asian',    customizable: false },
+      { id: 10, name: 'Lemongrass Chicken',          price: 8.49,  category: 'asian',    customizable: false },
       { id: 11, name: 'Chinese BBQ Chicken',        price: 8.49,  category: 'asian',    customizable: false },
       { id: 12, name: 'Grilled Chicken',            price: 8.49,  category: 'asian',    customizable: false },
       { id: 13, name: 'Chicken Chow Mein',          price: 8.49,  category: 'asian',    customizable: false },
@@ -1200,7 +1213,8 @@
 
     const asianAddons = [
       { name: 'Mint', price: 0 }, { name: 'Bean sprouts', price: 0 },
-      { name: 'Cilantro', price: 0 }, { name: 'Lime', price: 0 },
+      { name: 'Cilantro', price: 0 }, { name: 'Green onion', price: 0 },
+      { name: 'Lime', price: 0 },
       { name: 'Hoisin sauce', price: 0 }, { name: 'Sriracha', price: 0 },
       { name: 'Garlic chili oil', price: 0 }
     ];
