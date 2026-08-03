@@ -775,12 +775,12 @@
         <div class="group"><span>Sides</span></div>
         <div class="grid">
           <div class="item" data-photo="side-rice">
-            <div class="item-top"><h4>Rice</h4><span class="price">$2.49</span></div>
-            <p>Mexican or white rice</p>
+            <div class="item-top"><h4>Mexican Rice</h4><span class="price">$2.49</span></div>
+            <p>Tomato-simmered rice with onion and garlic.</p>
           </div>
           <div class="item" data-photo="side-beans">
             <div class="item-top"><h4>Beans</h4><span class="price">$2.49</span></div>
-            <p>Pinto or refried</p>
+            <p>Whole pinto or refried, your call.</p>
           </div>
           <div class="item" data-photo="esquites">
             <div class="item-top"><h4>Esquites <span class="heat mild">Mild</span></h4><span class="price">$3.49</span></div>
@@ -864,6 +864,14 @@
           </div>
         </div>
 
+        <div class="group"><span>Snack</span></div>
+        <div class="grid">
+          <div class="item" data-photo="spicy-pickles">
+            <div class="item-top"><h4>Spicy Pickles <span class="heat hot">Hot</span></h4><span class="price">$2.99</span></div>
+            <p>Eight crunchy spears shaken to order in toasted rice powder, chili, sugar and salt — sweet, smoky and seriously hot. Bagged to eat on the way.</p>
+          </div>
+        </div>
+
         <div class="group"><span>Rice Plates</span><span class="px">$8.49</span><span class="px-note">served with white or sticky rice</span></div>
         <div class="grid">
           <div class="item" data-photo="plate-beef-skewer">
@@ -896,22 +904,27 @@
           </div>
         </div>
 
-        <div class="group"><span>Sides</span><span class="px">$2.49</span></div>
+        <div class="group"><span>Sides</span></div>
         <div class="grid">
-          <div class="item" data-photo="spicy-pickles">
-            <div class="item-top"><h4>Spicy Pickles <span class="heat hot">Hot</span></h4></div>
-            <p>Crunchy spears shaken to order in toasted rice powder, chili, sugar and salt — sweet, smoky and seriously hot.</p>
-          </div>
           <div class="item" data-photo="white-rice">
-            <div class="item-top"><h4>White Rice</h4></div>
-            <p>Fragrant steamed jasmine rice.</p>
+            <div class="item-top"><h4>White Rice</h4><span class="price">$2.49</span></div>
+            <p>Fragrant steamed white rice.</p>
           </div>
           <div class="item" data-photo="sticky-rice">
-            <div class="item-top"><h4>Sticky Rice</h4></div>
+            <div class="item-top"><h4>Sticky Rice</h4><span class="price">$2.49</span></div>
             <p>Warm, chewy sticky rice — perfect for scooping and dipping.</p>
           </div>
+          <div class="item" data-photo="plate-fried-rice">
+            <div class="item-top"><h4>House Fried Rice</h4><span class="price">$3.49</span></div>
+            <p>Rice fired in the wok with garlic, veg and Chinese sausage. Smoky-sweet.</p>
+          </div>
+          <div class="item" data-photo="plate-chow-mein">
+            <div class="item-top"><h4>Chicken Chow Mein</h4><span class="price">$3.49</span></div>
+            <p>Noodles tossed in the wok with chicken and veg — hot, savory, a touch sweet.</p>
+          </div>
         </div>
-      </section>
+
+        </section>
 
       <!-- ══════════════ DRINKS ══════════════ -->
       <section class="wrap" id="drinks">
@@ -957,18 +970,6 @@
           </div>
 
           <div class="item">
-            <div class="item-top"><h4>Make It A Plate</h4></div>
-            <div class="note" style="margin-bottom:10px">Add a side to anything on the menu</div>
-            <div class="opt"><span>One side</span><span class="p">+$1.49</span></div>
-            <div class="opt"><span><strong>Two sides</strong></span><span class="p">+$2.49</span></div>
-            <div class="note" style="margin-top:14px;margin-bottom:10px">Any side on the menu</div>
-            <div class="opt"><span>White rice · Sticky rice · Mexican rice</span></div>
-            <div class="opt"><span>Whole pinto beans · Refried beans</span></div>
-            <div class="opt"><span>Spicy pickles · Fries · Crazy fries</span></div>
-            <div class="opt"><span>Esquites · House fried rice · Chicken chow mein</span></div>
-          </div>
-
-          <div class="item">
             <div class="item-top"><h4>Load It Up</h4></div>
             <div class="note" style="margin-bottom:10px">Add to anything</div>
             <div class="opt"><span>Add cheese</span><span class="p">+$0.75</span></div>
@@ -996,7 +997,7 @@
         <div class="callout">
           <div class="opt"><span><strong>Esquites</strong> — tangy chili-lime dusting, barely a whisper of heat</span><span class="p"><span class="heat mild">Mild</span></span></div>
           <div class="opt"><span><strong>Chigo</strong> — pickled Thai chilies, a real but friendly kick</span><span class="p"><span class="heat hot">Hot</span></span></div>
-          <div class="opt"><span><strong>Spicy Pickles</strong> — 24 árbol chilies per batch, smoky and sharp</span><span class="p"><span class="heat hot">Hot</span></span></div>
+          <div class="opt"><span><strong>Spicy Pickles</strong> — toasted rice powder and árbol chili shake, smoky and sharp</span><span class="p"><span class="heat hot">Hot</span></span></div>
           <div class="opt"><span><strong>Camarones</strong> — wild chiltepín peppers and a Carolina Reaper, full send</span><span class="p"><span class="heat hot">Reaper</span></span></div>
         </div>
 
@@ -1113,8 +1114,8 @@
       { id: 3,  name: 'California Burrito (Half)',  price: 5.99,  category: 'mexican',  customizable: true },
       { id: 34, name: 'Bangin Burrito (Full)',      price: 9.99,  category: 'mexican',  customizable: true },
       { id: 35, name: 'California Burrito (Full)',  price: 9.99,  category: 'mexican',  customizable: true },
-      { id: 27, name: 'Side of Rice',               price: 2.49,  category: 'mexican',  customizable: false },
-      { id: 28, name: 'Side of Beans',              price: 2.49,  category: 'mexican',  customizable: false },
+      { id: 27, name: 'Mexican Rice',               price: 2.49,  category: 'mexican',  customizable: false },
+      { id: 28, name: 'Beans',                      price: 2.49,  category: 'mexican',  customizable: false },
       { id: 39, name: 'Esquites',                   price: 3.49,  category: 'mexican',  customizable: false },
       // American
       { id: 29, name: 'Plain Dog (Classic)',        price: 2.49,  category: 'american', customizable: false },
@@ -1133,6 +1134,11 @@
       // Asian
       { id: 7,  name: 'Phở',                        price: 11.99, category: 'asian',    customizable: true },
       { id: 8,  name: 'Golden Eggrolls (3)',        price: 5.49,  category: 'asian',    customizable: false },
+      { id: 36, name: 'White Rice',                 price: 2.49,  category: 'asian',    customizable: false },
+      { id: 37, name: 'Sticky Rice',                price: 2.49,  category: 'asian',    customizable: false },
+      { id: 41, name: 'Side House Fried Rice',       price: 3.49,  category: 'asian',    customizable: false },
+      { id: 42, name: 'Side Chicken Chow Mein',      price: 3.49,  category: 'asian',    customizable: false },
+      { id: 38, name: 'Spicy Pickles (snack)',       price: 2.99,  category: 'asian',    customizable: false },
       { id: 20, name: 'Bánh Mì',                    price: 8.99,  category: 'asian',    customizable: false },
       { id: 9,  name: 'Kroeung Beef Skewer',        price: 9.49, category: 'asian',    customizable: false },
       { id: 10, name: 'Kroeung Chicken',            price: 8.49,  category: 'asian',    customizable: false },
@@ -1141,9 +1147,6 @@
       { id: 13, name: 'Chicken Chow Mein',          price: 8.49,  category: 'asian',    customizable: false },
       { id: 14, name: 'House Fried Rice',           price: 8.49,  category: 'asian',    customizable: false },
       { id: 26, name: 'Teriyaki Chicken',           price: 8.49,  category: 'asian',    customizable: false },
-      { id: 36, name: 'White Rice',                 price: 2.49,  category: 'asian',    customizable: false },
-      { id: 37, name: 'Sticky Rice',                price: 2.49,  category: 'asian',    customizable: false },
-      { id: 38, name: 'Spicy Pickles',              price: 2.49,  category: 'asian',    customizable: false },
       // Drinks
       { id: 15, name: 'Boba',                       price: 4.99,  category: 'drink',    customizable: false },
       { id: 18, name: 'Canned Soda',                price: 1.79,  category: 'drink',    customizable: false },
@@ -1175,8 +1178,6 @@
       { name: 'Add cheese', price: 0.75 },
       { name: 'Add guac-lime', price: 1.49 },
       { name: 'Crema', price: 0.75 },
-      { name: 'Make it a plate — one side', price: 1.49 },
-      { name: 'Make it a plate — two sides', price: 2.49 },
       { name: 'Cabbage', price: 0 }, { name: 'Radish', price: 0 },
       { name: 'Cilantro', price: 0 }, { name: 'Diced onion', price: 0 },
       { name: 'Grilled onion', price: 0 }, { name: 'Grilled jalapenos', price: 0 },
