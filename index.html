@@ -331,6 +331,7 @@
       margin-left: 8px;
       vertical-align: 1px;
     }
+    .heat + .heat { margin-left: 4px; }
     .heat.mild { color: var(--status-warning); border-color: var(--status-warning); }
     .heat.hot  { color: var(--status-danger);  border-color: var(--status-danger); }
 
@@ -812,8 +813,8 @@
             <div class="note">Ketchup, mustard, onion</div>
           </div>
           <div class="item" data-photo="dog-chigo">
-            <div class="item-top"><h4>Chigo <span class="heat hot">Hot</span></h4></div>
-            <p>Cucumber relish and whole pickled Thai chilies, covered with chopped tomato and onion, topped with cilantro-lime crema.</p>
+            <div class="item-top"><h4>Chigo <span class="heat mild">Mild</span><span class="heat hot">Hot</span></h4></div>
+            <p>Cucumber relish, chopped tomato and onion, topped with cilantro-lime crema. Say the word for whole pickled Thai chilies.</p>
           </div>
           <div class="item" data-photo="dog-kraut">
             <div class="item-top"><h4>Kraut</h4></div>
@@ -832,8 +833,12 @@
             <p>Sweet teriyaki glaze, toasted sesame, green onion and a stripe of mayo.</p>
           </div>
           <div class="item" data-photo="dog-khmer">
-            <div class="item-top"><h4>Cambodian <span class="heat mild">Mild</span></h4></div>
-            <p>Piled with our house pickled — cucumber, carrot and cabbage in a garlic-fish sauce brine. Sharp, tangy and bright, not hot.</p>
+            <div class="item-top"><h4>Cambodian <span class="heat mild">Mild</span><span class="heat hot">Hot</span></h4></div>
+            <p>Piled with our house pickled — cucumber, carrot and cabbage in a garlic-fish sauce brine. Sharp, tangy and bright. Add whole Thai chilies if you want it hot.</p>
+          </div>
+          <div class="item" data-photo="dog-italian">
+            <div class="item-top"><h4>Italian</h4></div>
+            <p>Smothered in our slow-cooked meat sauce with parmesan and diced onion.</p>
           </div>
         </div>
 
@@ -854,7 +859,7 @@
       <section class="wrap" id="asian">
         <div class="page-header">
           <h2>Asian</h2>
-          <div class="sub">Khmer based asian quisine, cooked over fire</div>
+          <div class="sub">Khmer-based Asian cuisine, cooked over fire</div>
         </div>
 
         <div class="grid">
@@ -932,8 +937,8 @@
             <p>Noodles tossed in the wok with chicken and veg — hot, savory, a touch sweet.</p>
           </div>
           <div class="item" data-photo="chrouk">
-            <div class="item-top"><h4>Pickled Vegetables <span class="heat hot">Hot</span></h4><span class="price">$1.49</span></div>
-            <p>Cambodian-style pickle — cucumber, carrot, cabbage and whole Thai chilies in a garlic-fish sauce brine. Cuts through anything rich.</p>
+            <div class="item-top"><h4>Pickled Vegetables <span class="heat mild">Mild</span><span class="heat hot">Hot</span></h4><span class="price">$1.49</span></div>
+            <p>Cambodian-style pickle — cucumber, carrot and cabbage in a garlic-fish sauce brine. Cuts through anything rich. Whole Thai chilies on request.</p>
           </div>
         </div>
 
@@ -956,7 +961,7 @@
           </div>
           <div class="item" data-photo="dog-plain">
             <div class="item-top"><h4>Kids Dog &amp; Fries</h4><span class="price">$3.99</span></div>
-            <p>A classic dog dressed how they like it, with smallfries.</p>
+            <p>A classic dog dressed how they like it, with small fries.</p>
           </div>
           <div class="item" data-photo="pho">
             <div class="item-top"><h4>Kids Phở</h4><span class="price">$6.49</span></div>
@@ -1035,9 +1040,9 @@
 
         <div class="callout">
           <div class="opt"><span><strong>Esquites</strong> — tangy chili-lime dusting, barely a whisper of heat</span><span class="p"><span class="heat mild">Mild</span></span></div>
-          <div class="opt"><span><strong>Chigo</strong> — pickled Thai chilies, a real but friendly kick</span><span class="p"><span class="heat hot">Hot</span></span></div>
-          <div class="opt"><span><strong>Cambodian Dog</strong> — pickled veg, tangy and bright, no heat</span><span class="p"><span class="heat mild">Mild</span></span></div>
-          <div class="opt"><span><strong>Pickled Vegetables</strong> — whole Thai chilies left in, sharp and building</span><span class="p"><span class="heat hot">Hot</span></span></div>
+          <div class="opt"><span><strong>Chigo</strong> — bright and tangy on its own; whole Thai chilies make it a real kick</span><span class="p"><span class="heat mild">Mild</span><span class="heat hot">Hot</span></span></div>
+          <div class="opt"><span><strong>Cambodian Dog</strong> — pickled veg, tangy and bright; add Thai chilies for heat</span><span class="p"><span class="heat mild">Mild</span><span class="heat hot">Hot</span></span></div>
+          <div class="opt"><span><strong>Pickled Vegetables</strong> — sharp and bright; chilies on request make it build</span><span class="p"><span class="heat mild">Mild</span><span class="heat hot">Hot</span></span></div>
           <div class="opt"><span><strong>Spicy Pickles</strong> — toasted rice powder and dried chili flakes, smoky and sharp</span><span class="p"><span class="heat hot">Hot</span></span></div>
           <div class="opt"><span><strong>Camarones</strong> — wild chiltepín peppers, smokey arbol chilies, and a Carolina Reaper full send</span><span class="p"><span class="heat hot">Reaper</span></span></div>
         </div>
@@ -1165,6 +1170,7 @@
       { id: 32, name: 'Hawaiian Dog (Classic)',      price: 2.49,  category: 'american', customizable: false },
       { id: 43, name: 'Teriyaki Dog (Classic)',      price: 2.49,  category: 'american', customizable: false },
       { id: 50, name: 'Cambodian Dog (Classic)',     price: 2.49,  category: 'american', customizable: false },
+      { id: 53, name: 'Italian Dog (Classic)',       price: 2.49,  category: 'american', customizable: false },
       { id: 33, name: 'Crazy Dog (Classic)',        price: 2.49,  category: 'american', customizable: false },
       { id: 4,  name: 'Plain Dog (Signature)',      price: 5.49,  category: 'american', customizable: false },
       { id: 5,  name: 'Chigo Dog (Signature)',      price: 5.49,  category: 'american', customizable: false },
@@ -1172,6 +1178,7 @@
       { id: 22, name: 'Hawaiian Dog (Signature)',    price: 5.49,  category: 'american', customizable: false },
       { id: 44, name: 'Teriyaki Dog (Signature)',    price: 5.49,  category: 'american', customizable: false },
       { id: 51, name: 'Cambodian Dog (Signature)',   price: 5.49,  category: 'american', customizable: false },
+      { id: 54, name: 'Italian Dog (Signature)',     price: 5.49,  category: 'american', customizable: false },
       { id: 23, name: 'Crazy Dog (Signature)',      price: 5.49,  category: 'american', customizable: false },
       { id: 6,  name: 'Spaghetti',                  price: 6.49,  category: 'american', customizable: false },
       { id: 40, name: 'Fries',                      price: 2.49,  category: 'american', customizable: false },
@@ -1188,7 +1195,7 @@
       { id: 20, name: 'Bánh Mì',                    price: 8.99,  category: 'asian',    customizable: false },
       { id: 9,  name: 'Lemongrass Beef Skewer',      price: 9.49, category: 'asian',    customizable: false },
       { id: 10, name: 'Lemongrass Chicken',          price: 8.49,  category: 'asian',    customizable: false },
-      { id: 11, name: 'Chinese BBQ Chicken',        price: 8.49,  category: 'asian',    customizable: false },
+      { id: 11, name: 'Red BBQ Chicken',              price: 8.49,  category: 'asian',    customizable: false },
       { id: 12, name: 'Grilled Chicken',            price: 8.49,  category: 'asian',    customizable: false },
       { id: 13, name: 'Chicken Chow Mein',          price: 8.49,  category: 'asian',    customizable: false },
       { id: 14, name: 'House Fried Rice',           price: 8.49,  category: 'asian',    customizable: false },
