@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="theme-color" content="#1C1C22"/>
   <title>IDK Kitchen</title>
+  <script>
+    /* runs before any paint — avoids swapping menu-view for order-view
+       after render, which was a full-page layout shift */
+    try { if (sessionStorage.getItem('idkUser')) document.documentElement.className = 'signed-in'; }
+    catch (e) {}
+  </script>
 
   <style>
     /* ═══════════════════════════════════════════════════════════
@@ -366,7 +372,9 @@
 
     .thumb:hover img { filter: brightness(.95) saturate(1); transform: scale(1.04); }
 
-    /* visible from the start. a missing file removes the element via onerror. */
+    /* a missing file hides the IMG but the .thumb keeps its box, so nothing
+       reflows. once every photo exists this is invisible either way. */
+    .thumb.missing { visibility: hidden; }
 
     /* ─── Lightbox ────────────────────────────────────────── */
     .lightbox {
@@ -570,6 +578,8 @@
 
     /* ─── Order view ──────────────────────────────────────── */
     #order-view { display: none; padding-bottom: 40px; }
+    html.signed-in #menu-view { display: none; }
+    html.signed-in #order-view { display: block; }
 
     .order-row {
       display: flex; align-items: center; justify-content: space-between; gap: 16px;
@@ -1359,8 +1369,8 @@
         var file = card.getAttribute('data-photo');
         if (typeof DEMO_IMAGES !== 'undefined' && DEMO_IMAGES[file]) img.src = DEMO_IMAGES[file];
         img.alt = (card.querySelector('h4') || {}).textContent || '';
-        img.onerror = function () { thumb.remove(); };
-        if (img.complete && !img.naturalWidth) thumb.remove();
+        img.onerror = function () { thumb.classList.add('missing'); };
+        if (img.complete && !img.naturalWidth) thumb.classList.add('missing');
         thumb.addEventListener('click', function () { openLightbox(card, img.src); });
       });
     }
@@ -1749,6 +1759,7 @@
         const saved = sessionStorage.getItem('idkUser');
         if (saved) { currentUser = JSON.parse(saved); showOrderMenu(); }
       } catch (e) { /* storage blocked on file:// — ignore */ }
+      document.documentElement.classList.remove('signed-in');
     });
 
     ['loginOverlay','customizeModal','addressModal'].forEach(function (id) {
