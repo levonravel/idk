@@ -356,6 +356,7 @@
 
     .thumb img {
       width: 100%; height: 100%;
+      aspect-ratio: 1 / 1;
       object-fit: cover;
       display: block;
       /* tame the glare — food shots are much brighter than this page */
@@ -754,21 +755,36 @@
 
         <div class="grid">
           <div class="item" data-photo="street-taco">
-            <div class="item-top"><h4>Twisted Street Taco</h4><span class="price">$1.99</span></div>
-            <p>Street-size corn tortilla topped with cilantro, onion and radish. Small, bright and loud in a few perfect bites.</p>
-            <div class="note">Grilled chicken or Hawaiian · asada +$0.50</div>
+            <div class="item-body">
+              <div class="item-text">
+                <div class="item-top"><h4>Twisted Street Taco</h4><span class="price">$1.99</span></div>
+                <p>Street-size corn tortilla topped with cilantro, onion and radish. Small, bright and loud in a few perfect bites.</p>
+                <div class="note">Grilled chicken or Hawaiian · asada +$0.50</div>
+              </div>
+              <div class="thumb"><img src="img/street-taco.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
+            </div>
           </div>
         </div>
 
         <div class="group"><span>Burritos</span><span class="px-note">(choose your protein)</span><span class="px">Half $5.99 · Full $9.99</span></div>
         <div class="grid">
           <div class="item" data-photo="burrito-bangin">
-            <div class="item-top"><h4>Bangin</h4></div>
-            <p>A loaded flour tortilla packed with Mexican rice, pinto beans, cabbage, onion and radish. Hearty and built to fill you up.</p>
+            <div class="item-body">
+              <div class="item-text">
+                <div class="item-top"><h4>Bangin</h4></div>
+                <p>A loaded flour tortilla packed with Mexican rice, pinto beans, cabbage, onion and radish. Hearty and built to fill you up.</p>
+              </div>
+              <div class="thumb"><img src="img/burrito-bangin.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
+            </div>
           </div>
           <div class="item" data-photo="burrito-california">
-            <div class="item-top"><h4>California</h4></div>
-            <p>A loaded flour tortilla with hot crispy fries, refried beans, melted cheese and cool guac-lime crema. Rich and messy.</p>
+            <div class="item-body">
+              <div class="item-text">
+                <div class="item-top"><h4>California</h4></div>
+                <p>A loaded flour tortilla with hot crispy fries, refried beans, melted cheese and cool guac-lime crema. Rich and messy.</p>
+              </div>
+              <div class="thumb"><img src="img/burrito-california.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
+            </div>
           </div>
         </div>
 
@@ -795,16 +811,31 @@
         <div class="group"><span>Sides</span></div>
         <div class="grid">
           <div class="item" data-photo="side-rice">
-            <div class="item-top"><h4>Mexican Rice</h4><span class="price">$2.49</span></div>
-            <p>Tomato-simmered rice with onion and garlic.</p>
+            <div class="item-body">
+              <div class="item-text">
+                <div class="item-top"><h4>Mexican Rice</h4><span class="price">$2.49</span></div>
+                <p>Tomato-simmered rice with onion and garlic.</p>
+              </div>
+              <div class="thumb"><img src="img/side-rice.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
+            </div>
           </div>
           <div class="item" data-photo="side-beans">
-            <div class="item-top"><h4>Beans</h4><span class="price">$2.49</span></div>
-            <p>Whole pinto or refried, your call.</p>
+            <div class="item-body">
+              <div class="item-text">
+                <div class="item-top"><h4>Beans</h4><span class="price">$2.49</span></div>
+                <p>Whole pinto or refried, your call.</p>
+              </div>
+              <div class="thumb"><img src="img/side-beans.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
+            </div>
           </div>
           <div class="item" data-photo="esquites">
-            <div class="item-top"><h4>Esquites <span class="heat mild">Mild</span></h4><span class="price">$3.49</span></div>
-            <p>Fire-grilled corn tossed in creamy mayo, parmesan and dusted with tangy lime seasoning.</p>
+            <div class="item-body">
+              <div class="item-text">
+                <div class="item-top"><h4>Esquites <span class="heat mild">Mild</span></h4><span class="price">$3.49</span></div>
+                <p>Fire-grilled corn tossed in creamy mayo, parmesan and dusted with tangy lime seasoning.</p>
+              </div>
+              <div class="thumb"><img src="img/esquites.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
+            </div>
           </div>
         </div>
 
@@ -819,52 +850,102 @@
 
         <div class="grid">
           <div class="item" data-photo="spaghetti">
-            <div class="item-top"><h4>Spaghetti</h4><span class="price">$6.49</span></div>
-            <p>A hearty bowl of spiral noodles loaded in our slow-cooked meat sauce — rich, meaty, home-style comfort food.</p>
+            <div class="item-body">
+              <div class="item-text">
+                <div class="item-top"><h4>Spaghetti</h4><span class="price">$6.49</span></div>
+                <p>A hearty bowl of spiral noodles loaded in our slow-cooked meat sauce — rich, meaty, home-style comfort food.</p>
+              </div>
+              <div class="thumb"><img src="img/spaghetti.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
+            </div>
           </div>
         </div>
 
         <div class="group"><span>Dogs</span><span class="px-note">classic $2.25 · signature $4.49</span><span class="px">styles priced below</span></div>
         <div class="grid">
           <div class="item" data-photo="dog-plain">
-            <div class="item-top"><h4>Plain</h4></div>
-            <p>Real snap, dressed simple. Ketchup, mustard and onion.</p>
+            <div class="item-body">
+              <div class="item-text">
+                <div class="item-top"><h4>Plain</h4></div>
+                <p>Real snap, dressed simple. Ketchup, mustard and onion.</p>
+              </div>
+              <div class="thumb"><img src="img/dog-plain.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
+            </div>
           </div>
           <div class="item" data-photo="dog-kraut">
-            <div class="item-top"><h4>Kraut</h4><span class="price">+$0.25</span></div>
-            <p>Tangy kraut and sharp mustard.</p>
+            <div class="item-body">
+              <div class="item-text">
+                <div class="item-top"><h4>Kraut</h4><span class="price">+$0.25</span></div>
+                <p>Tangy kraut and sharp mustard.</p>
+              </div>
+              <div class="thumb"><img src="img/dog-kraut.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
+            </div>
           </div>
           <div class="item" data-photo="dog-chigo">
-            <div class="item-top"><h4>Chigo <span class="heat mild">Mild</span><span class="heat hot">Hot</span></h4><span class="price">+$0.50</span></div>
-            <p>Cucumber relish, chopped tomato and onion, topped with cilantro-lime crema. Say the word for whole pickled Thai chilies.</p>
+            <div class="item-body">
+              <div class="item-text">
+                <div class="item-top"><h4>Chigo <span class="heat mild">Mild</span><span class="heat hot">Hot</span></h4><span class="price">+$0.50</span></div>
+                <p>Cucumber relish, chopped tomato and onion, topped with cilantro-lime crema. Say the word for whole pickled Thai chilies.</p>
+              </div>
+              <div class="thumb"><img src="img/dog-chigo.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
+            </div>
           </div>
           <div class="item" data-photo="dog-crazy">
-            <div class="item-top"><h4>Crazy</h4><span class="price">+$0.75</span></div>
-            <p>Topped with hot chopped fries tossed in our creamy tangy-sweet house sauce.</p>
+            <div class="item-body">
+              <div class="item-text">
+                <div class="item-top"><h4>Crazy</h4><span class="price">+$0.75</span></div>
+                <p>Topped with hot chopped fries tossed in our creamy tangy-sweet house sauce.</p>
+              </div>
+              <div class="thumb"><img src="img/dog-crazy.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
+            </div>
           </div>
           <div class="item" data-photo="dog-teriyaki">
-            <div class="item-top"><h4>Teriyaki</h4><span class="price">+$1.00</span></div>
-            <p>Sweet teriyaki glaze, toasted sesame, green onion and a stripe of mayo.</p>
+            <div class="item-body">
+              <div class="item-text">
+                <div class="item-top"><h4>Teriyaki</h4><span class="price">+$1.00</span></div>
+                <p>Sweet teriyaki glaze, toasted sesame, green onion and a stripe of mayo.</p>
+              </div>
+              <div class="thumb"><img src="img/dog-teriyaki.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
+            </div>
           </div>
           <div class="item" data-photo="dog-hawaiian">
-            <div class="item-top"><h4>Hawaiian</h4><span class="price">+$1.25</span></div>
-            <p>Sweet-savory pineapple beef spooned on hot, finished with green onion and toasted sesame — a different style sauce dog.</p>
+            <div class="item-body">
+              <div class="item-text">
+                <div class="item-top"><h4>Hawaiian</h4><span class="price">+$1.25</span></div>
+                <p>Sweet-savory pineapple beef spooned on hot, finished with green onion and toasted sesame — a different style sauce dog.</p>
+              </div>
+              <div class="thumb"><img src="img/dog-hawaiian.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
+            </div>
           </div>
           <div class="item" data-photo="dog-italian">
-            <div class="item-top"><h4>Italian</h4><span class="price">+$1.50</span></div>
-            <p>Smothered in our slow-cooked meat sauce with parmesan and diced onion.</p>
+            <div class="item-body">
+              <div class="item-text">
+                <div class="item-top"><h4>Italian</h4><span class="price">+$1.50</span></div>
+                <p>Smothered in our slow-cooked meat sauce with parmesan and diced onion.</p>
+              </div>
+              <div class="thumb"><img src="img/dog-italian.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
+            </div>
           </div>
         </div>
 
         <div class="group"><span>Sides</span></div>
         <div class="grid">
           <div class="item" data-photo="fries">
-            <div class="item-top"><h4>Fries</h4><span class="price">$2.99</span></div>
-            <p>Hot crispy fries.</p>
+            <div class="item-body">
+              <div class="item-text">
+                <div class="item-top"><h4>Fries</h4><span class="price">$2.99</span></div>
+                <p>Hot crispy fries.</p>
+              </div>
+              <div class="thumb"><img src="img/fries.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
+            </div>
           </div>
           <div class="item" data-photo="crazy-fries">
-            <div class="item-top"><h4>Crazy Fries</h4><span class="price">$3.79</span></div>
-            <p>Fries topped with our creamy tangy-sweet house sauce.</p>
+            <div class="item-body">
+              <div class="item-text">
+                <div class="item-top"><h4>Crazy Fries</h4><span class="price">$3.79</span></div>
+                <p>Fries topped with our creamy tangy-sweet house sauce.</p>
+              </div>
+              <div class="thumb"><img src="img/crazy-fries.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
+            </div>
           </div>
         </div>
 
@@ -879,74 +960,144 @@
 
         <div class="grid">
           <div class="item" data-photo="eggrolls">
-            <div class="item-top"><h4>Golden Eggrolls</h4><span class="price">$5.99</span></div>
-            <p>Three rolls fried to order — pork, carrot, cabbage, glass noodles, crisp shell.</p>
+            <div class="item-body">
+              <div class="item-text">
+                <div class="item-top"><h4>Golden Eggrolls</h4><span class="price">$5.99</span></div>
+                <p>Three rolls fried to order — pork, carrot, cabbage, glass noodles, crisp shell.</p>
+              </div>
+              <div class="thumb"><img src="img/eggrolls.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
+            </div>
           </div>
           <div class="item" data-photo="plate-teriyaki">
-            <div class="item-top"><h4>Teriyaki Chicken Bowl</h4><span class="price">$7.98</span></div>
-            <p>Shredded drumstick and carrot over white rice, the whole bowl glazed in teriyaki and topped with green onion and toasted sesame.</p>
+            <div class="item-body">
+              <div class="item-text">
+                <div class="item-top"><h4>Teriyaki Chicken Bowl</h4><span class="price">$7.98</span></div>
+                <p>Shredded drumstick and carrot over white rice, the whole bowl glazed in teriyaki and topped with green onion and toasted sesame.</p>
+              </div>
+              <div class="thumb"><img src="img/plate-teriyaki.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
+            </div>
           </div>
           <div class="item" data-photo="banh-mi">
-            <div class="item-top"><h4>Bánh Mì</h4><span class="price">$9.99</span></div>
-            <p>Rich toasted bread, marinated pork shoulder, honey ham, savory spread, pickled carrot and radish, cucumber and cilantro.</p>
+            <div class="item-body">
+              <div class="item-text">
+                <div class="item-top"><h4>Bánh Mì</h4><span class="price">$9.99</span></div>
+                <p>Rich toasted bread, marinated pork shoulder, honey ham, savory spread, pickled carrot and radish, cucumber and cilantro.</p>
+              </div>
+              <div class="thumb"><img src="img/banh-mi.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
+            </div>
           </div>
           <div class="item" data-photo="pho">
-            <div class="item-top"><h4>Phở</h4><span class="price">$12.99</span></div>
-            <p>Rice noodles in beef-bone broth simmered for hours, topped with sliced beef, fresh herbs, lime and heat.</p>
-            <div class="note" style="margin-bottom:6px">Comes with mint, bean sprouts, cilantro, green onion, lime, hoisin, sriracha and garlic chili oil</div>
-            <div class="opt" style="border-bottom:0;padding:4px 0"><span>Add shrimp, meatballs, pork or extra beef</span><span class="p">+$3.00</span></div>
+            <div class="item-body">
+              <div class="item-text">
+                <div class="item-top"><h4>Phở</h4><span class="price">$12.99</span></div>
+                <p>Rice noodles in beef-bone broth simmered for hours, topped with sliced beef, fresh herbs, lime and heat.</p>
+                <div class="note" style="margin-bottom:6px">Comes with mint, bean sprouts, cilantro, green onion, lime, hoisin, sriracha and garlic chili oil</div>
+                <div class="opt" style="border-bottom:0;padding:4px 0"><span>Add shrimp, meatballs, pork or extra beef</span><span class="p">+$3.00</span></div>
+              </div>
+              <div class="thumb"><img src="img/pho.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
+            </div>
           </div>
         </div>
 
 <div class="group"><span>Proteins</span><span class="px-note">protein only — pick a side below to build your own plate</span></div>
         <div class="grid">
           <div class="item" data-photo="plate-teriyaki">
-            <div class="item-top"><h4>Teriyaki Chicken</h4><span class="price">$2.99</span></div>
-            <p>Drumstick glazed with teriyaki sauce and topped with green onion and toasted sesame.</p>
+            <div class="item-body">
+              <div class="item-text">
+                <div class="item-top"><h4>Teriyaki Chicken</h4><span class="price">$2.99</span></div>
+                <p>Drumstick glazed with teriyaki sauce and topped with green onion and toasted sesame.</p>
+              </div>
+              <div class="thumb"><img src="img/plate-teriyaki.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
+            </div>
           </div>
           <div class="item" data-photo="plate-beef-skewer">
-            <div class="item-top"><h4>Lemongrass Beef Skewer</h4><span class="price">$3.49</span></div>
-            <p>Thin-sliced brisket in lemongrass, kaffir lime and warm spices, charred and smoky. One stick.</p>
+            <div class="item-body">
+              <div class="item-text">
+                <div class="item-top"><h4>Lemongrass Beef Skewer</h4><span class="price">$3.49</span></div>
+                <p>Thin-sliced brisket in lemongrass, kaffir lime and warm spices, charred and smoky. One stick.</p>
+              </div>
+              <div class="thumb"><img src="img/plate-beef-skewer.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
+            </div>
           </div>
           <div class="item" data-photo="plate-kroeung-chicken">
-            <div class="item-top"><h4>Lemongrass Chicken</h4><span class="price">$3.99</span></div>
-            <p>Thigh in our house lemongrass and kaffir lime marinade, charred. Smoky and herby.</p>
+            <div class="item-body">
+              <div class="item-text">
+                <div class="item-top"><h4>Lemongrass Chicken</h4><span class="price">$3.99</span></div>
+                <p>Thigh in our house lemongrass and kaffir lime marinade, charred. Smoky and herby.</p>
+              </div>
+              <div class="thumb"><img src="img/plate-kroeung-chicken.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
+            </div>
           </div>
           <div class="item" data-photo="plate-bbq-chicken">
-            <div class="item-top"><h4>Red BBQ Chicken</h4><span class="price">$3.99</span></div>
-            <p>Sweet chicken thigh in sticky char-siu grilled till the edges caramelize.</p>
+            <div class="item-body">
+              <div class="item-text">
+                <div class="item-top"><h4>Red BBQ Chicken</h4><span class="price">$3.99</span></div>
+                <p>Sweet chicken thigh in sticky char-siu grilled till the edges caramelize.</p>
+              </div>
+              <div class="thumb"><img src="img/plate-bbq-chicken.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
+            </div>
           </div>
         </div>
 
 <div class="group"><span>Sides</span></div>
         <div class="grid">
           <div class="item" data-photo="chrouk">
-            <div class="item-top"><h4>Pickled Vegetables <span class="heat mild">Mild</span><span class="heat hot">Hot</span></h4><span class="price">$1.49</span></div>
-            <p>Cambodian-style pickle — cucumber, carrot and cabbage in a garlic-fish sauce brine. Cuts through anything rich. Whole Thai chilies on request.</p>
+            <div class="item-body">
+              <div class="item-text">
+                <div class="item-top"><h4>Pickled Vegetables <span class="heat mild">Mild</span><span class="heat hot">Hot</span></h4><span class="price">$1.49</span></div>
+                <p>Cambodian-style pickle — cucumber, carrot and cabbage in a garlic-fish sauce brine. Cuts through anything rich. Whole Thai chilies on request.</p>
+              </div>
+              <div class="thumb"><img src="img/chrouk.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
+            </div>
           </div>
           <div class="item" data-photo="white-rice">
-            <div class="item-top"><h4>White Rice</h4><span class="price">$2.25</span></div>
-            <p>Fragrant steamed white rice.</p>
+            <div class="item-body">
+              <div class="item-text">
+                <div class="item-top"><h4>White Rice</h4><span class="price">$2.25</span></div>
+                <p>Fragrant steamed white rice.</p>
+              </div>
+              <div class="thumb"><img src="img/white-rice.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
+            </div>
           </div>
           <div class="item" data-photo="sticky-rice">
-            <div class="item-top"><h4>Sticky Rice</h4><span class="price">$2.49</span></div>
-            <p>Warm, chewy sticky rice — perfect for scooping and dipping.</p>
+            <div class="item-body">
+              <div class="item-text">
+                <div class="item-top"><h4>Sticky Rice</h4><span class="price">$2.49</span></div>
+                <p>Warm, chewy sticky rice — perfect for scooping and dipping.</p>
+              </div>
+              <div class="thumb"><img src="img/sticky-rice.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
+            </div>
           </div>
           <div class="item" data-photo="plate-chow-mein">
-            <div class="item-top"><h4>Chow Mein</h4><span class="price">$3.25</span></div>
-            <p>Noodles tossed in the wok with cabbage, carrot and celery — hot, savory, a touch sweet.</p>
+            <div class="item-body">
+              <div class="item-text">
+                <div class="item-top"><h4>Chow Mein</h4><span class="price">$3.25</span></div>
+                <p>Noodles tossed in the wok with cabbage, carrot and celery — hot, savory, a touch sweet.</p>
+              </div>
+              <div class="thumb"><img src="img/plate-chow-mein.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
+            </div>
           </div>
           <div class="item" data-photo="plate-fried-rice">
-            <div class="item-top"><h4>House Fried Rice</h4><span class="price">$3.49</span></div>
-            <p>Rice fired in the wok with garlic, veg and asian sausage. Smoky-sweet.</p>
+            <div class="item-body">
+              <div class="item-text">
+                <div class="item-top"><h4>House Fried Rice</h4><span class="price">$3.49</span></div>
+                <p>Rice fired in the wok with garlic, veg and asian sausage. Smoky-sweet.</p>
+              </div>
+              <div class="thumb"><img src="img/plate-fried-rice.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
+            </div>
           </div>
         </div>
 
 <div class="group"><span>Snack</span></div>
         <div class="grid">
           <div class="item" data-photo="spicy-pickles">
-            <div class="item-top"><h4>Spicy Pickles <span class="heat hot">Hot</span></h4><span class="price">$2.99</span></div>
-            <p>Eight crunchy spears shaken to order in toasted rice powder, chili, sugar and salt — sweet, smoky and seriously hot. Bagged to eat on the way.</p>
+            <div class="item-body">
+              <div class="item-text">
+                <div class="item-top"><h4>Spicy Pickles <span class="heat hot">Hot</span></h4><span class="price">$2.99</span></div>
+                <p>Eight crunchy spears shaken to order in toasted rice powder, chili, sugar and salt — sweet, smoky and seriously hot. Bagged to eat on the way.</p>
+              </div>
+              <div class="thumb"><img src="img/spicy-pickles.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
+            </div>
           </div>
         </div>
 
@@ -960,16 +1111,31 @@
         </div>
         <div class="grid">
           <div class="item" data-photo="water">
-            <div class="item-top"><h4>Water</h4><span class="price">$1.25</span></div>
-            <p>Ice-cold bottled water.</p>
+            <div class="item-body">
+              <div class="item-text">
+                <div class="item-top"><h4>Water</h4><span class="price">$1.25</span></div>
+                <p>Ice-cold bottled water.</p>
+              </div>
+              <div class="thumb"><img src="img/water.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
+            </div>
           </div>
           <div class="item" data-photo="soda">
-            <div class="item-top"><h4>Soda</h4><span class="price">$1.79</span></div>
-            <p>Coke, Pepsi, Sprite, Mountain Dew, Dr Pepper — zero-sugar available.</p>
+            <div class="item-body">
+              <div class="item-text">
+                <div class="item-top"><h4>Soda</h4><span class="price">$1.79</span></div>
+                <p>Coke, Pepsi, Sprite, Mountain Dew, Dr Pepper — zero-sugar available.</p>
+              </div>
+              <div class="thumb"><img src="img/soda.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
+            </div>
           </div>
           <div class="item" data-photo="boba">
-            <div class="item-top"><h4>Boba</h4><span class="price">$4.99</span></div>
-            <p>Cold flavor blasted smoothie with sweet tapioca pearls.</p>
+            <div class="item-body">
+              <div class="item-text">
+                <div class="item-top"><h4>Boba</h4><span class="price">$4.99</span></div>
+                <p>Cold flavor blasted smoothie with sweet tapioca pearls.</p>
+              </div>
+              <div class="thumb"><img src="img/boba.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
+            </div>
           </div>
         </div>
 
@@ -1184,34 +1350,18 @@
     ];
 
 
-    /* ─── Photos: add data-photo="name" to a card, drop img/name.jpg ─── */
+    /* ─── Photos: markup is static; JS only wires clicks and hides misses ─── */
     function initPhotos() {
-      document.querySelectorAll('.item[data-photo]').forEach(function (card) {
+      document.querySelectorAll('.item[data-photo] .thumb').forEach(function (thumb) {
+        var img = thumb.querySelector('img');
+        if (!img) return;
+        var card = thumb.closest('.item');
         var file = card.getAttribute('data-photo');
-        if (!file) return;
-
-        var text = document.createElement('div');
-        text.className = 'item-text';
-        while (card.firstChild) text.appendChild(card.firstChild);
-
-        var thumb = document.createElement('div');
-        thumb.className = 'thumb';
-
-        var img = document.createElement('img');
-        var h4 = text.querySelector('h4');
-        img.alt = h4 ? h4.textContent.trim() : '';
+        if (typeof DEMO_IMAGES !== 'undefined' && DEMO_IMAGES[file]) img.src = DEMO_IMAGES[file];
+        img.alt = (card.querySelector('h4') || {}).textContent || '';
         img.onerror = function () { thumb.remove(); };
-        img.src = (typeof DEMO_IMAGES !== 'undefined' && DEMO_IMAGES[file])
-                  ? DEMO_IMAGES[file] : 'img/' + file + '.jpg';
-
-        thumb.appendChild(img);
+        if (img.complete && !img.naturalWidth) thumb.remove();
         thumb.addEventListener('click', function () { openLightbox(card, img.src); });
-
-        var body = document.createElement('div');
-        body.className = 'item-body';
-        body.appendChild(text);
-        body.appendChild(thumb);
-        card.appendChild(body);
       });
     }
 
