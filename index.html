@@ -726,7 +726,7 @@
 
     <header class="hero" id="home">
       <div class="hero-card">
-        <img src="logo.png" alt="" class="hero-logo">
+        <img src="logo.png" alt="" class="hero-logo" width="340" height="340">
         <h1>IDK Kitchen</h1>
         <div class="rule"></div>
         <p>The place to go if you or they don't know.</p>
@@ -1741,9 +1741,10 @@
       window.scrollTo(0, 0);
     }
 
-    document.addEventListener('DOMContentLoaded', initPhotos);
-
-    window.addEventListener('load', function () {
+    document.addEventListener('DOMContentLoaded', function () {
+      initPhotos();
+      /* restore the session here, not on load — swapping menu-view for
+         order-view after first paint is a layout shift */
       try {
         const saved = sessionStorage.getItem('idkUser');
         if (saved) { currentUser = JSON.parse(saved); showOrderMenu(); }
