@@ -215,7 +215,14 @@
     }
 
     /* ─── Page header ─────────────────────────────────────── */
-    .page-header { padding: 64px 0 26px; }
+    .page-header {
+      padding: 64px 0 26px;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
 
     .page-header h2 {
       font-size: var(--font-title);
@@ -227,7 +234,7 @@
     .page-header .sub {
       font-size: var(--font-body);
       color: var(--text-secondary);
-      margin-top: 7px;
+      text-align: right;
     }
 
     /* ─── Group header ────────────────────────────────────── */
@@ -262,6 +269,14 @@
       font-variant-numeric: tabular-nums;
     }
 
+    /* two-line header: label + rule + price, note wraps underneath, right-aligned */
+    .group.stacked { flex-wrap: wrap; }
+    .group.stacked > span:first-child { order: 1; }
+    .group.stacked::after { order: 2; }
+    .group.stacked .px { order: 3; }
+    .group.stacked .px-note { order: 4; flex: 1 0 100%; margin-top: 5px; text-align: right; }
+    .group.stacked { margin-bottom: 24px; }
+
     .group .px-note {
       color: var(--text-secondary);
       font-weight: 400;
@@ -273,7 +288,9 @@
     /* ─── Cards (DarkTheme.PaintCard: bg fill + 1px border) ─ */
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(272px, 1fr));
+      /* 2 columns on desktop. at 3 the text column is only 168px once the
+         74px thumb is subtracted, which forces titles and heat badges to wrap. */
+      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
       gap: 12px;
     }
 
@@ -301,6 +318,10 @@
       font-weight: 700;
       color: var(--text-primary);
       letter-spacing: .2px;
+      /* the h4 is a flex child of .item-top; without this it gets squeezed
+         by the price and the badges wrap onto their own line */
+      flex: 1 1 auto;
+      min-width: 0;
     }
 
     .item .price {
@@ -309,6 +330,7 @@
       color: var(--text-primary);
       white-space: nowrap;
       font-variant-numeric: tabular-nums;
+      flex: 0 0 auto;
     }
 
     .item p {
@@ -327,15 +349,16 @@
     /* heat = status colour, never decorative */
     .heat {
       display: inline-block;
-      font-size: 10px;
-      letter-spacing: 1.2px;
+      font-size: 9px;
+      letter-spacing: .8px;
       text-transform: uppercase;
       font-weight: 700;
-      padding: 2px 6px;
+      padding: 2px 5px;
       border-radius: 3px;
       border: 1px solid;
-      margin-left: 8px;
+      margin-left: 6px;
       vertical-align: 1px;
+      white-space: nowrap;
     }
     .heat + .heat { margin-left: 4px; }
     .heat.mild { color: var(--status-warning); border-color: var(--status-warning); }
@@ -657,8 +680,12 @@
       .hero h1 { font-size: 26px; letter-spacing: 2.5px; }
       .hero p { font-size: var(--font-regular); }
 
-      .page-header { padding: 44px 0 20px; }
+      .page-header {
+        padding: 44px 0 20px;
+        display: block;
+      }
       .page-header h2 { font-size: 20px; }
+      .page-header .sub { text-align: left; margin-top: 7px; }
 
       /* group rows can't share one line on a phone — stack them */
       .group {
@@ -776,7 +803,7 @@
           </div>
         </div>
 
-        <div class="group"><span>Burritos</span><span class="px-note">(choose your protein)</span><span class="px">Half $5.99 · Full $9.99</span></div>
+        <div class="group stacked"><span>Burritos</span><span class="px">Half $5.99 · Full $9.99</span><span class="px-note">Choose your protein</span></div>
         <div class="grid">
           <div class="item" data-photo="burrito-bangin">
             <div class="item-body">
@@ -798,7 +825,7 @@
           </div>
         </div>
 
-        <div class="group"><span>Sauce Your Meat</span><span class="px-note">tossed with your meat · free on any taco or burrito</span></div>
+        <div class="group stacked"><span>Sauce Your Meat</span><span class="px-note">Tossed with your meat · free on any taco or burrito</span></div>
         <div class="grid">
           <div class="item">
             <div class="item-top"><h4>Citrus</h4></div>
@@ -814,7 +841,7 @@
           </div>
         </div>
 
-        <div class="group"><span>Salsa</span><span class="px-note">served in cups on the side · free with any taco or burrito</span></div>
+        <div class="group stacked"><span>Salsa</span><span class="px-note">Served in cups on the side · free with any taco or burrito</span></div>
         <div class="grid">
           <div class="item">
             <div class="item-top"><h4>Verde</h4></div>
@@ -886,21 +913,12 @@
           </div>
         </div>
 
-        <div class="group"><span>Dogs</span><span class="px">Classic $2.25 · Signature $4.49</span></div>
+        <div class="group stacked"><span>Dogs</span><span class="px">Classic $2.25 · Signature $4.49</span><span class="px-note">Comes with ketchup, mustard and onion, or pick a style +$0.75</span></div>
         <div class="grid">
-          <div class="item" data-photo="dog-plain">
-            <div class="item-body">
-              <div class="item-text">
-                <div class="item-top"><h4>Plain</h4></div>
-                <p>Real snap, dressed simple. Ketchup, mustard and onion.</p>
-              </div>
-              <div class="thumb"><img src="img/dog-plain.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
-            </div>
-          </div>
           <div class="item" data-photo="dog-kraut">
             <div class="item-body">
               <div class="item-text">
-                <div class="item-top"><h4>Kraut</h4><span class="price">+$0.75</span></div>
+                <div class="item-top"><h4>Kraut</h4></div>
                 <p>Tangy kraut and sharp mustard.</p>
               </div>
               <div class="thumb"><img src="img/dog-kraut.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
@@ -909,7 +927,7 @@
           <div class="item" data-photo="dog-chigo">
             <div class="item-body">
               <div class="item-text">
-                <div class="item-top"><h4>Chigo <span class="heat mild">Mild</span><span class="heat hot">Hot</span></h4><span class="price">+$0.75</span></div>
+                <div class="item-top"><h4>Chigo <span class="heat mild">Mild</span><span class="heat hot">Hot</span></h4></div>
                 <p>Cucumber relish, chopped tomato and onion, topped with cilantro-lime crema. Say the word for whole pickled Thai chilies.</p>
               </div>
               <div class="thumb"><img src="img/dog-chigo.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
@@ -918,7 +936,7 @@
           <div class="item" data-photo="dog-crazy">
             <div class="item-body">
               <div class="item-text">
-                <div class="item-top"><h4>Crazy</h4><span class="price">+$0.75</span></div>
+                <div class="item-top"><h4>Crazy</h4></div>
                 <p>Topped with hot chopped fries tossed in our creamy tangy-sweet house sauce.</p>
               </div>
               <div class="thumb"><img src="img/dog-crazy.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
@@ -927,7 +945,7 @@
           <div class="item" data-photo="dog-teriyaki">
             <div class="item-body">
               <div class="item-text">
-                <div class="item-top"><h4>Teriyaki</h4><span class="price">+$0.75</span></div>
+                <div class="item-top"><h4>Teriyaki</h4></div>
                 <p>Sweet teriyaki glaze, toasted sesame, green onion and a stripe of mayo.</p>
               </div>
               <div class="thumb"><img src="img/dog-teriyaki.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
@@ -936,7 +954,7 @@
           <div class="item" data-photo="dog-hawaiian">
             <div class="item-body">
               <div class="item-text">
-                <div class="item-top"><h4>Hawaiian</h4><span class="price">+$0.75</span></div>
+                <div class="item-top"><h4>Hawaiian</h4></div>
                 <p>Sweet-savory pineapple beef spooned on hot, finished with green onion and toasted sesame — a different style sauce dog.</p>
               </div>
               <div class="thumb"><img src="img/dog-hawaiian.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
@@ -945,7 +963,7 @@
           <div class="item" data-photo="dog-italian">
             <div class="item-body">
               <div class="item-text">
-                <div class="item-top"><h4>Italian</h4><span class="price">+$0.75</span></div>
+                <div class="item-top"><h4>Italian</h4></div>
                 <p>Smothered in our slow-cooked meat sauce with parmesan and diced onion.</p>
               </div>
               <div class="thumb"><img src="img/dog-italian.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
@@ -1025,7 +1043,7 @@
           </div>
         </div>
 
-<div class="group"><span>Proteins</span><span class="px-note">protein only — pick a side below to build your own plate</span></div>
+<div class="group stacked"><span>Proteins</span><span class="px-note">Protein only — pick a side below to build your own plate</span></div>
         <div class="grid">
           <div class="item" data-photo="plate-teriyaki">
             <div class="item-body">
@@ -1303,14 +1321,14 @@
       { id: 28, name: 'Beans',                      price: 2.49,  category: 'mexican',  customizable: false },
       { id: 39, name: 'Esquites',                   price: 3.49,  category: 'mexican',  customizable: false },
       // American
-      { id: 29,  name: 'Plain Dog (Classic)',        price: 2.25,  category: 'american', customizable: false },
+      { id: 29,  name: 'Classic Dog',                price: 2.25,  category: 'american', customizable: false },
       { id: 30,  name: 'Chigo Dog (Classic)',        price: 3.00,  category: 'american', customizable: false },
       { id: 31,  name: 'Kraut Dog (Classic)',        price: 3.00,  category: 'american', customizable: false },
       { id: 32,  name: 'Hawaiian Dog (Classic)',      price: 3.00,  category: 'american', customizable: false },
       { id: 43,  name: 'Teriyaki Dog (Classic)',      price: 3.00,  category: 'american', customizable: false },
       { id: 53,  name: 'Italian Dog (Classic)',       price: 3.00,  category: 'american', customizable: false },
       { id: 33,  name: 'Crazy Dog (Classic)',        price: 3.00,  category: 'american', customizable: false },
-      { id: 4,  name: 'Plain Dog (Signature)',      price: 4.49,  category: 'american', customizable: false },
+      { id: 4,  name: 'Signature Dog',              price: 4.49,  category: 'american', customizable: false },
       { id: 5,  name: 'Chigo Dog (Signature)',      price: 5.24,  category: 'american', customizable: false },
       { id: 21,  name: 'Kraut Dog (Signature)',      price: 5.24,  category: 'american', customizable: false },
       { id: 22,  name: 'Hawaiian Dog (Signature)',    price: 5.24,  category: 'american', customizable: false },
