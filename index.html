@@ -137,13 +137,15 @@
       border-left-color: var(--border-secondary);
     }
 
-    .sidebar-foot { margin-top: auto; padding: 14px 20px 0; border-top: 1px solid var(--border-tertiary); }
-
-    .addr {
-      font-size: var(--font-small);
-      color: var(--text-tertiary);
-      line-height: 1.6;
+    .sidebar .nav-social {
+      display: flex;
+      align-items: center;
+      gap: 9px;
     }
+    .sidebar .nav-social svg { flex: 0 0 auto; opacity: .75; }
+    .sidebar .nav-social:hover svg { opacity: 1; }
+
+
 
     /* ─── Layout ──────────────────────────────────────────── */
     .main { margin-left: var(--sidebar-w); }
@@ -215,7 +217,14 @@
     }
 
     /* ─── Page header ─────────────────────────────────────── */
-    .page-header { padding: 64px 0 26px; }
+    .page-header {
+      padding: 64px 0 26px;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
 
     .page-header h2 {
       font-size: var(--font-title);
@@ -227,7 +236,7 @@
     .page-header .sub {
       font-size: var(--font-body);
       color: var(--text-secondary);
-      margin-top: 7px;
+      text-align: right;
     }
 
     /* ─── Group header ────────────────────────────────────── */
@@ -262,6 +271,14 @@
       font-variant-numeric: tabular-nums;
     }
 
+    /* two-line header: label + rule + price, note wraps underneath, right-aligned */
+    .group.stacked { flex-wrap: wrap; }
+    .group.stacked > span:first-child { order: 1; }
+    .group.stacked::after { order: 2; }
+    .group.stacked .px { order: 3; }
+    .group.stacked .px-note { order: 4; flex: 1 0 100%; margin-top: 5px; text-align: right; }
+    .group.stacked { margin-bottom: 24px; }
+
     .group .px-note {
       color: var(--text-secondary);
       font-weight: 400;
@@ -273,7 +290,9 @@
     /* ─── Cards (DarkTheme.PaintCard: bg fill + 1px border) ─ */
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(272px, 1fr));
+      /* 2 columns on desktop. at 3 the text column is only 168px once the
+         74px thumb is subtracted, which forces titles and heat badges to wrap. */
+      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
       gap: 12px;
     }
 
@@ -301,6 +320,10 @@
       font-weight: 700;
       color: var(--text-primary);
       letter-spacing: .2px;
+      /* the h4 is a flex child of .item-top; without this it gets squeezed
+         by the price and the badges wrap onto their own line */
+      flex: 1 1 auto;
+      min-width: 0;
     }
 
     .item .price {
@@ -309,6 +332,7 @@
       color: var(--text-primary);
       white-space: nowrap;
       font-variant-numeric: tabular-nums;
+      flex: 0 0 auto;
     }
 
     .item p {
@@ -327,15 +351,16 @@
     /* heat = status colour, never decorative */
     .heat {
       display: inline-block;
-      font-size: 10px;
-      letter-spacing: 1.2px;
+      font-size: 9px;
+      letter-spacing: .8px;
       text-transform: uppercase;
       font-weight: 700;
-      padding: 2px 6px;
+      padding: 2px 5px;
       border-radius: 3px;
       border: 1px solid;
-      margin-left: 8px;
+      margin-left: 6px;
       vertical-align: 1px;
+      white-space: nowrap;
     }
     .heat + .heat { margin-left: 4px; }
     .heat.mild { color: var(--status-warning); border-color: var(--status-warning); }
@@ -490,6 +515,17 @@
     .btn:disabled { opacity: .5; cursor: default; }
 
     /* ─── Footer ──────────────────────────────────────────── */
+    .footer-inner .social {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color .15s;
+    }
+    .footer-inner .social:hover { color: var(--text-primary); }
+    .footer-inner .social svg { flex: 0 0 auto; }
+
     footer {
       border-top: 1px solid var(--border-tertiary);
       margin-top: 72px;
@@ -629,7 +665,7 @@
         padding: 0 0 env(safe-area-inset-bottom, 0px);
         border-right: 0; border-top: 1px solid var(--border-tertiary);
       }
-      .brand, .nav-label, .sidebar-foot, .nav-secondary { display: none; }
+      .brand, .nav-label, .nav-secondary { display: none; }
       .sidebar a {
         flex: 1 1 0;
         text-align: center;
@@ -657,8 +693,12 @@
       .hero h1 { font-size: 26px; letter-spacing: 2.5px; }
       .hero p { font-size: var(--font-regular); }
 
-      .page-header { padding: 44px 0 20px; }
+      .page-header {
+        padding: 44px 0 20px;
+        display: block;
+      }
       .page-header h2 { font-size: 20px; }
+      .page-header .sub { text-align: left; margin-top: 7px; }
 
       /* group rows can't share one line on a phone — stack them */
       .group {
@@ -724,12 +764,10 @@
     <div class="nav-label">More</div>
     <a class="nav-secondary" href="#about">About</a>
     <a class="nav-secondary" href="#heat">Heat Guide</a>
-    <a onclick="openLogin()" id="loginNav">Sign In</a>
+    <a class="nav-secondary nav-social" href="https://www.facebook.com/profile.php?id=61592719984908" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5 3.66 9.15 8.44 9.94v-7.03H7.9v-2.91h2.54V9.85c0-2.52 1.5-3.91 3.77-3.91 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.78-1.63 1.57v1.89h2.78l-.45 2.91h-2.33V22c4.78-.79 8.44-4.94 8.44-9.94Z"/></svg>Facebook</a>
+    <a onclick="openLogin()" id="loginNav" style="display:none">Sign In</a>
     <a onclick="logout()" id="logoutNav" style="display:none">Sign Out</a>
 
-    <div class="sidebar-foot">
-      <div class="addr">28199 US-23<br>South Shore, KY 41175</div>
-    </div>
   </nav>
 
   <div class="main">
@@ -767,16 +805,16 @@
           <div class="item" data-photo="street-taco">
             <div class="item-body">
               <div class="item-text">
-                <div class="item-top"><h4>Twisted Street Taco</h4><span class="price">$1.99</span></div>
+                <div class="item-top"><h4>Twisted Street Taco</h4><span class="price">$2.25</span></div>
                 <p>Street-size corn tortilla topped with cilantro, onion and radish. Small, bright and loud in a few perfect bites.</p>
-                <div class="note">Grilled chicken or Hawaiian · asada +$0.50</div>
+                <div class="note">Grilled chicken, Hawaiian or asada</div>
               </div>
               <div class="thumb"><img src="img/street-taco.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
             </div>
           </div>
         </div>
 
-        <div class="group"><span>Burritos</span><span class="px-note">(choose your protein)</span><span class="px">Half $5.99 · Full $9.99</span></div>
+        <div class="group stacked"><span>Burritos</span><span class="px">Half $5.99 · Full $9.99</span><span class="px-note">Grilled chicken or asada</span></div>
         <div class="grid">
           <div class="item" data-photo="burrito-bangin">
             <div class="item-body">
@@ -798,7 +836,23 @@
           </div>
         </div>
 
-        <div class="group"><span>Salsa</span><span class="px-note">served in cups on the side · free with any taco or burrito</span></div>
+        <div class="group stacked"><span>Sauce Your Meat</span><span class="px-note">Tossed with your meat · free on any taco or burrito</span></div>
+        <div class="grid">
+          <div class="item">
+            <div class="item-top"><h4>Citrus</h4></div>
+            <p>Bright and tangy, cut with lime and orange.</p>
+          </div>
+          <div class="item">
+            <div class="item-top"><h4>Jerk-Style</h4></div>
+            <p>Allspice, thyme and heat.</p>
+          </div>
+          <div class="item">
+            <div class="item-top"><h4>Diabla <span class="heat hot">Reaper</span></h4></div>
+            <p>Our house sauce loaded with wild chiltepín, smoky árbol and a whole Carolina Reaper. Order if you dare.</p>
+          </div>
+        </div>
+
+        <div class="group stacked"><span>Salsa</span><span class="px-note">Served in cups on the side · free with any taco or burrito</span></div>
         <div class="grid">
           <div class="item">
             <div class="item-top"><h4>Verde</h4></div>
@@ -818,12 +872,12 @@
           </div>
         </div>
 
-        <div class="group"><span>Sides</span></div>
+        <div class="group stacked"><span>Sides</span><span class="px-note">Half pint · pint</span></div>
         <div class="grid">
           <div class="item" data-photo="side-rice">
             <div class="item-body">
               <div class="item-text">
-                <div class="item-top"><h4>Mexican Rice</h4><span class="price">$2.49</span></div>
+                <div class="item-top"><h4>Mexican Rice</h4><span class="price">$1.99 · $2.49</span></div>
                 <p>Tomato-simmered rice with onion and garlic.</p>
               </div>
               <div class="thumb"><img src="img/side-rice.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
@@ -832,7 +886,7 @@
           <div class="item" data-photo="side-beans">
             <div class="item-body">
               <div class="item-text">
-                <div class="item-top"><h4>Beans</h4><span class="price">$2.49</span></div>
+                <div class="item-top"><h4>Beans</h4><span class="price">$2.25 · $3.99</span></div>
                 <p>Whole pinto or refried, your call.</p>
               </div>
               <div class="thumb"><img src="img/side-beans.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
@@ -862,7 +916,7 @@
           <div class="item" data-photo="spaghetti">
             <div class="item-body">
               <div class="item-text">
-                <div class="item-top"><h4>Spaghetti</h4><span class="price">$6.49</span></div>
+                <div class="item-top"><h4>Spaghetti</h4><span class="price">$4.49 · $8.49</span></div>
                 <p>A hearty bowl of spiral noodles loaded in our slow-cooked meat sauce — rich, meaty, home-style comfort food.</p>
               </div>
               <div class="thumb"><img src="img/spaghetti.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
@@ -870,21 +924,12 @@
           </div>
         </div>
 
-        <div class="group"><span>Dogs</span><span class="px-note">classic $2.25 · signature $4.49</span><span class="px">styles priced below</span></div>
+        <div class="group stacked"><span>Dogs</span><span class="px">Classic $1.99 · Signature $3.49</span><span class="px-note">Comes with ketchup, mustard and onion, or pick a style +$0.75</span></div>
         <div class="grid">
-          <div class="item" data-photo="dog-plain">
-            <div class="item-body">
-              <div class="item-text">
-                <div class="item-top"><h4>Plain</h4></div>
-                <p>Real snap, dressed simple. Ketchup, mustard and onion.</p>
-              </div>
-              <div class="thumb"><img src="img/dog-plain.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
-            </div>
-          </div>
           <div class="item" data-photo="dog-kraut">
             <div class="item-body">
               <div class="item-text">
-                <div class="item-top"><h4>Kraut</h4><span class="price">+$0.25</span></div>
+                <div class="item-top"><h4>Kraut</h4></div>
                 <p>Tangy kraut and sharp mustard.</p>
               </div>
               <div class="thumb"><img src="img/dog-kraut.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
@@ -893,7 +938,7 @@
           <div class="item" data-photo="dog-chigo">
             <div class="item-body">
               <div class="item-text">
-                <div class="item-top"><h4>Chigo <span class="heat mild">Mild</span><span class="heat hot">Hot</span></h4><span class="price">+$0.50</span></div>
+                <div class="item-top"><h4>Chigo <span class="heat mild">Mild</span><span class="heat hot">Hot</span></h4></div>
                 <p>Cucumber relish, chopped tomato and onion, topped with cilantro-lime crema. Say the word for whole pickled Thai chilies.</p>
               </div>
               <div class="thumb"><img src="img/dog-chigo.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
@@ -902,7 +947,7 @@
           <div class="item" data-photo="dog-crazy">
             <div class="item-body">
               <div class="item-text">
-                <div class="item-top"><h4>Crazy</h4><span class="price">+$0.75</span></div>
+                <div class="item-top"><h4>Crazy</h4></div>
                 <p>Topped with hot chopped fries tossed in our creamy tangy-sweet house sauce.</p>
               </div>
               <div class="thumb"><img src="img/dog-crazy.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
@@ -911,7 +956,7 @@
           <div class="item" data-photo="dog-teriyaki">
             <div class="item-body">
               <div class="item-text">
-                <div class="item-top"><h4>Teriyaki</h4><span class="price">+$1.00</span></div>
+                <div class="item-top"><h4>Teriyaki</h4></div>
                 <p>Sweet teriyaki glaze, toasted sesame, green onion and a stripe of mayo.</p>
               </div>
               <div class="thumb"><img src="img/dog-teriyaki.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
@@ -920,7 +965,7 @@
           <div class="item" data-photo="dog-hawaiian">
             <div class="item-body">
               <div class="item-text">
-                <div class="item-top"><h4>Hawaiian</h4><span class="price">+$1.25</span></div>
+                <div class="item-top"><h4>Hawaiian</h4></div>
                 <p>Sweet-savory pineapple beef spooned on hot, finished with green onion and toasted sesame — a different style sauce dog.</p>
               </div>
               <div class="thumb"><img src="img/dog-hawaiian.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
@@ -929,7 +974,7 @@
           <div class="item" data-photo="dog-italian">
             <div class="item-body">
               <div class="item-text">
-                <div class="item-top"><h4>Italian</h4><span class="price">+$1.50</span></div>
+                <div class="item-top"><h4>Italian</h4></div>
                 <p>Smothered in our slow-cooked meat sauce with parmesan and diced onion.</p>
               </div>
               <div class="thumb"><img src="img/dog-italian.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
@@ -951,7 +996,7 @@
           <div class="item" data-photo="crazy-fries">
             <div class="item-body">
               <div class="item-text">
-                <div class="item-top"><h4>Crazy Fries</h4><span class="price">$3.79</span></div>
+                <div class="item-top"><h4>Crazy Fries</h4><span class="price">$3.99</span></div>
                 <p>Fries topped with our creamy tangy-sweet house sauce.</p>
               </div>
               <div class="thumb"><img src="img/crazy-fries.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
@@ -972,8 +1017,8 @@
           <div class="item" data-photo="eggrolls">
             <div class="item-body">
               <div class="item-text">
-                <div class="item-top"><h4>Golden Eggrolls</h4><span class="price">$5.99</span></div>
-                <p>Three rolls fried to order — pork, carrot, cabbage, glass noodles, crisp shell.</p>
+                <div class="item-top"><h4>Golden Eggrolls</h4><span class="price">2 for $3.49 · 4 for $5.99</span></div>
+                <p>Fried to order — pork, carrot, cabbage, glass noodles, crisp shell.</p>
               </div>
               <div class="thumb"><img src="img/eggrolls.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
             </div>
@@ -981,7 +1026,7 @@
           <div class="item" data-photo="plate-teriyaki">
             <div class="item-body">
               <div class="item-text">
-                <div class="item-top"><h4>Teriyaki Chicken Bowl</h4><span class="price">$7.98</span></div>
+                <div class="item-top"><h4>Teriyaki Chicken Bowl</h4><span class="price">$7.99</span></div>
                 <p>Shredded drumstick and carrot over white rice, the whole bowl glazed in teriyaki and topped with green onion and toasted sesame.</p>
               </div>
               <div class="thumb"><img src="img/plate-teriyaki.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
@@ -990,7 +1035,7 @@
           <div class="item" data-photo="banh-mi">
             <div class="item-body">
               <div class="item-text">
-                <div class="item-top"><h4>Bánh Mì</h4><span class="price">$9.99</span></div>
+                <div class="item-top"><h4>Bánh Mì</h4><span class="price">$10.99</span></div>
                 <p>Rich toasted bread, marinated pork shoulder, honey ham, savory spread, pickled carrot and radish, cucumber and cilantro.</p>
               </div>
               <div class="thumb"><img src="img/banh-mi.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
@@ -999,9 +1044,9 @@
           <div class="item" data-photo="pho">
             <div class="item-body">
               <div class="item-text">
-                <div class="item-top"><h4>Phở</h4><span class="price">$12.99</span></div>
+                <div class="item-top"><h4>Phở</h4><span class="price">$7.99 · $10.49 · $12.99</span></div>
                 <p>Rice noodles in beef-bone broth simmered for hours, topped with sliced beef, fresh herbs, lime and heat.</p>
-                <div class="note" style="margin-bottom:6px">Comes with mint, bean sprouts, cilantro, green onion, lime, hoisin, sriracha and garlic chili oil</div>
+                <div class="note" style="margin-bottom:6px">Small · Medium · Large. Comes with mint, bean sprouts, cilantro, green onion, lime, hoisin, sriracha and garlic chili oil</div>
                 <div class="opt" style="border-bottom:0;padding:4px 0"><span>Add shrimp, meatballs, pork or extra beef</span><span class="p">+$3.00</span></div>
               </div>
               <div class="thumb"><img src="img/pho.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
@@ -1009,7 +1054,7 @@
           </div>
         </div>
 
-<div class="group"><span>Proteins</span><span class="px-note">protein only — pick a side below to build your own plate</span></div>
+<div class="group stacked"><span>Proteins</span><span class="px-note">Protein only — pick a side below to build your own plate</span></div>
         <div class="grid">
           <div class="item" data-photo="plate-teriyaki">
             <div class="item-body">
@@ -1049,7 +1094,7 @@
           </div>
         </div>
 
-<div class="group"><span>Sides</span></div>
+<div class="group stacked"><span>Sides</span><span class="px-note">Half pint · pint</span></div>
         <div class="grid">
           <div class="item" data-photo="chrouk">
             <div class="item-body">
@@ -1063,7 +1108,7 @@
           <div class="item" data-photo="white-rice">
             <div class="item-body">
               <div class="item-text">
-                <div class="item-top"><h4>White Rice</h4><span class="price">$2.25</span></div>
+                <div class="item-top"><h4>White Rice</h4><span class="price">$1.49 · $2.49</span></div>
                 <p>Fragrant steamed white rice.</p>
               </div>
               <div class="thumb"><img src="img/white-rice.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
@@ -1072,7 +1117,7 @@
           <div class="item" data-photo="sticky-rice">
             <div class="item-body">
               <div class="item-text">
-                <div class="item-top"><h4>Sticky Rice</h4><span class="price">$2.49</span></div>
+                <div class="item-top"><h4>Sticky Rice</h4><span class="price">$2.25 · $3.49</span></div>
                 <p>Warm, chewy sticky rice — perfect for scooping and dipping.</p>
               </div>
               <div class="thumb"><img src="img/sticky-rice.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
@@ -1081,7 +1126,7 @@
           <div class="item" data-photo="plate-chow-mein">
             <div class="item-body">
               <div class="item-text">
-                <div class="item-top"><h4>Chow Mein</h4><span class="price">$3.25</span></div>
+                <div class="item-top"><h4>Chow Mein</h4><span class="price">$2.25 · $4.25</span></div>
                 <p>Noodles tossed in the wok with cabbage, carrot and celery — hot, savory, a touch sweet.</p>
               </div>
               <div class="thumb"><img src="img/plate-chow-mein.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
@@ -1090,7 +1135,7 @@
           <div class="item" data-photo="plate-fried-rice">
             <div class="item-body">
               <div class="item-text">
-                <div class="item-top"><h4>House Fried Rice</h4><span class="price">$3.49</span></div>
+                <div class="item-top"><h4>House Fried Rice</h4><span class="price">$3.25 · $5.25</span></div>
                 <p>Rice fired in the wok with garlic, veg and asian sausage. Smoky-sweet.</p>
               </div>
               <div class="thumb"><img src="img/plate-fried-rice.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
@@ -1132,7 +1177,7 @@
           <div class="item" data-photo="soda">
             <div class="item-body">
               <div class="item-text">
-                <div class="item-top"><h4>Soda</h4><span class="price">$1.79</span></div>
+                <div class="item-top"><h4>Soda 16oz</h4><span class="price">$2.49</span></div>
                 <p>Coke, Pepsi, Sprite, Mountain Dew, Dr Pepper — zero-sugar available.</p>
               </div>
               <div class="thumb"><img src="img/soda.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
@@ -1141,7 +1186,7 @@
           <div class="item" data-photo="boba">
             <div class="item-body">
               <div class="item-text">
-                <div class="item-top"><h4>Boba</h4><span class="price">$4.99</span></div>
+                <div class="item-top"><h4>Boba</h4><span class="price">$3.99 · $4.99</span></div>
                 <p>Cold flavor blasted smoothie with sweet tapioca pearls.</p>
               </div>
               <div class="thumb"><img src="img/boba.jpg" width="74" height="74" alt="" loading="eager" decoding="async"></div>
@@ -1167,12 +1212,12 @@
           <div class="opt"><span><strong>Chigo</strong> — bright and tangy on its own; whole Thai chilies make it a real kick</span><span class="p"><span class="heat mild">Mild</span><span class="heat hot">Hot</span></span></div>
           <div class="opt"><span><strong>Pickled Vegetables</strong> — sharp and bright; chilies on request make it build</span><span class="p"><span class="heat mild">Mild</span><span class="heat hot">Hot</span></span></div>
           <div class="opt"><span><strong>Spicy Pickles</strong> — toasted rice powder and dried chili flakes, smoky and sharp</span><span class="p"><span class="heat hot">Hot</span></span></div>
-          <div class="opt"><span><strong>Camarones</strong> — wild chiltepín peppers, smokey arbol chilies, and a Carolina Reaper full send</span><span class="p"><span class="heat hot">Reaper</span></span></div>
+          <div class="opt"><span><strong>Diabla</strong> — wild chiltepín peppers, smokey árbol chilies, and a Carolina Reaper full send</span><span class="p"><span class="heat hot">Reaper</span></span></div>
         </div>
 
         <div class="callout warn" style="margin-top:14px">
           <h3>Spice Challenge</h3>
-          <p>Think you can handle it? Our <strong style="color:var(--text-primary)">Camarones sauce</strong> is built on our house sauce, then loaded with wild Mexican chiltepín peppers and a whole Carolina Reaper in every batch. This is not a joke — it's seriously hot. Order if you dare.</p>
+          <p>Think you can handle it? Our <strong style="color:var(--text-primary)">Diabla sauce</strong> is built on our house sauce, then loaded with wild Mexican chiltepín peppers and a whole Carolina Reaper in every batch. This is not a joke — it's seriously hot. Order if you dare.</p>
           <div class="fine">Contains Carolina Reaper and wild chili peppers. Enjoy at your own risk — not recommended if you're sensitive to spice or have heart or digestive concerns.</div>
         </div>
       </section>
@@ -1189,8 +1234,9 @@
 
     <footer>
       <div class="footer-inner">
-        <div>&copy; 2025 IDK Kitchen™</div>
+        <div>&copy; 2026 IDK Kitchen™</div>
         <div>28199 US-23 · South Shore, KY 41175</div>
+        <div><a class="social" href="https://www.facebook.com/profile.php?id=61592719984908" target="_blank" rel="noopener noreferrer" aria-label="IDK Kitchen on Facebook"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5 3.66 9.15 8.44 9.94v-7.03H7.9v-2.91h2.54V9.85c0-2.52 1.5-3.91 3.77-3.91 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.78-1.63 1.57v1.89h2.78l-.45 2.91h-2.33V22c4.78-.79 8.44-4.94 8.44-9.94Z"/></svg>Facebook</a></div>
       </div>
     </footer>
   </div>
@@ -1283,44 +1329,55 @@
       { id: 3,  name: 'California Burrito (Half)',  price: 5.99,  category: 'mexican',  customizable: true },
       { id: 34, name: 'Bangin Burrito (Full)',      price: 9.99,  category: 'mexican',  customizable: true },
       { id: 35, name: 'California Burrito (Full)',  price: 9.99,  category: 'mexican',  customizable: true },
-      { id: 27, name: 'Mexican Rice',               price: 2.49,  category: 'mexican',  customizable: false },
-      { id: 28, name: 'Beans',                      price: 2.49,  category: 'mexican',  customizable: false },
+      { id: 27, name: 'Mexican Rice (half pint)',   price: 1.49,  category: 'mexican',  customizable: false },
+      { id: 81, name: 'Mexican Rice (pint)',        price: 2.49,  category: 'mexican',  customizable: false },
+      { id: 28, name: 'Beans (half pint)',          price: 1.49,  category: 'mexican',  customizable: false },
+      { id: 82, name: 'Beans (pint)',               price: 2.49,  category: 'mexican',  customizable: false },
       { id: 39, name: 'Esquites',                   price: 3.49,  category: 'mexican',  customizable: false },
       // American
-      { id: 29,  name: 'Plain Dog (Classic)',        price: 2.25,  category: 'american', customizable: false },
-      { id: 30,  name: 'Chigo Dog (Classic)',        price: 2.75,  category: 'american', customizable: false },
-      { id: 31,  name: 'Kraut Dog (Classic)',        price: 2.50,  category: 'american', customizable: false },
-      { id: 32,  name: 'Hawaiian Dog (Classic)',      price: 3.50,  category: 'american', customizable: false },
-      { id: 43,  name: 'Teriyaki Dog (Classic)',      price: 3.25,  category: 'american', customizable: false },
-      { id: 53,  name: 'Italian Dog (Classic)',       price: 3.75,  category: 'american', customizable: false },
-      { id: 33,  name: 'Crazy Dog (Classic)',        price: 3.00,  category: 'american', customizable: false },
-      { id: 4,  name: 'Plain Dog (Signature)',      price: 4.49,  category: 'american', customizable: false },
-      { id: 5,  name: 'Chigo Dog (Signature)',      price: 4.99,  category: 'american', customizable: false },
-      { id: 21,  name: 'Kraut Dog (Signature)',      price: 4.74,  category: 'american', customizable: false },
-      { id: 22,  name: 'Hawaiian Dog (Signature)',    price: 5.74,  category: 'american', customizable: false },
-      { id: 44,  name: 'Teriyaki Dog (Signature)',    price: 5.49,  category: 'american', customizable: false },
-      { id: 54,  name: 'Italian Dog (Signature)',     price: 5.99,  category: 'american', customizable: false },
-      { id: 23,  name: 'Crazy Dog (Signature)',      price: 5.24,  category: 'american', customizable: false },
-      { id: 6,  name: 'Spaghetti',                  price: 6.49,  category: 'american', customizable: false },
+      { id: 29,  name: 'Classic Dog',                price: 1.99,  category: 'american', customizable: false },
+      { id: 30,  name: 'Chigo Dog (Classic)',        price: 2.74,  category: 'american', customizable: false },
+      { id: 31,  name: 'Kraut Dog (Classic)',        price: 2.74,  category: 'american', customizable: false },
+      { id: 32,  name: 'Hawaiian Dog (Classic)',      price: 2.74,  category: 'american', customizable: false },
+      { id: 43,  name: 'Teriyaki Dog (Classic)',      price: 2.74,  category: 'american', customizable: false },
+      { id: 53,  name: 'Italian Dog (Classic)',       price: 2.74,  category: 'american', customizable: false },
+      { id: 33,  name: 'Crazy Dog (Classic)',        price: 2.74,  category: 'american', customizable: false },
+      { id: 4,  name: 'Signature Dog',              price: 3.49,  category: 'american', customizable: false },
+      { id: 5,  name: 'Chigo Dog (Signature)',      price: 4.24,  category: 'american', customizable: false },
+      { id: 21,  name: 'Kraut Dog (Signature)',      price: 4.24,  category: 'american', customizable: false },
+      { id: 22,  name: 'Hawaiian Dog (Signature)',    price: 4.24,  category: 'american', customizable: false },
+      { id: 44,  name: 'Teriyaki Dog (Signature)',    price: 4.24,  category: 'american', customizable: false },
+      { id: 54,  name: 'Italian Dog (Signature)',     price: 4.24,  category: 'american', customizable: false },
+      { id: 23,  name: 'Crazy Dog (Signature)',      price: 4.24,  category: 'american', customizable: false },
+      { id: 6,  name: 'Spaghetti (small)',          price: 4.49,  category: 'american', customizable: false },
+      { id: 83, name: 'Spaghetti (large)',          price: 6.49,  category: 'american', customizable: false },
       { id: 40, name: 'Fries',                      price: 2.99,  category: 'american', customizable: false },
-      { id: 25, name: 'Crazy Fries',                price: 3.79,  category: 'american', customizable: false },
+      { id: 25, name: 'Crazy Fries',                price: 3.99,  category: 'american', customizable: false },
       // Asian
-      { id: 7,  name: 'Phở',                        price: 12.99, category: 'asian',    customizable: true },
-      { id: 8,  name: 'Golden Eggrolls (3)',        price: 5.99,  category: 'asian',    customizable: false },
-      { id: 36, name: 'White Rice',                 price: 2.25,  category: 'asian',    customizable: false },
-      { id: 37, name: 'Sticky Rice',                price: 2.49,  category: 'asian',    customizable: false },
-      { id: 41, name: 'Side House Fried Rice',       price: 3.49,  category: 'asian',    customizable: false },
-      { id: 42, name: 'Side Chow Mein',              price: 3.25,  category: 'asian',    customizable: false },
+      { id: 73, name: 'Phở (Small)',                price: 7.99,  category: 'asian',    customizable: false },
+      { id: 74, name: 'Phở (Medium)',               price: 10.49, category: 'asian',    customizable: false },
+      { id: 7,  name: 'Phở (Large)',                price: 12.99, category: 'asian',    customizable: true },
+      { id: 8,  name: 'Golden Eggrolls (2)',        price: 3.49,  category: 'asian',    customizable: false },
+      { id: 85, name: 'Golden Eggrolls (4)',        price: 5.99,  category: 'asian',    customizable: false },
+      { id: 36, name: 'White Rice (half pint)',     price: 1.75,  category: 'asian',    customizable: false },
+      { id: 75, name: 'White Rice (pint)',          price: 2.99,  category: 'asian',    customizable: false },
+      { id: 37, name: 'Sticky Rice (half pint)',    price: 2.25,  category: 'asian',    customizable: false },
+      { id: 76, name: 'Sticky Rice (pint)',         price: 3.49,  category: 'asian',    customizable: false },
+      { id: 41, name: 'House Fried Rice (half pint)', price: 3.25, category: 'asian',    customizable: false },
+      { id: 78, name: 'House Fried Rice (pint)',    price: 5.25,  category: 'asian',    customizable: false },
+      { id: 42, name: 'Chow Mein (half pint)',      price: 2.25,  category: 'asian',    customizable: false },
+      { id: 77, name: 'Chow Mein (pint)',           price: 4.25,  category: 'asian',    customizable: false },
       { id: 52, name: 'Pickled Vegetables',          price: 1.49,  category: 'asian',    customizable: false },
       { id: 61, name: 'Lemongrass Chicken (protein)',   price: 3.99,  category: 'asian',    customizable: false },
       { id: 62, name: 'Red BBQ Chicken (protein)',      price: 3.99,  category: 'asian',    customizable: false },
       { id: 63, name: 'Teriyaki Chicken (protein)',     price: 2.99,  category: 'asian',    customizable: false },
       { id: 64, name: 'Beef Skewer (single)',           price: 3.49,  category: 'asian',    customizable: false },
       { id: 38, name: 'Spicy Pickles (snack)',       price: 2.99,  category: 'asian',    customizable: false },
-      { id: 20, name: 'Bánh Mì',                    price: 9.99,  category: 'asian',    customizable: false },
-      { id: 26, name: 'Teriyaki Chicken Bowl',        price: 7.98,  category: 'asian',    customizable: false },
+      { id: 20, name: 'Bánh Mì',                    price: 10.99,  category: 'asian',    customizable: false },
+      { id: 26, name: 'Teriyaki Chicken Bowl',        price: 7.99,  category: 'asian',    customizable: false },
       // Drinks
-      { id: 15, name: 'Boba',                       price: 4.99,  category: 'drink',    customizable: false },
+      { id: 15, name: 'Boba (small)',               price: 3.99,  category: 'drink',    customizable: false },
+      { id: 84, name: 'Boba (large)',               price: 4.99,  category: 'drink',    customizable: false },
       { id: 18, name: 'Canned Soda',                price: 1.79,  category: 'drink',    customizable: false },
       { id: 19, name: 'Bottled Water',              price: 1.25,  category: 'drink',    customizable: false }
     ];
@@ -1343,7 +1400,7 @@
     const mexicanProteins = [
       { name: 'Grilled Chicken', price: 0 },
       { name: 'Hawaiian', price: 0 },
-      { name: 'Asada', price: 0.50 }
+      { name: 'Asada', price: 0 }
     ];
 
     const mexicanAddons = [
@@ -1354,6 +1411,8 @@
       { name: 'Cabbage', price: 0 }, { name: 'Radish', price: 0 },
       { name: 'Cilantro', price: 0 }, { name: 'Diced onion', price: 0 },
       { name: 'Grilled onion', price: 0 }, { name: 'Grilled jalapenos', price: 0 },
+      { name: 'Citrus sauce', price: 0 }, { name: 'Jerk-style sauce', price: 0 },
+      { name: 'Diabla sauce', price: 0 },
       { name: 'Avocado crema', price: 0.75 },
       { name: 'Verde salsa', price: 0 }, { name: 'Roja salsa', price: 0 },
       { name: 'Reaper salsa', price: 0 }, { name: 'Extra Spicy', price: 0 }
